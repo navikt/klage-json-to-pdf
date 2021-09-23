@@ -2,6 +2,8 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 val mockkVersion = "1.9.3"
 val logstashVersion = "5.1"
+val jsoupVersion = "1.11.3"
+val openHtmlToPdfVersion = "1.0.3"
 
 repositories {
     mavenCentral()
@@ -25,6 +27,11 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
     implementation("org.projectreactor:reactor-spring:1.0.1.RELEASE")
+
+    implementation("org.jsoup:jsoup:$jsoupVersion")
+    implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:$openHtmlToPdfVersion")
+    implementation("com.openhtmltopdf:openhtmltopdf-slf4j:$openHtmlToPdfVersion")
+    implementation("com.openhtmltopdf:openhtmltopdf-svg-support:$openHtmlToPdfVersion")
 
     implementation("ch.qos.logback:logback-classic")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
