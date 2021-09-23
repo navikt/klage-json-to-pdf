@@ -1,0 +1,4 @@
+ingresses:
+  - https://kabal-json-to-pdf.dev.nav.no
+externalHosts:
+springProfile: dev-gcp
