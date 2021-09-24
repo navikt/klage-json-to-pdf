@@ -13,20 +13,21 @@ import org.jsoup.Jsoup
 import org.jsoup.helper.W3CDom
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.*
+import java.io.ByteArrayInputStream
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 import java.nio.file.Files
 import java.nio.file.Path
-import java.nio.file.Paths
-
-
-val fontsRoot: Path = Paths.get("fonts/")
 
 val objectMapper: ObjectMapper = ObjectMapper()
     .registerKotlinModule()
 
 val colorProfile: ByteArray = IOUtils.toByteArray(Application::class.java.getResourceAsStream("/sRGB2014.icc"))
 
-val fonts: Array<FontMetadata> = objectMapper.readValue(Files.newInputStream(fontsRoot.resolve("config.json")))
+val fonts: Array<FontMetadata> =
+    objectMapper.readValue(
+        Files.newInputStream(Path.of(Application::class.java.getResource("/fonts/config.json").toURI())))
 
 data class FontMetadata(
     val family: String,
@@ -35,9 +36,8 @@ data class FontMetadata(
     val style: BaseRendererBuilder.FontStyle,
     val subset: Boolean
 ) {
-    val bytes: ByteArray = Files.readAllBytes(fontsRoot.resolve(path))
+    val bytes: ByteArray = Files.readAllBytes(Path.of(Application::class.java.getResource("/fonts/${path}").toURI()))
 }
-
 
 @Service
 class PDFGenService {
