@@ -28,7 +28,7 @@ class PDFGenController(
     ): ResponseEntity<ByteArray> {
         logger.debug("received json: {}", json)
 
-        val data = pdfGenService.getPDFAsOutputStream(json)
+        val data = pdfGenService.getPDFAsByteArray(json)
 
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF

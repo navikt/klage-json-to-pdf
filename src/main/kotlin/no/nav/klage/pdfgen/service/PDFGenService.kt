@@ -1,6 +1,7 @@
 package no.nav.klage.pdfgen.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.registerKotlinModule
 import com.openhtmltopdf.extend.FSSupplier
@@ -8,9 +9,8 @@ import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder
 import com.openhtmltopdf.pdfboxout.PdfRendererBuilder
 import com.openhtmltopdf.svgsupport.BatikSVGDrawer
 import no.nav.klage.pdfgen.Application
+import no.nav.klage.pdfgen.transformers.HtmlCreator
 import org.apache.pdfbox.io.IOUtils
-import org.jsoup.Jsoup
-import org.jsoup.helper.W3CDom
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayInputStream
@@ -27,7 +27,8 @@ val colorProfile: ByteArray = IOUtils.toByteArray(Application::class.java.getRes
 
 val fonts: Array<FontMetadata> =
     objectMapper.readValue(
-        Files.newInputStream(Path.of(Application::class.java.getResource("/fonts/config.json").toURI())))
+        Files.newInputStream(Path.of(Application::class.java.getResource("/fonts/config.json").toURI()))
+    )
 
 data class FontMetadata(
     val family: String,
@@ -42,40 +43,17 @@ data class FontMetadata(
 @Service
 class PDFGenService {
 
-    fun getPDFAsOutputStream(json: String): ByteArray {
-
-        //TODO json to html..
-
-        val html = """
-            <!DOCTYPE html>
-            <html>
-            <head>
-                <title>Test template</title>
-                <style>
-                    h1 {
-                        font-family: "Source Sans Pro" !important;
-                    }
-                </style>
-            </head>
-            <body>
-            <h1>This document should render fine</h1>
-            </body>
-            </html>
-        """.trimIndent()
-
-        val doc = fromHtmlToDocument(html)
-
+    fun getPDFAsByteArray(json: String): ByteArray {
+        val list = jacksonObjectMapper().readValue(json, List::class.java)
+        val doc = getHTMLDocument(list)
         val os = ByteArrayOutputStream()
-
         createPDFA(doc, os)
-
         return os.toByteArray()
     }
 
-
-    private fun fromHtmlToDocument(html: String): Document {
-        val doc = Jsoup.parse(html)
-        return W3CDom().fromJsoup(doc)
+    private fun getHTMLDocument(list: List<*>): Document {
+        val c = HtmlCreator(list)
+        return c.getDoc()
     }
 
     private fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder()

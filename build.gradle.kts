@@ -4,6 +4,7 @@ val mockkVersion = "1.9.3"
 val logstashVersion = "5.1"
 val jsoupVersion = "1.11.3"
 val openHtmlToPdfVersion = "1.0.3"
+val kotlinxHtmlVersion = "0.7.2"
 
 repositories {
     mavenCentral()
@@ -36,6 +37,9 @@ dependencies {
     implementation("ch.qos.logback:logback-classic")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
+    implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.springframework:spring-mock:2.0.8")
