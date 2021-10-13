@@ -5,6 +5,7 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import no.nav.klage.pdfgen.transformers.ElementType.*
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 
@@ -67,26 +68,8 @@ class HtmlCreator(val dataList: List<*>) {
 
         children.forEach {
             when (it.getType()) {
-                "StaticRichTextElement" -> addStaticRichElement(it)
-            }
-        }
-    }
-
-    private fun addElement(map: Map<String, *>) {
-        when (map["type"]) {
-            "paragraph" -> {
-                val children = map["children"] as List<Map<String, *>>
-
-                val divElement = document.getElementById("div_content_id") as Node
-
-                val pElement = document.create.p {
-                    children.forEach {
-                        when (it.getType()) {
-                            "Leaf" -> this.addLeafElement(it)
-                        }
-                    }
-                }
-                divElement.appendChild(pElement)
+                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
+                STATIC_SIMPLE_ELEMENT -> addStaticSimpleElement(it)
             }
         }
     }
@@ -130,8 +113,8 @@ class HtmlCreator(val dataList: List<*>) {
         element.visit {
             children.forEach {
                 when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
+                    LEAF -> this.addLeafElement(it)
+                    ELEMENT -> this.addHTMLElement(it)
                 }
             }
         }
@@ -184,28 +167,34 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
-            "TemplateSection" -> addTemplateSection(map)
-            "Element" -> addElement(map)
-            "StaticSimpleElement" -> addStaticSimpleElement(map)
-            "StaticRichTextElement" -> addStaticRichElement(map)
+            TEMPLATE_SECTION -> addTemplateSection(map)
+            STATIC_SIMPLE_ELEMENT -> addStaticSimpleElement(map)
+            STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
         }
     }
 
-    private fun Map<String, *>.getType(): String {
+    private fun Map<String, *>.getType(): ElementType {
         if (this.containsKey("title")) {
-            return "TemplateSection"
+            return TEMPLATE_SECTION
         } else {
             val type = this["type"]
             if (type != null) {
                 when (type) {
-                    "text" -> return "StaticSimpleElement"
-                    "rich-text" -> return "StaticRichTextElement"
-                    "paragraph", "h1", "h2", "h3", "ul", "ol", "li", "table", "tr", "td", "blockquote", "standard-text" -> return "Element"
+                    "text" -> return STATIC_SIMPLE_ELEMENT
+                    "rich-text" -> return STATIC_RICH_TEXT_ELEMENT
+                    "paragraph", "h1", "h2", "h3", "ul", "ol", "li",
+                    "table", "tr", "td", "blockquote", "standard-text" -> return ELEMENT
                 }
             }
         }
-        return "Leaf"
+        return LEAF
     }
 }
 
-
+enum class ElementType {
+    TEMPLATE_SECTION,
+    STATIC_SIMPLE_ELEMENT,
+    STATIC_RICH_TEXT_ELEMENT,
+    ELEMENT,
+    LEAF
+}
