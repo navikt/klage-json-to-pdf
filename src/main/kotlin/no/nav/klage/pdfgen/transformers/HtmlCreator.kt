@@ -91,134 +91,43 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
-    private fun HTMLTag.addHTMLElement(map: Map<String, *>) {
+    private fun Tag.addHTMLElement(map: Map<String, *>) {
         when (map["type"]) {
-            "paragraph" -> p(map)
-            "ul" -> ul(map)
-            "ol" -> ol(map)
-            "li" -> li(map)
-            "h1" -> h1(map)
-            "h2" -> h2(map)
-            "h3" -> h3(map)
-            "table" -> table(map)
-            "tr" -> tr(map)
-            "td" -> td(map)
-            "blockquote" -> blockquote(map)
-            "standard-text" -> standardText(map)
+            "paragraph", "ul", "ol", "li", "table", "tr", "td" -> elementWithPossiblyMultibleChildren(map)
+            "blockquote", "h1", "h2", "h3", "standard-text" -> elementWithOnlyOneChild(map)
         }
     }
 
-    private fun HTMLTag.blockquote(map: Map<String, *>) {
+    private fun Tag.elementWithOnlyOneChild(map: Map<String, *>) {
         val onlyChild = (map["children"] as List<Map<String, *>>).first()
-        this.consumer.blockQuote {
+        val element = when (map["type"]) {
+            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
+            "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
+            else -> throw RuntimeException("what happened?")
+        }
+
+        element.visit {
             +onlyChild["text"].toString()
         }
     }
 
-    private fun HTMLTag.standardText(map: Map<String, *>) {
-        val onlyChild = (map["children"] as List<Map<String, *>>).first()
-        this.consumer.span {
-            +onlyChild["text"].toString()
-        }
-    }
-
-    private fun HTMLTag.h1(map: Map<String, *>) {
-        val onlyChild = (map["children"] as List<Map<String, *>>).first()
-        this.consumer.h1 {
-            +onlyChild["text"].toString()
-        }
-    }
-
-    private fun HTMLTag.h2(map: Map<String, *>) {
-        val onlyChild = (map["children"] as List<Map<String, *>>).first()
-        this.consumer.h2 {
-            +onlyChild["text"].toString()
-        }
-    }
-
-    private fun HTMLTag.h3(map: Map<String, *>) {
-        val onlyChild = (map["children"] as List<Map<String, *>>).first()
-        this.consumer.h3 {
-            +onlyChild["text"].toString()
-        }
-    }
-
-    private fun HTMLTag.li(map: Map<String, *>) {
+    private fun Tag.elementWithPossiblyMultibleChildren(map: Map<String, *>) {
         val children = map["children"] as List<Map<String, *>>
-        this.consumer.li {
-            children.forEach {
-                when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
-                }
-            }
-        }
-    }
 
-    private fun HTMLTag.table(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
-        this.consumer.table {
-            children.forEach {
-                when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
-                }
-            }
+        val element = when (map["type"]) {
+            "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
+            "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
+            "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
+            "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            "td" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
+            else -> throw RuntimeException("what happened?")
         }
-    }
-
-    private fun HTMLTag.tr(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
-        this.consumer.tr {
-            children.forEach {
-                when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
-                }
-            }
-        }
-    }
-
-    private fun HTMLTag.td(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
-        this.consumer.td {
-            println(this::class.java.name)
-            children.forEach {
-                when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
-                }
-            }
-        }
-    }
-
-    private fun HTMLTag.ul(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
-        this.consumer.ul {
-            children.forEach {
-                when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
-                }
-            }
-        }
-    }
-
-    private fun HTMLTag.ol(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
-        this.consumer.ol {
-            children.forEach {
-                when (it.getType()) {
-                    "Leaf" -> this.addLeafElement(it)
-                    "Element" -> this.addHTMLElement(it)
-                }
-            }
-        }
-    }
-
-    private fun HTMLTag.p(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
-        this.consumer.p {
+        element.visit {
             children.forEach {
                 when (it.getType()) {
                     "Leaf" -> this.addLeafElement(it)
@@ -245,7 +154,7 @@ class HtmlCreator(val dataList: List<*>) {
         divElement.appendChild(dElement)
     }
 
-    private fun HTMLTag.addLeafElement(map: Map<String, *>) {
+    private fun Tag.addLeafElement(map: Map<String, *>) {
         val text = map["text"] ?: throw RuntimeException("no content here")
 
         val classesToAdd = mutableSetOf<String>()
