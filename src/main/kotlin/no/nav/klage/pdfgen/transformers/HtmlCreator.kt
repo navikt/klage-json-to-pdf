@@ -186,8 +186,8 @@ class HtmlCreator(val dataList: List<*>) {
                     "table", "tr", "td", "blockquote", "standard-text" -> return ELEMENT
                 }
             }
+            return LEAF
         }
-        return LEAF
     }
 }
 
