@@ -11,14 +11,12 @@ import com.openhtmltopdf.svgsupport.BatikSVGDrawer
 import no.nav.klage.pdfgen.Application
 import no.nav.klage.pdfgen.transformers.HtmlCreator
 import org.apache.pdfbox.io.IOUtils
+import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayInputStream
 import java.io.ByteArrayOutputStream
 import java.io.InputStream
 import java.io.OutputStream
-import java.nio.file.Files
-import java.nio.file.Path
 
 val objectMapper: ObjectMapper = ObjectMapper()
     .registerKotlinModule()
@@ -26,9 +24,7 @@ val objectMapper: ObjectMapper = ObjectMapper()
 val colorProfile: ByteArray = IOUtils.toByteArray(Application::class.java.getResourceAsStream("/sRGB2014.icc"))
 
 val fonts: Array<FontMetadata> =
-    objectMapper.readValue(
-        Files.newInputStream(Path.of(Application::class.java.getResource("/fonts/config.json").toURI()))
-    )
+    objectMapper.readValue(ClassPathResource("/fonts/config.json").inputStream)
 
 data class FontMetadata(
     val family: String,
@@ -36,9 +32,7 @@ data class FontMetadata(
     val weight: Int,
     val style: BaseRendererBuilder.FontStyle,
     val subset: Boolean
-) {
-    val bytes: ByteArray = Files.readAllBytes(Path.of(Application::class.java.getResource("/fonts/${path}").toURI()))
-}
+)
 
 @Service
 class PDFGenService {
@@ -59,7 +53,7 @@ class PDFGenService {
     private fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder()
         .apply {
             for (font in fonts) {
-                useFont(FSSupplier(getIs(font.bytes)), font.family, font.weight, font.style, font.subset)
+                useFont(FSSupplier(getIs(font.path)), font.family, font.weight, font.style, font.subset)
             }
         }
         // .useFastMode() wait with fast mode until it doesn't print a bunch of errors
@@ -71,8 +65,6 @@ class PDFGenService {
         .buildPdfRenderer()
         .createPDF()
 
-    private fun getIs(byteArray: ByteArray): () -> InputStream {
-        return { ByteArrayInputStream(byteArray) }
-    }
+    private fun getIs(path: String): () -> InputStream { return { ClassPathResource("/fonts/$path").inputStream } }
 
 }
