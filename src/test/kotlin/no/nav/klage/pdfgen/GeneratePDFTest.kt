@@ -10,54 +10,10 @@ class GeneratePDF {
 
     @Test
     fun `generate pdf`() {
-        val byteArray = PDFGenService().getPDFAsByteArray(json)
-
-        Files.write(Path.of("hei.pdf"), byteArray)
+        Files.write(Path.of("test.pdf"), PDFGenService().getPDFAsByteArray(json))
     }
 
 }
-
-val jsonSmall = """
-{
-  "id": "string",
-  "title": "Tittel for vedtaksmalen",
-  "content": [
-    {
-      "type": "paragraph",
-      "children": [
-        {
-          "text": "En paragraf med "
-        },
-        {
-          "text": "bold tekst",
-          "bold": true
-        }
-      ]
-    },
-    {
-      "type": "ul",
-      "children": [
-        {
-          "type": "li",
-          "children": [
-            {
-              "text": "Punkt 1"
-            }
-          ]
-        },
-        {
-          "type": "li",
-          "children": [
-            {
-              "text": "Punkt 2"
-            }
-          ]
-        }
-      ]
-    }
-  ]
-}
-""".trimIndent()
 
 val json = """
 [
