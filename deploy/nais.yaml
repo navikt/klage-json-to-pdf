@@ -52,6 +52,9 @@ spec:
       rules:
         - application: kabal-api
   env:
-  {{#each envs as |env|}}
-    {{env}}
+    - name: SPRING_PROFILES_ACTIVE
+      value: {{springProfile}}
+  {{#each envs}}
+    - name: {{name}}
+      value: {{value}}
   {{/each}}

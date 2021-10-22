@@ -2,6 +2,3 @@ ingresses:
   - https://kabal-json-to-pdf.intern.nav.no
 externalHosts:
 springProfile: prod-gcp
-envs:
-  - name: SPRING_PROFILES_ACTIVE
-    value: {{springProfile}}
