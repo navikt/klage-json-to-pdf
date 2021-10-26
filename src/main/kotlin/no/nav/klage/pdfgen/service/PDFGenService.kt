@@ -38,8 +38,8 @@ data class FontMetadata(
 class PDFGenService {
 
     fun getPDFAsByteArray(json: String): ByteArray {
-        val list = jacksonObjectMapper().readValue(json, List::class.java)
-        val doc = getHTMLDocument(list)
+        val templateSection = jacksonObjectMapper().readValue(json, Map::class.java)
+        val doc = getHTMLDocument(templateSection["content"] as List<*>)
         val os = ByteArrayOutputStream()
         createPDFA(doc, os)
         return os.toByteArray()

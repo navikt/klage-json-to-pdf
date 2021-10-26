@@ -4,7 +4,6 @@ import kotlinx.html.*
 import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
-import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import org.w3c.dom.Document
 import org.w3c.dom.Node
@@ -77,7 +76,7 @@ class HtmlCreator(val dataList: List<*>) {
     private fun Tag.addHTMLElement(map: Map<String, *>) {
         when (map["type"]) {
             "paragraph", "ul", "ol", "li", "table", "tr", "td" -> elementWithPossiblyMultibleChildren(map)
-            "blockquote", "h1", "h2", "h3", "standard-text" -> elementWithOnlyOneChild(map)
+            "blockquote", "h1", "h2", "standard-text" -> elementWithOnlyOneChild(map)
         }
     }
 
@@ -87,7 +86,6 @@ class HtmlCreator(val dataList: List<*>) {
             "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
             "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
             "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
             "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> throw RuntimeException("what happened?")
         }
@@ -161,13 +159,11 @@ class HtmlCreator(val dataList: List<*>) {
         dataList.forEach {
             processElement(it as Map<String, *>)
         }
-        println(document.serialize())
         return document
     }
 
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
-            TEMPLATE_SECTION -> addTemplateSection(map)
             STATIC_SIMPLE_ELEMENT -> addStaticSimpleElement(map)
             STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
         }
@@ -182,7 +178,7 @@ class HtmlCreator(val dataList: List<*>) {
                 when (type) {
                     "text" -> return STATIC_SIMPLE_ELEMENT
                     "rich-text" -> return STATIC_RICH_TEXT_ELEMENT
-                    "paragraph", "h1", "h2", "h3", "ul", "ol", "li",
+                    "paragraph", "h1", "h2", "ul", "ol", "li",
                     "table", "tr", "td", "blockquote", "standard-text" -> return ELEMENT
                 }
             }
