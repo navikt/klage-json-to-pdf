@@ -164,6 +164,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
+            TEMPLATE_SECTION -> addTemplateSection(map)
             STATIC_SIMPLE_ELEMENT -> addStaticSimpleElement(map)
             STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
         }
