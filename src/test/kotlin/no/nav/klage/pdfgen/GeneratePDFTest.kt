@@ -10,8 +10,11 @@ class GeneratePDF {
 
     @Test
     fun `generate pdf`() {
-        Files.write(Path.of("test.pdf"), PDFGenService().getPDFAsByteArray(json))
+        val (filename, data) = PDFGenService().getPDFAsByteArray(json)
+        println("filename: $filename")
+        Files.write(Path.of("test.pdf"), data)
     }
+
 
 }
 

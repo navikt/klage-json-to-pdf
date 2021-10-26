@@ -26,13 +26,13 @@ class PDFGenController(
     fun toPDF(
         @RequestBody json: String
     ): ResponseEntity<ByteArray> {
-        logger.debug("received json: {}", json)
+        logger.debug("toPDF(). received json: {}", json)
 
-        val data = pdfGenService.getPDFAsByteArray(json)
+        val (filename, data) = pdfGenService.getPDFAsByteArray(json)
 
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
-        responseHeaders.add("Content-Disposition", "inline; filename=file.pdf")
+        responseHeaders.add("Content-Disposition", "inline; filename=$filename.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
