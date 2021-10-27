@@ -18,7 +18,7 @@ class CorsGlobalConfiguration {
 
     @Bean
     fun corsServletFilterRegistration(): FilterRegistrationBean<CorsFilter> {
-        val config = corsConfiguration()
+        val config = corsConfiguration().applyPermitDefaultValues()
         val source = corsConfigurationSource(config)
         val corsFilter = CorsFilter(source)
         val bean = FilterRegistrationBean<CorsFilter>()
