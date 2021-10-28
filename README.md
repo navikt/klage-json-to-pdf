@@ -2,4 +2,4 @@
 
 One exposed endpoint: /topdf
 
-Takes a JSON-array, in body, and returns a pdf/a.
+Takes JSON, in body, and returns pdf/a.
