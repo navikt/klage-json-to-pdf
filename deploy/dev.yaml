@@ -5,3 +5,4 @@ springProfile: dev-gcp
 envs:
   - name: JAVA_TOOL_OPTIONS
     value: -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
+tenant: trygdeetaten.no
