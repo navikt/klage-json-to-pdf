@@ -51,6 +51,7 @@ spec:
     inbound:
       rules:
         - application: kabal-frontend
+        - application: kabal-smart-editor-api
   azure:
     application:
       enabled: true
