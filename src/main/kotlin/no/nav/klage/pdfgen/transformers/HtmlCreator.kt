@@ -4,12 +4,19 @@ import kotlinx.html.*
 import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
+import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.transformers.ElementType.*
+import no.nav.klage.pdfgen.util.getLogger
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<*>) {
+
+    companion object {
+        @Suppress("JAVA_CLASS_ON_COMPANION")
+        private val logger = getLogger(javaClass.enclosingClass)
+    }
 
     private val document: Document = createHTMLDocument()
         .html {
@@ -30,7 +37,7 @@ class HtmlCreator(val dataList: List<*>) {
                                 .italic {
                                     font-style: italic
                                 }
-                                .right {
+                                .alignRight {
                                     text-align: right;
                                 }
                             """.trimIndent()
@@ -76,32 +83,14 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
-    private fun Tag.addHTMLElement(map: Map<String, *>) {
-        when (map["type"]) {
-            "paragraph", "bullet-list", "numbered-list", "list-item", "table", "table-row", "table-cell" -> elementWithPossiblyMultipleChildren(map)
-            "blockquote", "heading-one", "heading-two", "standard-text" -> elementWithOnlyOneChild(map)
-        }
-    }
-
-    private fun Tag.elementWithOnlyOneChild(map: Map<String, *>) {
-        val onlyChild = (map["children"] as List<Map<String, *>>).first()
-        val element = when (map["type"]) {
-            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
-            else -> throw RuntimeException("what happened?")
-        }
-
-        element.visit {
-            +onlyChild["text"].toString()
-        }
-    }
-
-    private fun Tag.elementWithPossiblyMultipleChildren(map: Map<String, *>) {
+    private fun Tag.addElementWithPossiblyMultipleChildren(map: Map<String, *>) {
         val children = map["children"] as List<Map<String, *>>
 
         val element = when (map["type"]) {
+            "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
             "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
             "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
             "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
@@ -111,11 +100,15 @@ class HtmlCreator(val dataList: List<*>) {
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> throw RuntimeException("what happened?")
         }
+
+        val applyClasses = if (map["textAlign"] == "text-align-right") setOf("alignRight") else emptySet()
+
         element.visit {
+            classes = applyClasses
             children.forEach {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
-                    ELEMENT -> this.addHTMLElement(it)
+                    ELEMENT -> this.addElementWithPossiblyMultipleChildren(it)
                 }
             }
         }
@@ -131,7 +124,7 @@ class HtmlCreator(val dataList: List<*>) {
                 br { }
             }
             children.forEach {
-                this.addHTMLElement(it)
+                this.addElementWithPossiblyMultipleChildren(it)
             }
         }
         val divElement = document.getElementById("div_content_id") as Node
@@ -162,6 +155,7 @@ class HtmlCreator(val dataList: List<*>) {
         dataList.forEach {
             processElement(it as Map<String, *>)
         }
+        logger.debug(document.serialize())
         return document
     }
 
@@ -179,12 +173,10 @@ class HtmlCreator(val dataList: List<*>) {
         } else {
             val type = this["type"]
             if (type != null) {
-                when (type) {
-                    "text" -> return STATIC_SIMPLE_ELEMENT
-                    "rich-text" -> return STATIC_RICH_TEXT_ELEMENT
-//                    "paragraph", "heading-one", "heading-two", "ul", "ol", "li",
-//                    "table", "tr", "td", "blockquote", "standard-text" -> return ELEMENT
-                    else -> return ELEMENT
+                return when (type) {
+                    "text" -> STATIC_SIMPLE_ELEMENT
+                    "rich-text" -> STATIC_RICH_TEXT_ELEMENT
+                    else -> ELEMENT
                 }
             }
             return LEAF
