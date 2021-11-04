@@ -90,7 +90,7 @@ class HtmlCreator(val dataList: List<*>) {
             "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
+            "quote", "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
             "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
             "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
             "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
@@ -98,7 +98,7 @@ class HtmlCreator(val dataList: List<*>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
-            else -> throw RuntimeException("what happened?")
+            else -> throw RuntimeException("unknown element type: " + map["type"])
         }
 
         val applyClasses = if (map["textAlign"] == "text-align-right") setOf("alignRight") else emptySet()
