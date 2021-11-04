@@ -7,6 +7,7 @@ import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import no.nav.klage.pdfgen.util.getLogger
+import no.nav.klage.pdfgen.util.getSecureLogger
 import org.w3c.dom.Document
 import org.w3c.dom.Node
 
@@ -16,6 +17,7 @@ class HtmlCreator(val dataList: List<*>) {
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
         private val logger = getLogger(javaClass.enclosingClass)
+        private val secureLogger = getSecureLogger()
     }
 
     private val document: Document = createHTMLDocument()
@@ -155,7 +157,7 @@ class HtmlCreator(val dataList: List<*>) {
         dataList.forEach {
             processElement(it as Map<String, *>)
         }
-        logger.debug(document.serialize())
+        secureLogger.debug(document.serialize())
         return document
     }
 
