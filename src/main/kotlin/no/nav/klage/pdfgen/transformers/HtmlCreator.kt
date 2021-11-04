@@ -27,8 +27,11 @@ class HtmlCreator(val dataList: List<*>) {
                     unsafe {
                         raw(
                             """
+                                #header {
+                                    font-size: 14px;
+                                }
                                 img {
-                                    width: 80px;
+                                    width: 100px;
                                     float: right;
                                 }
                                 * {
@@ -52,7 +55,15 @@ class HtmlCreator(val dataList: List<*>) {
                 }
             }
             body {
-                img { src = "nav_logo.png" }
+                div { id = "header"
+                    span { +"Returadresse," }
+                    br {  }
+                    span { +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO" }
+                    img { src = "nav_logo.png" }
+                }
+                br {  }
+                br {  }
+
                 div { id = "div_content_id" }
             }
         }
