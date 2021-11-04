@@ -60,7 +60,7 @@ class PDFGenService {
         .useColorProfile(colorProfile)
         .useSVGDrawer(BatikSVGDrawer())
         .usePdfAConformance(PdfRendererBuilder.PdfAConformance.PDFA_2_U)
-        .withW3cDocument(w3doc, "")
+        .withW3cDocument(w3doc, PDFGenService::javaClass.javaClass.getResource("/dummy.html").toExternalForm())
         .toStream(outputStream)
         .buildPdfRenderer()
         .createPDF()

@@ -27,17 +27,21 @@ class HtmlCreator(val dataList: List<*>) {
                     unsafe {
                         raw(
                             """
+                                img {
+                                    width: 80px;
+                                    float: right;
+                                }
                                 * {
                                     font-family: "Source Sans Pro" !important;
                                 }
                                 .bold {
-                                    font-weight: bold
+                                    font-weight: bold;
                                 }
                                 .underline {
                                     text-decoration: underline;
                                 }
                                 .italic {
-                                    font-style: italic
+                                    font-style: italic;
                                 }
                                 .alignRight {
                                     text-align: right;
@@ -48,6 +52,7 @@ class HtmlCreator(val dataList: List<*>) {
                 }
             }
             body {
+                img { src = "nav_logo.png" }
                 div { id = "div_content_id" }
             }
         }
