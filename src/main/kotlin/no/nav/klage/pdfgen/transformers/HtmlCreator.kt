@@ -30,6 +30,9 @@ class HtmlCreator(val dataList: List<*>) {
                                 .italic {
                                     font-style: italic
                                 }
+                                .right {
+                                    text-align: right;
+                                }
                             """.trimIndent()
                         )
                     }
@@ -42,7 +45,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun addStaticSimpleElement(map: Map<String, *>) {
         val label = map["label"] ?: throw RuntimeException("no content here")
-        val text = map["content"] ?: throw RuntimeException("no content here")
+        val text = map["content"] ?: "missing content"//throw RuntimeException("no content here")
 
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
@@ -75,8 +78,8 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun Tag.addHTMLElement(map: Map<String, *>) {
         when (map["type"]) {
-            "paragraph", "ul", "ol", "li", "table", "tr", "td" -> elementWithPossiblyMultibleChildren(map)
-            "blockquote", "h1", "h2", "standard-text" -> elementWithOnlyOneChild(map)
+            "paragraph", "bullet-list", "numbered-list", "list-item", "table", "table-row", "table-cell" -> elementWithPossiblyMultipleChildren(map)
+            "blockquote", "heading-one", "heading-two", "standard-text" -> elementWithOnlyOneChild(map)
         }
     }
 
@@ -84,8 +87,8 @@ class HtmlCreator(val dataList: List<*>) {
         val onlyChild = (map["children"] as List<Map<String, *>>).first()
         val element = when (map["type"]) {
             "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
             "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> throw RuntimeException("what happened?")
         }
@@ -95,17 +98,17 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
-    private fun Tag.elementWithPossiblyMultibleChildren(map: Map<String, *>) {
+    private fun Tag.elementWithPossiblyMultipleChildren(map: Map<String, *>) {
         val children = map["children"] as List<Map<String, *>>
 
         val element = when (map["type"]) {
             "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
-            "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
+            "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "list-item" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
-            "td" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
+            "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> throw RuntimeException("what happened?")
         }
         element.visit {
@@ -179,8 +182,9 @@ class HtmlCreator(val dataList: List<*>) {
                 when (type) {
                     "text" -> return STATIC_SIMPLE_ELEMENT
                     "rich-text" -> return STATIC_RICH_TEXT_ELEMENT
-                    "paragraph", "h1", "h2", "ul", "ol", "li",
-                    "table", "tr", "td", "blockquote", "standard-text" -> return ELEMENT
+//                    "paragraph", "heading-one", "heading-two", "ul", "ol", "li",
+//                    "table", "tr", "td", "blockquote", "standard-text" -> return ELEMENT
+                    else -> return ELEMENT
                 }
             }
             return LEAF
