@@ -36,7 +36,7 @@ class PDFGenController(
         @RequestBody json: String
     ): ResponseEntity<ByteArray> {
         logger.debug("toPDF() called. See body in secure logs")
-        secureLogger.debug("toPDF(). received json: {}", json)
+        secureLogger.debug("toPDF() called. Received json: {}", json)
 
         val (filename, data) = pdfGenService.getPDFAsByteArray(json)
 
