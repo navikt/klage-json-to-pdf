@@ -27,12 +27,22 @@ class HtmlCreator(val dataList: List<*>) {
                     unsafe {
                         raw(
                             """
-                                #header {
-                                    font-size: 14px;
+                                h1 * {
+                                    font-size: 16pt;
+                                }
+                                h2 * {
+                                    font-size: 14pt;
+                                }
+                                #header span {
+                                    font-size: 10pt;
                                 }
                                 img {
-                                    width: 100px;
+                                    display: block;
+                                    width: 100pt;
                                     float: right;
+                                }
+                                p, span {
+                                    font-size: 12pt;
                                 }
                                 * {
                                     font-family: "Source Sans Pro" !important;
@@ -52,10 +62,31 @@ class HtmlCreator(val dataList: List<*>) {
                                 .pageBreak {
                                     page-break-after: always;
                                 }
+                                
                                 @page {
+                                    img {
+                                        display: none;
+                                    }
+                                    margin: 20mm 20mm 20mm 20mm;
+                                    @bottom-left {
+                                        content: "";
+                                    }
                                     @bottom-right {
                                         font-family: "Source Sans Pro" !important;
+                                        font-size: 10pt;
                                         content: "Side " counter(page) " av " counter(pages);
+                                    }
+                                }
+
+                                @page :first {
+                                    @bottom-left {
+                                        font-family: "Source Sans Pro" !important;
+                                        font-size: 10pt;
+                                        content: "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 OSLO\ATelefon: 21 07 17 30\Anav.no";
+                                        white-space: pre-wrap;
+                                    }
+                                    @bottom-right {
+                                        content: "";
                                     }
                                 }
                             """.trimIndent()
@@ -64,14 +95,15 @@ class HtmlCreator(val dataList: List<*>) {
                 }
             }
             body {
-                div { id = "header"
+                div {
+                    id = "header"
                     span { +"Returadresse," }
-                    br {  }
+                    br { }
                     span { +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO" }
                     img { src = "nav_logo.png" }
                 }
-                br {  }
-                br {  }
+                br { }
+                br { }
 
                 div { id = "div_content_id" }
             }
@@ -84,9 +116,9 @@ class HtmlCreator(val dataList: List<*>) {
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
             div {
-                +label.toString()
+                span { +label.toString() }
                 br { }
-                +text.toString()
+                span { +text.toString() }
                 br { }
                 br { }
             }
@@ -95,7 +127,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun addTemplateSection(map: Map<String, *>) {
         val h1 = document.create.h1 {
-            +map["title"].toString()
+            span { +map["title"].toString() }
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(h1)
