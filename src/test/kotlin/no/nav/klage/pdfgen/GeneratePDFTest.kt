@@ -62,7 +62,7 @@ val json = """
                     "type": "paragraph",
                     "children": [
                         {
-                            "text": ""
+                            "text": "en p her."
                         }
                     ]
                 }
@@ -77,12 +77,15 @@ val json = """
                     "type": "rich-text",
                     "content": [
                         {
+                            "type": "page-break"
+                        },
+                        {
                             "type": "standard-text",
                             "standardText": "Dette er en standardtekst.",
                             "standardTextId": "id-123",
                             "children": [
                                 {
-                                    "text": "Dette er en standardtekst."
+                                    "text": "Dette er en standardtekst på ny side."
                                 }
                             ]
                         },

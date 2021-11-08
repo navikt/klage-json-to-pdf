@@ -49,6 +49,9 @@ class HtmlCreator(val dataList: List<*>) {
                                 .alignRight {
                                     text-align: right;
                                 }
+                                .pageBreak {
+                                    page-break-after: always;
+                                }
                             """.trimIndent()
                         )
                     }
@@ -101,14 +104,23 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
-    private fun Tag.addElementWithPossiblyMultipleChildren(map: Map<String, *>) {
-        val children = map["children"] as List<Map<String, *>>
+    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
+        val elementType = map["type"]
+        var children = emptyList<Map<String, *>>()
 
-        val element = when (map["type"]) {
+        val applyClasses = if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight") else mutableSetOf()
+
+        if (elementType != "page-break") {
+            children = map["children"] as List<Map<String, *>>
+        } else {
+            applyClasses.add("pageBreak")
+        }
+
+        val element = when (elementType) {
             "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "quote", "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
+            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
             "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
             "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
             "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
@@ -116,17 +128,16 @@ class HtmlCreator(val dataList: List<*>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
+            "page-break" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> throw RuntimeException("unknown element type: " + map["type"])
         }
-
-        val applyClasses = if (map["textAlign"] == "text-align-right") setOf("alignRight") else emptySet()
 
         element.visit {
             classes = applyClasses
             children.forEach {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
-                    ELEMENT -> this.addElementWithPossiblyMultipleChildren(it)
+                    ELEMENT -> this.addElementWithPossiblyChildren(it)
                 }
             }
         }
@@ -142,7 +153,7 @@ class HtmlCreator(val dataList: List<*>) {
                 br { }
             }
             children.forEach {
-                this.addElementWithPossiblyMultipleChildren(it)
+                this.addElementWithPossiblyChildren(it)
             }
         }
         val divElement = document.getElementById("div_content_id") as Node
