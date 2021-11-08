@@ -52,6 +52,12 @@ class HtmlCreator(val dataList: List<*>) {
                                 .pageBreak {
                                     page-break-after: always;
                                 }
+                                @page {
+                                    @bottom-right {
+                                        font-family: "Source Sans Pro" !important;
+                                        content: "Side " counter(page) " av " counter(pages);
+                                    }
+                                }
                             """.trimIndent()
                         )
                     }
