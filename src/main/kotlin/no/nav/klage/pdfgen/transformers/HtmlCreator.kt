@@ -64,10 +64,7 @@ class HtmlCreator(val dataList: List<*>) {
                                 }
                                 
                                 @page {
-                                    img {
-                                        display: none;
-                                    }
-                                    margin: 20mm 20mm 20mm 20mm;
+                                    margin: 15mm 20mm 20mm 20mm;
                                     @bottom-left {
                                         content: "";
                                     }
@@ -79,6 +76,7 @@ class HtmlCreator(val dataList: List<*>) {
                                 }
 
                                 @page :first {
+                                    margin: 15mm 20mm 30mm 20mm;
                                     @bottom-left {
                                         font-family: "Source Sans Pro" !important;
                                         font-size: 10pt;
