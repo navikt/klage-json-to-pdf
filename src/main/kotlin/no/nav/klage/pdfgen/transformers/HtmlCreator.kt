@@ -27,6 +27,15 @@ class HtmlCreator(val dataList: List<*>) {
                     unsafe {
                         raw(
                             """
+                                .column {
+                                  font-size: 16px;
+                                  display: inline-block;
+                                  width: 50%;
+                                }
+                                /* Fjerner spacing mellom inline-blockene */
+                                .wrapper {
+                                  font-size: 0;
+                                }
                                 h1 * {
                                     font-size: 16pt;
                                 }
@@ -196,6 +205,27 @@ class HtmlCreator(val dataList: List<*>) {
         divElement.appendChild(dElement)
     }
 
+    private fun addSignatureElement(map: Map<String, *>) {
+        val children = map["content"] as Map<String, Map<String, *>>
+
+        val dElement = document.create.div {
+            classes = setOf("wrapper")
+            div {
+                classes = setOf("column")
+                div { +children["medunderskriver"]!!["name"].toString() }
+                div { +children["medunderskriver"]!!["title"].toString() }
+            }
+
+            div {
+                classes = setOf("column")
+                div { +children["saksbehandler"]!!["name"].toString() }
+                div { +children["saksbehandler"]!!["title"].toString() }
+            }
+        }
+        val divElement = document.getElementById("div_content_id") as Node
+        divElement.appendChild(dElement)
+    }
+
     private fun Tag.addLeafElement(map: Map<String, *>) {
         val text = map["text"] ?: throw RuntimeException("no content here")
 
@@ -229,6 +259,7 @@ class HtmlCreator(val dataList: List<*>) {
             TEMPLATE_SECTION -> addTemplateSection(map)
             STATIC_SIMPLE_ELEMENT -> addStaticSimpleElement(map)
             STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
+            SIGNATURE_ELEMENT -> addSignatureElement(map)
         }
     }
 
@@ -241,6 +272,7 @@ class HtmlCreator(val dataList: List<*>) {
                 return when (type) {
                     "text" -> STATIC_SIMPLE_ELEMENT
                     "rich-text" -> STATIC_RICH_TEXT_ELEMENT
+                    "signature" -> SIGNATURE_ELEMENT
                     else -> ELEMENT
                 }
             }
@@ -253,6 +285,7 @@ enum class ElementType {
     TEMPLATE_SECTION,
     STATIC_SIMPLE_ELEMENT,
     STATIC_RICH_TEXT_ELEMENT,
+    SIGNATURE_ELEMENT,
     ELEMENT,
     LEAF
 }
