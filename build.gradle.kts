@@ -13,9 +13,9 @@ repositories {
 }
 
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.5.31"
-    id("org.springframework.boot") version "2.5.5"
-    id("org.jetbrains.kotlin.plugin.spring") version "1.5.31"
+    id("org.jetbrains.kotlin.jvm") version "1.6.0"
+    id("org.springframework.boot") version "2.5.7"
+    id("org.jetbrains.kotlin.plugin.spring") version "1.6.0"
     idea
 }
 
@@ -57,7 +57,10 @@ idea {
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions.jvmTarget = "11"
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "17"
+    }
 }
 
 tasks.withType<Test> {
