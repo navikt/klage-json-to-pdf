@@ -10,18 +10,14 @@ class GeneratePDF {
 
     @Test
     fun `generate pdf`() {
-        val (filename, data) = PDFGenService().getPDFAsByteArray(json)
-        println("filename: $filename")
+        val data = PDFGenService().getPDFAsByteArray(json)
         Files.write(Path.of("test.pdf"), data)
     }
 
 }
 
 val json = """
-{
-  "id": "string",
-  "title": "Tittel for dokumentet",
-  "content": [
+[
     {
       "id": "klager",
       "type": "text",
@@ -710,5 +706,4 @@ val json = """
       }
     }
   ]
-}
 """.trimIndent()
