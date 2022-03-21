@@ -210,17 +210,21 @@ class HtmlCreator(val dataList: List<*>) {
 
         val dElement = document.create.div {
             classes = setOf("wrapper")
-            div {
-                classes = setOf("column")
-                div { +children["medunderskriver"]!!["name"].toString() }
-                div { +children["medunderskriver"]!!["title"].toString() }
+            if (children.containsKey("medunderskriver")) {
+                div {
+                    classes = setOf("column")
+                    div { +children["medunderskriver"]!!["name"].toString() }
+                    div { +children["medunderskriver"]!!["title"].toString() }
+                }
+            }
+            if (children.containsKey("saksbehandler")) {
+                div {
+                    classes = setOf("column")
+                    div { +children["saksbehandler"]!!["name"].toString() }
+                    div { +children["saksbehandler"]!!["title"].toString() }
+                }
             }
 
-            div {
-                classes = setOf("column")
-                div { +children["saksbehandler"]!!["name"].toString() }
-                div { +children["saksbehandler"]!!["title"].toString() }
-            }
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(dElement)
