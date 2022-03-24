@@ -27,6 +27,14 @@ class HtmlCreator(val dataList: List<*>) {
                     unsafe {
                         raw(
                             """
+                                html {
+                                    white-space: pre-wrap;
+                                    font-family: "Source Sans Pro" !important;
+                                    box-sizing: border-box;
+                                }
+                                *, ::before, ::after {
+                                  box-sizing: inherit;
+                                }
                                 .column {
                                   font-size: 16px;
                                   display: inline-block;
@@ -55,9 +63,6 @@ class HtmlCreator(val dataList: List<*>) {
                                 }
                                 p, span {
                                     font-size: 12pt;
-                                }
-                                * {
-                                    font-family: "Source Sans Pro" !important;
                                 }
                                 .bold {
                                     font-weight: bold;
@@ -237,7 +242,7 @@ class HtmlCreator(val dataList: List<*>) {
         val children = map["content"] as List<Map<String, String>>
         val dElement = document.create.div {
             ul {
-                children.forEach {
+                children.filter { it["include"] == "true" }.forEach {
                     li { +it["title"].toString() }
                 }
             }
