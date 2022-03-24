@@ -202,7 +202,7 @@ class HtmlCreator(val dataList: List<*>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
-            "page-break" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
+            "page-break", "list-item-container" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> throw RuntimeException("unknown element type: " + map["type"])
         }
 
