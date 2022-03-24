@@ -246,6 +246,34 @@ val json = """
   },
   {
     "type": "section",
+    "id": "section-anke",
+    "content": [
+      {
+        "type": "rich-text",
+        "id": "anke-text",
+        "content": [
+          {
+            "type": "heading-two",
+            "children": [
+              {
+                "text": "Du har rett til å anke"
+              }
+            ]
+          },
+          {
+            "type": "heading-three",
+            "children": [
+              {
+                "text": "Du har rett til å anke"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
     "id": "section-questions",
     "content": [
       {

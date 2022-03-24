@@ -42,6 +42,9 @@ class HtmlCreator(val dataList: List<*>) {
                                 h2 * {
                                     font-size: 14pt;
                                 }
+                                h3 * {
+                                    font-size: 12pt;
+                                }
                                 #header span {
                                     font-size: 10pt;
                                 }
@@ -190,6 +193,7 @@ class HtmlCreator(val dataList: List<*>) {
             "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-three" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
             "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
             "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
             "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
