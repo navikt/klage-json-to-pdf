@@ -18,692 +18,323 @@ class GeneratePDF {
 
 val json = """
 [
-    {
-      "id": "klager",
-      "type": "text",
-      "label": "Klager",
-      "content": "Navn Navnesen"
-    },
-    {
-      "id": "fnr",
-      "type": "text",
-      "label": "Fødselsnummer",
-      "content": "1234567890"
-    },
-    {
-      "id": "saksnummer",
-      "type": "text",
-      "label": "Saksnummer",
-      "content": "987654321"
-    },
-    {
-      "id": "prosess",
-      "type": "text",
-      "label": "Prosessfullmektig"
-    },
-    {
-      "id": "about",
-      "type": "text",
-      "label": "Saken gjelder",
-      "placeholder": "Klagen din av (dato) på (enhet) sitt vedtak av (dato)."
-    },
-    {
-      "id": "problem",
-      "type": "rich-text",
-      "label": "Problemstilling",
-      "placeholder": "Spørsmålet er om du (tekst) fra (dato).",
-      "content": [
-        {
-          "type": "paragraph",
-          "children": [
-            {
-              "text": "en p her."
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "vedtak-block",
-      "title": "Vår vurdering",
-      "content": [
-        {
-          "id": "vedtak",
-          "type": "rich-text",
-          "content": [
-            {
-              "type": "standard-text",
-              "standardText": "Dette er en standardtekst.",
-              "standardTextId": "id-123",
-              "children": [
-                {
-                  "text": "Dette er en standardtekst på ny side."
-                }
-              ]
-            },
-            {
-              "type": "heading-one",
-              "children": [
-                {
-                  "text": "Tittel for vedtaket h1"
-                }
-              ]
-            },
-            {
-              "type": "heading-two",
-              "children": [
-                {
-                  "text": "Tittel for vedtaket h2"
-                }
-              ]
-            },
-            {
-              "type": "blockquote",
-              "children": [
-                {
-                  "text": "Block quote."
-                }
-              ]
-            },
-            {
-              "type": "blockquote",
-              "textAlign": "text-align-right",
-              "children": [
-                {
-                  "text": "Block quote. Høyrestilt."
-                }
-              ]
-            },
-            {
-              "type": "paragraph",
-              "children": [
-                {
-                  "text": "En venstrestilt paragraf med "
-                },
-                {
-                  "text": "bold tekst",
-                  "bold": true
-                },
-                {
-                  "text": " "
-                },
-                {
-                  "text": "kursiv tekst",
-                  "italic": true
-                },
-                {
-                  "text": " "
-                },
-                {
-                  "text": "understreking",
-                  "underline": true
-                },
-                {
-                  "text": " og ingen formatering."
-                }
-              ]
-            },
-            {
-              "type": "paragraph",
-              "textAlign": "text-align-right",
-              "children": [
-                {
-                  "text": "En høyrestilt paragraf."
-                }
-              ]
-            },
-            {
-              "type": "paragraph",
-              "textAlign": "text-align-left",
-              "children": [
-                {
-                  "text": "En venstrestilt paragraf. Som er default, dersom 'textAlign' ikke er satt."
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "bullet-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "numbered-list",
-              "children": [
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 1"
-                    }
-                  ]
-                },
-                {
-                  "type": "list-item",
-                  "children": [
-                    {
-                      "text": "Punkt 2"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "table",
-              "children": [
-                {
-                  "type": "table-row",
-                  "children": [
-                    {
-                      "type": "table-cell",
-                      "children": [
-                        {
-                          "text": "test"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "table-cell",
-                      "children": [
-                        {
-                          "text": "test"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "table-cell",
-                      "children": [
-                        {
-                          "text": "test"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "table-row",
-                  "children": [
-                    {
-                      "type": "table-cell",
-                      "children": [
-                        {
-                          "text": "test"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "table-cell",
-                      "children": [
-                        {
-                          "text": "test"
-                        }
-                      ]
-                    },
-                    {
-                      "type": "table-cell",
-                      "children": [
-                        {
-                          "text": "test"
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "id": "signature",
-      "label": "Signatur",
-      "type": "signature",
-      "content": {
-        "medunderskriver": {
-          "name": "Medunderskriver Navnesen",
-          "title": "Medunderskriver"
-        },
-        "saksbehandler": {
-          "name": "Saksbehandler Navnesen",
-          "title": "Saksbehandler"
-        }
+  {
+    "type": "document-title",
+    "id": "document-title",
+    "content": "NAV Klageinstans har behandlet klagen din"
+  },
+  {
+    "type": "section",
+    "id": "data-section",
+    "content": [
+      {
+        "type": "label-content",
+        "id": "klager",
+        "label": "Klager",
+        "source": "sakenGjelder.name",
+        "content": "KRAFTIG KAKKERLAKK"
+      },
+      {
+        "type": "label-content",
+        "id": "fnr",
+        "label": "Fødselsnummer",
+        "source": "sakenGjelder.fnr",
+        "content": "024467 01749"
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-vedtak",
+    "content": [
+      {
+        "type": "section-title",
+        "id": "vedtak-title",
+        "source": "utfall-title",
+        "content": "Vedtak"
+      },
+      {
+        "id": "vedtak",
+        "type": "rich-text",
+        "content": [
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "[Alt 1 stadfestelse] Vi er enige i vedtaket."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "[Alt 2 omgjøring] Vi har omgjort vedtaket, slik at"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "[Alt 3 avvisning] Vi har avvist klagen din "
+              },
+              {
+                "text": "fordi",
+                "bold": false
+              },
+              {
+                "text": " du ikke har overholdt klagefristen."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "[Beslutning] Vi har opphevet vedtaket og sendt saken tilbake til NAV, som skal behandle den på nytt."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-din-vekt",
+    "content": [
+      {
+        "type": "section-title",
+        "id": "din-vekt-title",
+        "content": "I klagen din har du lagt vekt på"
+      },
+      {
+        "id": "din-vekt",
+        "type": "rich-text",
+        "content": [
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "dfsdfsdfsdfs"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "sdfsdfsdf"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-documents",
+    "content": [
+      {
+        "type": "section-title",
+        "id": "documents-title",
+        "content": "I vurderingen vår har vi lagt vekt på disse dokumentene"
+      },
+      {
+        "type": "document-list",
+        "id": "document-list",
+        "content": [
+          "Vedtak-/utfallsbrev",
+          "dummy-01.pdf",
+          "Enkelt utfall-/vedtaksbrev",
+          "dummy-01.pdf",
+          "MASKERT_FELT"
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-vurdering",
+    "content": [
+      {
+        "type": "section-title",
+        "id": "vurdering-title",
+        "content": "Vurderingen vår"
+      },
+      {
+        "id": "vurdering",
+        "type": "rich-text",
+        "content": [
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-konklusjon",
+    "content": [
+      {
+        "type": "section-title",
+        "id": "konklusjon-title",
+        "content": "Konklusjonen vår"
+      },
+      {
+        "id": "konklusjon",
+        "type": "rich-text",
+        "content": [
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "[Vedtak]Vi har kommet fram til at du [ikke] har rett til, og gir deg derfor [ikke medhold><medhold] i klagen din."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "Vedtaket er gjort etter folketrygdloven § [hjemmel]."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "[Beslutning] Vi kan ikke vurdere om du har rett til [stønad], fordi . NAV [enhet] skal behandle saken på nytt."
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "Saken er vurdert etter folketrygdloven §."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-anke",
+    "content": [
+      {
+        "type": "rich-text",
+        "id": "anke-text",
+        "content": [
+          {
+            "type": "heading-one",
+            "children": [
+              {
+                "text": "Du har rett til å anke"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom fram til deg. Du finner informasjon, skjema og første side for innsending på www.nav.no/klage. Velg NAV Klageinstans [avdeling]."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-questions",
+    "content": [
+      {
+        "type": "static",
+        "id": "questions",
+        "source": "questions",
+        "content": [
+          {
+            "type": "heading-one",
+            "children": [
+              {
+                "text": "Har du spørsmål?"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "section",
+    "id": "section-regards",
+    "content": [
+      {
+        "type": "static",
+        "id": "regards",
+        "source": "regards",
+        "content": [
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "children": [
+              {
+                "text": "Med vennlig hilsen\nNAV Klageinstans"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "signature",
+    "id": "signature",
+    "content": {
+      "useShortName": true,
+      "medunderskriver": {
+        "name": "K. Nordmann",
+        "title": "Avdelingsdirektør"
+      },
+      "saksbehandler": {
+        "name": "C. Skrøvseth",
+        "title": "Seniorrådgiver"
       }
     }
-  ]
+  }
+]
 """.trimIndent()
