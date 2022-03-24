@@ -31,15 +31,13 @@ val json = """
         "type": "label-content",
         "id": "klager",
         "label": "Klager",
-        "source": "sakenGjelder.name",
-        "content": "KRAFTIG KAKKERLAKK"
+        "source": "sakenGjelder.name"
       },
       {
         "type": "label-content",
         "id": "fnr",
         "label": "Fødselsnummer",
-        "source": "sakenGjelder.fnr",
-        "content": "024467 01749"
+        "source": "sakenGjelder.fnr"
       }
     ]
   },
@@ -50,8 +48,7 @@ val json = """
       {
         "type": "section-title",
         "id": "vedtak-title",
-        "source": "utfall-title",
-        "content": "Vedtak"
+        "source": "utfall-title"
       },
       {
         "id": "vedtak",
@@ -80,14 +77,7 @@ val json = """
             "textAlign": "text-align-left",
             "children": [
               {
-                "text": "[Alt 3 avvisning] Vi har avvist klagen din "
-              },
-              {
-                "text": "fordi",
-                "bold": false
-              },
-              {
-                "text": " du ikke har overholdt klagefristen."
+                "text": "[Alt 3 avvisning] Vi har avvist klagen din fordi du ikke har overholdt klagefristen."
               }
             ]
           },
@@ -122,16 +112,7 @@ val json = """
             "textAlign": "text-align-left",
             "children": [
               {
-                "text": "dfsdfsdfsdfs"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "sdfsdfsdf"
+                "text": ""
               }
             ]
           }
@@ -151,13 +132,7 @@ val json = """
       {
         "type": "document-list",
         "id": "document-list",
-        "content": [
-          "Vedtak-/utfallsbrev",
-          "dummy-01.pdf",
-          "Enkelt utfall-/vedtaksbrev",
-          "dummy-01.pdf",
-          "MASKERT_FELT"
-        ]
+        "content": []
       }
     ]
   },
@@ -276,26 +251,7 @@ val json = """
       {
         "type": "static",
         "id": "questions",
-        "source": "questions",
-        "content": [
-          {
-            "type": "heading-one",
-            "children": [
-              {
-                "text": "Har du spørsmål?"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
-              }
-            ]
-          }
-        ]
+        "source": "questions"
       }
     ]
   },
@@ -306,18 +262,7 @@ val json = """
       {
         "type": "static",
         "id": "regards",
-        "source": "regards",
-        "content": [
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Med vennlig hilsen\nNAV Klageinstans"
-              }
-            ]
-          }
-        ]
+        "source": "regards"
       }
     ]
   },
@@ -325,15 +270,7 @@ val json = """
     "type": "signature",
     "id": "signature",
     "content": {
-      "useShortName": true,
-      "medunderskriver": {
-        "name": "K. Nordmann",
-        "title": "Avdelingsdirektør"
-      },
-      "saksbehandler": {
-        "name": "C. Skrøvseth",
-        "title": "Seniorrådgiver"
-      }
+      "useShortName": false
     }
   }
 ]

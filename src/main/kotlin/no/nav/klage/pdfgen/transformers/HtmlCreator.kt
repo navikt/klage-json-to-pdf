@@ -118,7 +118,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun addLabelContentElement(map: Map<String, *>) {
         val label = map["label"] ?: throw RuntimeException("no content here")
-        val text = map["content"] ?: "missing content"//throw RuntimeException("no content here")
+        val text = map["content"] ?: ""//throw RuntimeException("no content here")
 
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
@@ -214,6 +214,10 @@ class HtmlCreator(val dataList: List<*>) {
     }
 
     private fun addStaticRichElement(map: Map<String, *>) {
+        if (!map.containsKey("content")) {
+            return
+        }
+
         val children = map["content"] as List<Map<String, *>>
 
         val dElement = document.create.div {
