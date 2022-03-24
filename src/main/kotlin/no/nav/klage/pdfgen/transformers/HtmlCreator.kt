@@ -310,7 +310,7 @@ class HtmlCreator(val dataList: List<*>) {
             if (type != null) {
                 return when (type) {
                     "label-content" -> LABEL_CONTENT_ELEMENT
-                    "rich-text" -> STATIC_RICH_TEXT_ELEMENT
+                    "rich-text", "static" -> STATIC_RICH_TEXT_ELEMENT
                     "signature" -> SIGNATURE_ELEMENT
                     "section" -> SECTION_ELEMENT
                     "document-title" -> DOCUMENT_TITLE_ELEMENT
