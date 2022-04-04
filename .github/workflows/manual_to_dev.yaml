@@ -47,7 +47,6 @@ jobs:
   deploytodev:
     name: Deploy to dev
     needs: build
-    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
