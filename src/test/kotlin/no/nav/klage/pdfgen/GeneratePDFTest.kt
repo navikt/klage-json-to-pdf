@@ -21,7 +21,10 @@ val json = """
   {
     "type": "document-title",
     "id": "document-title",
-    "content": "NAV Klageinstans har behandlet klagen din"
+    "content": {
+      "value": "NAV Klageinstans har behandlet klagen din",
+      "threadIds": []
+    }
   },
   {
     "type": "section",
@@ -32,14 +35,20 @@ val json = """
         "id": "klager",
         "label": "Klager",
         "source": "sakenGjelder.name",
-        "content": "KRAFTIG KAKKERLAKK"
+        "content": {
+          "threadIds": [],
+          "value": null
+        }
       },
       {
         "type": "label-content",
         "id": "fnr",
         "label": "Fødselsnummer",
         "source": "sakenGjelder.fnr",
-        "content": "024467 01749"
+        "content": {
+          "threadIds": [],
+          "value": "null"
+        }
       }
     ]
   },
@@ -51,7 +60,10 @@ val json = """
         "type": "section-title",
         "id": "vedtak-title",
         "source": "utfall-title",
-        "content": "Vedtak"
+        "content": {
+          "threadIds": [],
+          "value": "Some section-title"
+        }
       },
       {
         "id": "vedtak",
@@ -104,7 +116,10 @@ val json = """
       {
         "type": "section-title",
         "id": "din-vekt-title",
-        "content": "I klagen din har du lagt vekt på"
+        "content": {
+          "value": "I klagen din har du lagt vekt på",
+          "threadIds": []
+        }
       },
       {
         "id": "din-vekt",
@@ -130,38 +145,18 @@ val json = """
       {
         "type": "section-title",
         "id": "documents-title",
-        "content": "I vurderingen vår har vi lagt vekt på disse dokumentene"
+        "content": {
+          "value": "I vurderingen vår har vi lagt vekt på disse dokumentene",
+          "threadIds": []
+        }
       },
       {
         "type": "document-list",
         "id": "document-list",
-        "content": [
-          {
-            "id": "c4f75919-57b6-4d8a-a71b-493d705d6eed",
-            "title": "Vedtak-/utfallsbrev",
-            "include": true
-          },
-          {
-            "id": "bb321c66-d51c-4266-a91e-5c52bc6a3755",
-            "title": "Generelt brev",
-            "include": true
-          },
-          {
-            "id": "524986390-549180021",
-            "title": "e2e-2022-03-11T14:28:25.051Z.pdf-renamed",
-            "include": true
-          },
-          {
-            "id": "524986088-549179661",
-            "title": "dummy-01.pdf",
-            "include": true
-          },
-          {
-            "id": "510534792-533438602",
-            "title": "MASKERT_FELT",
-            "include": true
-          }
-        ]
+        "content": {
+          "value": [],
+          "threadIds": []
+        }
       }
     ]
   },
@@ -172,7 +167,10 @@ val json = """
       {
         "type": "section-title",
         "id": "vurdering-title",
-        "content": "Vurderingen vår"
+        "content": {
+          "value": "Vurderingen vår",
+          "threadIds": []
+        }
       },
       {
         "id": "vurdering",
@@ -198,7 +196,10 @@ val json = """
       {
         "type": "section-title",
         "id": "konklusjon-title",
-        "content": "Konklusjonen vår"
+        "content": {
+          "value": "Konklusjonen vår",
+          "threadIds": []
+        }
       },
       {
         "id": "konklusjon",
@@ -281,25 +282,9 @@ val json = """
         "type": "static",
         "id": "questions",
         "source": "questions",
-        "content": [
-          {
-            "type": "heading-one",
-            "children": [
-              {
-                "text": "Har du spørsmål?"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
-              }
-            ]
-          }
-        ]
+        "content": {
+          "threadIds": []
+        }
       }
     ]
   },
@@ -311,17 +296,9 @@ val json = """
         "type": "static",
         "id": "regards",
         "source": "regards",
-        "content": [
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Med vennlig hilsen\nNAV Klageinstans"
-              }
-            ]
-          }
-        ]
+        "content": {
+          "threadIds": []
+        }
       }
     ]
   },
@@ -329,14 +306,9 @@ val json = """
     "type": "signature",
     "id": "signature",
     "content": {
-      "useShortName": false,
-      "medunderskriver": {
-        "name": "Kari Nordmann",
-        "title": "Fagleder"
-      },
-      "saksbehandler": {
-        "name": "Christan Skrøvseth",
-        "title": "Seniorrådgiver"
+      "threadIds": [],
+      "value": {
+        "useShortName": false
       }
     }
   }

@@ -126,7 +126,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun addLabelContentElement(map: Map<String, *>) {
         val label = map["label"] ?: throw RuntimeException("no content here")
-        val text = map["content"] ?: ""//throw RuntimeException("no content here")
+        val text = getValueFromMapAsString(map)
 
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
@@ -136,6 +136,7 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
+    //In use?
     private fun addTemplateSection(map: Map<String, *>) {
         val h1 = document.create.h1 {
             span { +map["title"].toString() }
@@ -147,7 +148,8 @@ class HtmlCreator(val dataList: List<*>) {
 
         children.forEach {
             when (it.getType()) {
-                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
+                RICH_TEXT_ELEMENT -> addRichElement(it)
+                STATIC_ELEMENT -> addStaticElement(it)
                 LABEL_CONTENT_ELEMENT -> addLabelContentElement(it)
             }
         }
@@ -155,7 +157,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun addDocumentTitle(map: Map<String, *>) {
         val h1 = document.create.h1 {
-            span { +map["content"].toString() }
+            span { +getValueFromMapAsString(map).toString() }
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(h1)
@@ -163,7 +165,7 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun addSectionTitle(map: Map<String, *>) {
         val h1 = document.create.h1 {
-            span { +map["content"].toString() }
+            span { +getValueFromMapAsString(map).toString() }
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(h1)
@@ -174,7 +176,8 @@ class HtmlCreator(val dataList: List<*>) {
 
         children.forEach {
             when (it.getType()) {
-                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
+                RICH_TEXT_ELEMENT -> addRichElement(it)
+                STATIC_ELEMENT -> addStaticElement(it)
                 LABEL_CONTENT_ELEMENT -> addLabelContentElement(it)
                 SECTION_TITLE_ELEMENT -> addSectionTitle(it)
                 DOCUMENT_LIST -> addDocumentList(it)
@@ -222,7 +225,7 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
-    private fun addStaticRichElement(map: Map<String, *>) {
+    private fun addRichElement(map: Map<String, *>) {
         if (!map.containsKey("content")) {
             return
         }
@@ -238,8 +241,24 @@ class HtmlCreator(val dataList: List<*>) {
         divElement.appendChild(dElement)
     }
 
+    private fun addStaticElement(map: Map<String, *>) {
+        if (!map.containsKey("content")) {
+            return
+        }
+
+        val children = getValueFromMapAsList(map) ?: return
+
+        val dElement = document.create.div {
+            children.forEach {
+                this.addElementWithPossiblyChildren(it)
+            }
+        }
+        val divElement = document.getElementById("div_content_id") as Node
+        divElement.appendChild(dElement)
+    }
+
     private fun addDocumentList(map: Map<String, *>) {
-        val children = map["content"] as List<Map<String, String>>
+        val children = getValueFromMapAsList(map) ?: return
         val dElement = document.create.div {
             ul {
                 children.filter { it["include"] == "true" }.forEach {
@@ -251,23 +270,62 @@ class HtmlCreator(val dataList: List<*>) {
         divElement.appendChild(dElement)
     }
 
+    private fun getValueFromMapAsString(map: Map<String, *>): String? {
+        if (map.containsKey("content")) {
+            val content = map["content"] as Map<String, *>
+            return if (content.containsKey("value")) {
+                content["value"].toString()
+            } else {
+                null
+            }
+        } else {
+            throw RuntimeException("missing value in content")
+        }
+    }
+
+    private fun getValueFromMapAsList(map: Map<String, *>): List<Map<String, *>>? {
+        if (map.containsKey("content")) {
+            val content = map["content"] as Map<String, *>
+            return if (content.containsKey("value")) {
+                content["value"] as List<Map<String, *>>
+            } else {
+                null
+            }
+        } else {
+            throw RuntimeException("missing value in content")
+        }
+    }
+
+    private fun getValueFromMapAsMap(map: Map<String, *>): Map<String, Map<String, *>>? {
+        if (map.containsKey("content")) {
+            val content = map["content"] as Map<String, *>
+            return if (content.containsKey("value")) {
+                content["value"] as Map<String, Map<String, *>>
+            } else {
+                null
+            }
+        } else {
+            throw RuntimeException("missing value in content")
+        }
+    }
+
     private fun addSignatureElement(map: Map<String, *>) {
-        val children = map["content"] as Map<String, Map<String, *>>
+        val value = getValueFromMapAsMap(map) ?: return
 
         val dElement = document.create.div {
             classes = setOf("wrapper")
-            if (children.containsKey("medunderskriver")) {
+            if (value.containsKey("medunderskriver")) {
                 div {
                     classes = setOf("column")
-                    div { +children["medunderskriver"]!!["name"].toString() }
-                    div { +children["medunderskriver"]!!["title"].toString() }
+                    div { +value["medunderskriver"]!!["name"].toString() }
+                    div { +value["medunderskriver"]!!["title"].toString() }
                 }
             }
-            if (children.containsKey("saksbehandler")) {
+            if (value.containsKey("saksbehandler")) {
                 div {
                     classes = setOf("column")
-                    div { +children["saksbehandler"]!!["name"].toString() }
-                    div { +children["saksbehandler"]!!["title"].toString() }
+                    div { +value["saksbehandler"]!!["name"].toString() }
+                    div { +value["saksbehandler"]!!["title"].toString() }
                 }
             }
 
@@ -309,7 +367,8 @@ class HtmlCreator(val dataList: List<*>) {
             TEMPLATE_SECTION -> addTemplateSection(map)
             SECTION_ELEMENT -> addSectionElement(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
-            STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
+            RICH_TEXT_ELEMENT -> addRichElement(map)
+            STATIC_ELEMENT -> addStaticElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
             DOCUMENT_TITLE_ELEMENT -> addDocumentTitle(map)
         }
@@ -323,7 +382,8 @@ class HtmlCreator(val dataList: List<*>) {
             if (type != null) {
                 return when (type) {
                     "label-content" -> LABEL_CONTENT_ELEMENT
-                    "rich-text", "static" -> STATIC_RICH_TEXT_ELEMENT
+                    "rich-text" -> RICH_TEXT_ELEMENT
+                    "static" -> STATIC_ELEMENT
                     "signature" -> SIGNATURE_ELEMENT
                     "section" -> SECTION_ELEMENT
                     "document-title" -> DOCUMENT_TITLE_ELEMENT
@@ -340,7 +400,8 @@ class HtmlCreator(val dataList: List<*>) {
 enum class ElementType {
     TEMPLATE_SECTION,
     LABEL_CONTENT_ELEMENT,
-    STATIC_RICH_TEXT_ELEMENT,
+    RICH_TEXT_ELEMENT,
+    STATIC_ELEMENT,
     SIGNATURE_ELEMENT,
     ELEMENT,
     LEAF,
