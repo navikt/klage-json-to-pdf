@@ -252,22 +252,22 @@ class HtmlCreator(val dataList: List<*>) {
     }
 
     private fun addSignatureElement(map: Map<String, *>) {
-        val children = map["content"] as Map<String, Map<String, *>>
-
         val dElement = document.create.div {
             classes = setOf("wrapper")
-            if (children.containsKey("medunderskriver")) {
+            if (map.containsKey("medunderskriver")) {
+                val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
                 div {
                     classes = setOf("column")
-                    div { +children["medunderskriver"]!!["name"].toString() }
-                    div { +children["medunderskriver"]!!["title"].toString() }
+                    div { +medunderskriver["name"].toString() }
+                    div { +medunderskriver["title"].toString() }
                 }
             }
-            if (children.containsKey("saksbehandler")) {
+            if (map.containsKey("saksbehandler")) {
+                val saksbehandler = map["saksbehandler"] as Map<String, Map<String, *>>
                 div {
                     classes = setOf("column")
-                    div { +children["saksbehandler"]!!["name"].toString() }
-                    div { +children["saksbehandler"]!!["title"].toString() }
+                    div { +saksbehandler["name"].toString() }
+                    div { +saksbehandler["title"].toString() }
                 }
             }
 
