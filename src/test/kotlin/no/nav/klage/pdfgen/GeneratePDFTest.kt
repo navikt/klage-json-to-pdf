@@ -26,37 +26,55 @@ val json = """
       }
     ],
     "source": "document-title",
-    "maltekst": null,
-    "threadIds": []
+    "maltekst": [
+      {
+        "type": "heading-one",
+        "children": [
+          {
+            "text": "NAV Klageinstans har behandlet klagen din"
+          }
+        ]
+      }
+    ],
+    "threadIds": [
+    ]
   },
   {
     "type": "label-content",
     "children": [
       {
-        "text": ": "
+        "text": ""
       }
     ],
+    "result": "Klager: KRAFTIG KAKKERLAKK",
     "source": "sakenGjelder.name",
     "label": "Klager",
-    "threadIds": []
+    "threadIds": [
+    ]
   },
   {
     "type": "label-content",
     "children": [
       {
-        "text": ": "
+        "text": ""
       }
     ],
+    "result": "Fødselsnummer: 024467 01749",
     "source": "sakenGjelder.fnr",
     "label": "Fødselsnummer",
-    "threadIds": []
+    "threadIds": [
+    ]
   },
   {
     "type": "paragraph",
     "textAlign": "text-align-left",
     "children": [
       {
-        "text": "Prosessfullmektig: "
+        "text": "Prosessfullmektig",
+        "commentThreadId_0dde9c17-c630-4b6c-a56d-d8b4ba6630b6": true
+      },
+      {
+        "text": ": "
       }
     ]
   },
@@ -65,7 +83,15 @@ val json = """
     "textAlign": "text-align-left",
     "children": [
       {
-        "text": "Saken gjelder: Klagen din av [] på NAV []s vedtak av "
+        "text": "Saken gjelder: "
+      },
+      {
+        "text": "Klagen",
+        "commentThreadId_e717c817-1fd7-4ea1-81b0-eec932a55ac3": true,
+        "commentThreadId_f7d4bd55-3869-44b7-b662-0d0c455d07a4": true
+      },
+      {
+        "text": " din av [] på NAV []s vedtak av "
       }
     ]
   },
@@ -74,7 +100,7 @@ val json = """
     "textAlign": "text-align-left",
     "children": [
       {
-        "text": "Problemstilling: Om"
+        "text": "Problemstilling: Om "
       }
     ]
   },
@@ -82,7 +108,8 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "Vedtak"
+        "text": "Vedtak",
+        "commentThreadId_afe25029-1789-4588-b332-9ada99b89b59": true
       }
     ]
   },
@@ -121,7 +148,11 @@ val json = """
         "bold": true
       },
       {
-        "text": "Vi har avvist klagen din fordi du ikke har overholdt klagefristen."
+        "text": "Vi har avvist klagen",
+        "commentThreadId_93014183-baca-4923-9f17-44f4cb26bdb0": true
+      },
+      {
+        "text": " din fordi du ikke har overholdt klagefristen."
       }
     ]
   },
@@ -138,7 +169,14 @@ val json = """
     "textAlign": "text-align-left",
     "children": [
       {
-        "text": "Vi har opphevet vedtaket og sendt saken tilbake til NAV [], som skal behandle den på nytt."
+        "text": "Vi har opphevet vedtaket og sendt saken tilbake til NAV [], "
+      },
+      {
+        "text": "som skal behandle den",
+        "commentThreadId_61733251-9045-4d17-8982-440ea265fcaf": true
+      },
+      {
+        "text": " på nytt."
       }
     ]
   },
@@ -222,7 +260,8 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "Konklusjonen vår"
+        "text": "Konklusjonen vår",
+        "commentThreadId_abe11116-8ee5-4416-8f52-59d23df693ef": true
       }
     ]
   },
@@ -309,7 +348,8 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "Du har rett til å anke"
+        "text": "Du har rett til å anke",
+        "commentThreadId_1b147e24-36f8-42c1-9ab2-56653c91ca8c": true
       }
     ]
   },
@@ -372,7 +412,14 @@ val json = """
         "text": ": Ta ut avsnittet om anke ved beslutning om oppheving og erstatt med]"
       },
       {
-        "text": "\nDenne avgjørelsen er ikke et vedtak som gjelder individuelle rettigheter eller plikter (enkeltvedtak), men en prosessuell beslutning. Du kan ikke klage eller anke over denne beslutningen, jf. forvaltningsloven §§ 2 og 28 og lov om anke til trygderetten § 2.\n"
+        "text": "\n"
+      },
+      {
+        "text": "Denne avgjørelsen er ikke et vedtak",
+        "commentThreadId_ffd54395-195c-4090-ba91-144905e1ea79": true
+      },
+      {
+        "text": " som gjelder individuelle rettigheter eller plikter (enkeltvedtak), men en prosessuell beslutning. Du kan ikke klage eller anke over denne beslutningen, jf. forvaltningsloven §§ 2 og 28 og lov om anke til trygderetten § 2.\n"
       },
       {
         "text": "[",
@@ -393,7 +440,8 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "Du har rett til innsyn"
+        "text": "Du har rett til innsyn",
+        "commentThreadId_30a725f1-d9de-4c75-9d4a-893cbaff589a": true
       }
     ]
   },
@@ -410,7 +458,8 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "Informasjon om fri rettshjelp"
+        "text": "Informasjon om fri rettshjelp",
+        "commentThreadId_812d9bdb-eb66-4786-a12d-65f80325b17c": true
       }
     ]
   },
@@ -437,7 +486,8 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "Informasjon om dekning av sakskostnader"
+        "text": "Informasjon om dekning av sakskostnader",
+        "commentThreadId_2756ba4f-2e73-407d-9d08-7402600b8520": true
       }
     ]
   },
@@ -460,22 +510,6 @@ val json = """
     ]
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Du finner første side for innsending på "
-      },
-      {
-        "text": "www.nav.no/klage",
-        "underline": true
-      },
-      {
-        "text": ". Velg NAV Klageinstans Sakskostnader."
-      }
-    ]
-  },
-  {
     "type": "maltekst",
     "source": "questions",
     "children": [
@@ -483,8 +517,27 @@ val json = """
         "text": ""
       }
     ],
-    "maltekst": null,
-    "threadIds": []
+    "maltekst": [
+      {
+        "type": "heading-one",
+        "children": [
+          {
+            "text": "Har du spørsmål?"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
+          }
+        ]
+      }
+    ],
+    "threadIds": [
+    ]
   },
   {
     "type": "maltekst",
@@ -494,21 +547,30 @@ val json = """
         "text": ""
       }
     ],
-    "maltekst": null,
-    "threadIds": []
+    "maltekst": [
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Med vennlig hilsen\nNAV Klageinstans"
+          }
+        ]
+      }
+    ],
+    "threadIds": [
+    ]
   },
   {
-  "type": "signature",
-  "children": [{ "text": "" }],
-  "useShortName": "boolean",
-  "saksbehandler": {
-    "name": "Navn Navnesen",
-    "title": "Saksbehandler"
-  },
-  "medunderskriver": {
-    "name": "Navn Navnesen",
-    "title": "Medunderskriver"
+    "type": "signature",
+    "useShortName": false,
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [
+    ]
   }
-}
 ]
 """.trimIndent()

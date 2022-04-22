@@ -125,13 +125,12 @@ class HtmlCreator(val dataList: List<*>) {
         }
 
     private fun addLabelContentElement(map: Map<String, *>) {
-        val label = map["label"] ?: throw RuntimeException("no content here")
-        val text = map["content"] ?: ""//throw RuntimeException("no content here")
+        val result = map["result"] ?: throw RuntimeException("no content here")
 
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
             div {
-                p { +"$label: $text" }
+                p { +"$result" }
             }
         }
     }
@@ -161,25 +160,23 @@ class HtmlCreator(val dataList: List<*>) {
         divElement.appendChild(h1)
     }
 
-    private fun addSectionTitle(map: Map<String, *>) {
-        val h1 = document.create.h1 {
-            span { +map["content"].toString() }
+    private fun addMaltekst(map: Map<String, *>) {
+        val elementList = map["maltekst"] as List<Map<String, *>>
+        elementList.forEach {
+            val div = document.create.div {
+                this.addElementWithPossiblyChildren(it)
+            }
+            val divElement = document.getElementById("div_content_id") as Node
+            divElement.appendChild(div)
         }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(h1)
     }
 
-    private fun addSectionElement(map: Map<String, *>) {
-        val children = map["content"] as List<Map<String, *>>
-
-        children.forEach {
-            when (it.getType()) {
-                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
-                LABEL_CONTENT_ELEMENT -> addLabelContentElement(it)
-                SECTION_TITLE_ELEMENT -> addSectionTitle(it)
-                DOCUMENT_LIST -> addDocumentList(it)
-            }
+    private fun addElementWithPossiblyChildren(map: Map<String, *>) {
+        val div = document.create.div {
+            this.addElementWithPossiblyChildren(map)
         }
+        val divElement = document.getElementById("div_content_id") as Node
+        divElement.appendChild(div)
     }
 
     private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
@@ -217,6 +214,7 @@ class HtmlCreator(val dataList: List<*>) {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
                     ELEMENT -> this.addElementWithPossiblyChildren(it)
+                    else -> {}
                 }
             }
         }
@@ -307,11 +305,14 @@ class HtmlCreator(val dataList: List<*>) {
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
             TEMPLATE_SECTION -> addTemplateSection(map)
-            SECTION_ELEMENT -> addSectionElement(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
             DOCUMENT_TITLE_ELEMENT -> addDocumentTitle(map)
+            ELEMENT -> addElementWithPossiblyChildren(map)
+            LEAF -> TODO()
+            DOCUMENT_LIST -> addDocumentList(map)
+            MALTEKST -> addMaltekst(map)
         }
     }
 
@@ -325,10 +326,9 @@ class HtmlCreator(val dataList: List<*>) {
                     "label-content" -> LABEL_CONTENT_ELEMENT
                     "rich-text", "static" -> STATIC_RICH_TEXT_ELEMENT
                     "signature" -> SIGNATURE_ELEMENT
-                    "section" -> SECTION_ELEMENT
                     "document-title" -> DOCUMENT_TITLE_ELEMENT
-                    "section-title" -> SECTION_TITLE_ELEMENT
                     "document-list" -> DOCUMENT_LIST
+                    "maltekst" -> MALTEKST
                     else -> ELEMENT
                 }
             }
@@ -344,8 +344,7 @@ enum class ElementType {
     SIGNATURE_ELEMENT,
     ELEMENT,
     LEAF,
-    SECTION_ELEMENT,
     DOCUMENT_TITLE_ELEMENT,
-    SECTION_TITLE_ELEMENT,
     DOCUMENT_LIST,
+    MALTEKST,
 }
