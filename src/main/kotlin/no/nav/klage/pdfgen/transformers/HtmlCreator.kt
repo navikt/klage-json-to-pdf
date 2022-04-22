@@ -125,7 +125,7 @@ class HtmlCreator(val dataList: List<*>) {
         }
 
     private fun addLabelContentElement(map: Map<String, *>) {
-        val result = map["result"] ?: throw RuntimeException("no content here")
+        val result = map["result"] ?: return
 
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
@@ -161,7 +161,12 @@ class HtmlCreator(val dataList: List<*>) {
     }
 
     private fun addMaltekst(map: Map<String, *>) {
-        val elementList = map["maltekst"] as List<Map<String, *>>
+        val elementList = map["maltekst"]
+        if (elementList != null) {
+            elementList as List<Map<String, *>>
+        } else {
+            return
+        }
         elementList.forEach {
             val div = document.create.div {
                 this.addElementWithPossiblyChildren(it)
