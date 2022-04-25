@@ -242,10 +242,10 @@ class HtmlCreator(val dataList: List<*>) {
     }
 
     private fun addDocumentList(map: Map<String, *>) {
-        val children = map["content"] as List<Map<String, String>>
+        val children = map["documents"] as List<Map<String, String>>
         val dElement = document.create.div {
             ul {
-                children.filter { it["include"] == "true" }.forEach {
+                children.forEach {
                     li { +it["title"].toString() }
                 }
             }

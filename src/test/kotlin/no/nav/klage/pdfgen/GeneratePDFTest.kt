@@ -482,6 +482,15 @@ val json = """
     "threadIds": []
   },
   {
+    "type": "document-list",
+    "children": [{ "text": "" }],
+    "threadIds": [],
+    "documents": [{
+      "id": "some-id",
+      "title": "Dokumenttittel"
+    }]
+  },
+  {
     "type": "signature",
     "useShortName": false,
     "children": [
