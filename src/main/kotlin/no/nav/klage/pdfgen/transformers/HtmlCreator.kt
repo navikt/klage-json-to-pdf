@@ -135,31 +135,6 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
-    private fun addTemplateSection(map: Map<String, *>) {
-        val h1 = document.create.h1 {
-            span { +map["title"].toString() }
-        }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(h1)
-
-        val children = map["content"] as List<Map<String, *>>
-
-        children.forEach {
-            when (it.getType()) {
-                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
-                LABEL_CONTENT_ELEMENT -> addLabelContentElement(it)
-            }
-        }
-    }
-
-    private fun addDocumentTitle(map: Map<String, *>) {
-        val h1 = document.create.h1 {
-            span { +map["content"].toString() }
-        }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(h1)
-    }
-
     private fun addMaltekst(map: Map<String, *>) {
         val elementList = map["maltekst"]
         if (elementList != null) {
@@ -223,22 +198,6 @@ class HtmlCreator(val dataList: List<*>) {
                 }
             }
         }
-    }
-
-    private fun addStaticRichElement(map: Map<String, *>) {
-        if (!map.containsKey("content")) {
-            return
-        }
-
-        val children = map["content"] as List<Map<String, *>>
-
-        val dElement = document.create.div {
-            children.forEach {
-                this.addElementWithPossiblyChildren(it)
-            }
-        }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(dElement)
     }
 
     private fun addDocumentList(map: Map<String, *>) {
@@ -309,47 +268,35 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
-            TEMPLATE_SECTION -> addTemplateSection(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
-            STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
-            DOCUMENT_TITLE_ELEMENT -> addDocumentTitle(map)
             ELEMENT -> addElementWithPossiblyChildren(map)
-            LEAF -> TODO()
             DOCUMENT_LIST -> addDocumentList(map)
             MALTEKST -> addMaltekst(map)
+            LEAF -> {}
         }
     }
 
     private fun Map<String, *>.getType(): ElementType {
-        if (this.containsKey("title")) {
-            return TEMPLATE_SECTION
-        } else {
-            val type = this["type"]
-            if (type != null) {
-                return when (type) {
-                    "label-content" -> LABEL_CONTENT_ELEMENT
-                    "rich-text", "static" -> STATIC_RICH_TEXT_ELEMENT
-                    "signature" -> SIGNATURE_ELEMENT
-                    "document-title" -> DOCUMENT_TITLE_ELEMENT
-                    "document-list" -> DOCUMENT_LIST
-                    "maltekst" -> MALTEKST
-                    else -> ELEMENT
-                }
+        val type = this["type"]
+        if (type != null) {
+            return when (type) {
+                "label-content" -> LABEL_CONTENT_ELEMENT
+                "signature" -> SIGNATURE_ELEMENT
+                "document-list" -> DOCUMENT_LIST
+                "maltekst" -> MALTEKST
+                else -> ELEMENT
             }
-            return LEAF
         }
+        return LEAF
     }
 }
 
 enum class ElementType {
-    TEMPLATE_SECTION,
     LABEL_CONTENT_ELEMENT,
-    STATIC_RICH_TEXT_ELEMENT,
     SIGNATURE_ELEMENT,
     ELEMENT,
     LEAF,
-    DOCUMENT_TITLE_ELEMENT,
     DOCUMENT_LIST,
     MALTEKST,
 }

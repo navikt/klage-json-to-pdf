@@ -26,7 +26,16 @@ val json = """
       }
     ],
     "source": "document-title",
-    "maltekst": null,
+    "maltekst": [
+      {
+        "type": "heading-one",
+        "children": [
+          {
+            "text": "NAV Klageinstans har behandlet klagen din"
+          }
+        ]
+      }
+    ],
     "threadIds": []
   },
   {
@@ -38,7 +47,8 @@ val json = """
     ],
     "source": "sakenGjelder.name",
     "label": "Klager",
-    "threadIds": []
+    "threadIds": [],
+    "result": "Klager: KRAFTIG KAKKERLAKK"
   },
   {
     "type": "label-content",
@@ -49,7 +59,8 @@ val json = """
     ],
     "source": "sakenGjelder.fnr",
     "label": "Fødselsnummer",
-    "threadIds": []
+    "threadIds": [],
+    "result": "Fødselsnummer: 024467 01749"
   },
   {
     "type": "paragraph",
@@ -172,27 +183,22 @@ val json = """
     "type": "heading-one",
     "children": [
       {
-        "text": "I vurderingen vår har vi lagt vekt på disse dokumentene:"
+        "text": "I vurderingen vår har vi lagt vekt på disse dokumentene"
       }
     ]
   },
   {
-    "type": "bullet-list",
+    "type": "document-list",
     "children": [
       {
-        "type": "list-item",
-        "children": [
-          {
-            "type": "list-item-container",
-            "children": [
-              {
-                "text": "osv."
-              }
-            ]
-          }
-        ]
+        "text": ""
       }
-    ]
+    ],
+    "threadIds": [],
+      "documents": [{
+        "id": "some-id",
+        "title": "Dokumenttittel"
+      }]
   },
   {
     "type": "heading-one",
@@ -467,7 +473,25 @@ val json = """
         "text": ""
       }
     ],
-    "maltekst": null,
+    "maltekst": [
+      {
+        "type": "heading-one",
+        "children": [
+          {
+            "text": "Har du spørsmål?"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
+          }
+        ]
+      }
+    ],
     "threadIds": []
   },
   {
@@ -478,17 +502,18 @@ val json = """
         "text": ""
       }
     ],
-    "maltekst": null,
+    "maltekst": [
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Med vennlig hilsen\nNAV Klageinstans"
+          }
+        ]
+      }
+    ],
     "threadIds": []
-  },
-  {
-    "type": "document-list",
-    "children": [{ "text": "" }],
-    "threadIds": [],
-    "documents": [{
-      "id": "some-id",
-      "title": "Dokumenttittel"
-    }]
   },
   {
     "type": "signature",
@@ -498,7 +523,15 @@ val json = """
         "text": ""
       }
     ],
-    "threadIds": []
+    "threadIds": [],
+    "medunderskriver": {
+      "name": "Espen",
+      "title": "Fagleder"
+    },
+    "saksbehandler": {
+      "name": "Christian Skrøvseth",
+      "title": "Seniorrådgiver/saksbehandler"
+    }
   }
 ]
 """.trimIndent()
