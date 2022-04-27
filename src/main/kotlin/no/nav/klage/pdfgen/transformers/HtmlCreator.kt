@@ -10,6 +10,10 @@ import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import org.w3c.dom.Document
 import org.w3c.dom.Node
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<*>) {
@@ -60,7 +64,7 @@ class HtmlCreator(val dataList: List<*>) {
                                     display: block;
                                     width: 100pt;
                                     float: right;
-                                }
+                                },
                                 p, span {
                                     font-size: 12pt;
                                 }
@@ -117,6 +121,8 @@ class HtmlCreator(val dataList: List<*>) {
                     span { +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO" }
                     img { src = "nav_logo.png" }
                 }
+                br { }
+                br { }
                 br { }
                 br { }
 
@@ -258,6 +264,19 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
+    private fun addCurrentDate() {
+        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("nb"))
+        val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
+
+        val div = document.create.div {
+            classes = setOf("alignRight")
+            +"Dato: $dateAsText"
+        }
+        val divElement = document.getElementById("div_content_id") as Node
+        divElement.appendChild(div)
+
+    }
+
     fun getDoc(): Document {
         dataList.forEach {
             processElement(it as Map<String, *>)
@@ -273,6 +292,7 @@ class HtmlCreator(val dataList: List<*>) {
             ELEMENT -> addElementWithPossiblyChildren(map)
             DOCUMENT_LIST -> addDocumentList(map)
             MALTEKST -> addMaltekst(map)
+            CURRENT_DATE -> addCurrentDate()
             LEAF -> {}
         }
     }
@@ -285,6 +305,7 @@ class HtmlCreator(val dataList: List<*>) {
                 "signature" -> SIGNATURE_ELEMENT
                 "document-list" -> DOCUMENT_LIST
                 "maltekst" -> MALTEKST
+                "current-date" -> CURRENT_DATE
                 else -> ELEMENT
             }
         }
@@ -299,4 +320,5 @@ enum class ElementType {
     LEAF,
     DOCUMENT_LIST,
     MALTEKST,
+    CURRENT_DATE,
 }

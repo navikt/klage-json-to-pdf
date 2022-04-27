@@ -19,6 +19,9 @@ class GeneratePDF {
 val json = """
 [
   {
+    "type": "current-date"
+  },
+  {
     "type": "maltekst",
     "children": [
       {
