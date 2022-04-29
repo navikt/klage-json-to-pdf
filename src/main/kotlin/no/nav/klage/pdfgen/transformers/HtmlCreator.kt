@@ -238,7 +238,6 @@ class HtmlCreator(val dataList: List<*>) {
                     div { +saksbehandler["title"].toString() }
                 }
             }
-
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(dElement)
@@ -274,7 +273,6 @@ class HtmlCreator(val dataList: List<*>) {
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(div)
-
     }
 
     fun getDoc(): Document {
