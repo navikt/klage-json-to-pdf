@@ -10,6 +10,10 @@ import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import org.w3c.dom.Document
 import org.w3c.dom.Node
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<*>) {
@@ -60,7 +64,7 @@ class HtmlCreator(val dataList: List<*>) {
                                     display: block;
                                     width: 100pt;
                                     float: right;
-                                }
+                                },
                                 p, span {
                                     font-size: 12pt;
                                 }
@@ -119,67 +123,46 @@ class HtmlCreator(val dataList: List<*>) {
                 }
                 br { }
                 br { }
+                br { }
+                br { }
 
                 div { id = "div_content_id" }
             }
         }
 
     private fun addLabelContentElement(map: Map<String, *>) {
-        val label = map["label"] ?: throw RuntimeException("no content here")
-        val text = map["content"] ?: ""//throw RuntimeException("no content here")
+        val result = map["result"] ?: return
 
         val divElement = document.getElementById("div_content_id") as Node
         divElement.append {
             div {
-                p { +"$label: $text" }
+                p { +"$result" }
             }
         }
     }
 
-    private fun addTemplateSection(map: Map<String, *>) {
-        val h1 = document.create.h1 {
-            span { +map["title"].toString() }
+    private fun addMaltekst(map: Map<String, *>) {
+        val elementList = map["maltekst"]
+        if (elementList != null) {
+            elementList as List<Map<String, *>>
+        } else {
+            return
         }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(h1)
-
-        val children = map["content"] as List<Map<String, *>>
-
-        children.forEach {
-            when (it.getType()) {
-                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
-                LABEL_CONTENT_ELEMENT -> addLabelContentElement(it)
+        elementList.forEach {
+            val div = document.create.div {
+                this.addElementWithPossiblyChildren(it)
             }
+            val divElement = document.getElementById("div_content_id") as Node
+            divElement.appendChild(div)
         }
     }
 
-    private fun addDocumentTitle(map: Map<String, *>) {
-        val h1 = document.create.h1 {
-            span { +map["content"].toString() }
+    private fun addElementWithPossiblyChildren(map: Map<String, *>) {
+        val div = document.create.div {
+            this.addElementWithPossiblyChildren(map)
         }
         val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(h1)
-    }
-
-    private fun addSectionTitle(map: Map<String, *>) {
-        val h1 = document.create.h1 {
-            span { +map["content"].toString() }
-        }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(h1)
-    }
-
-    private fun addSectionElement(map: Map<String, *>) {
-        val children = map["content"] as List<Map<String, *>>
-
-        children.forEach {
-            when (it.getType()) {
-                STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(it)
-                LABEL_CONTENT_ELEMENT -> addLabelContentElement(it)
-                SECTION_TITLE_ELEMENT -> addSectionTitle(it)
-                DOCUMENT_LIST -> addDocumentList(it)
-            }
-        }
+        divElement.appendChild(div)
     }
 
     private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
@@ -217,32 +200,17 @@ class HtmlCreator(val dataList: List<*>) {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
                     ELEMENT -> this.addElementWithPossiblyChildren(it)
+                    else -> {}
                 }
             }
         }
     }
 
-    private fun addStaticRichElement(map: Map<String, *>) {
-        if (!map.containsKey("content")) {
-            return
-        }
-
-        val children = map["content"] as List<Map<String, *>>
-
-        val dElement = document.create.div {
-            children.forEach {
-                this.addElementWithPossiblyChildren(it)
-            }
-        }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(dElement)
-    }
-
     private fun addDocumentList(map: Map<String, *>) {
-        val children = map["content"] as List<Map<String, String>>
+        val children = map["documents"] as List<Map<String, String>>
         val dElement = document.create.div {
             ul {
-                children.filter { it["include"] == "true" }.forEach {
+                children.forEach {
                     li { +it["title"].toString() }
                 }
             }
@@ -252,25 +220,24 @@ class HtmlCreator(val dataList: List<*>) {
     }
 
     private fun addSignatureElement(map: Map<String, *>) {
-        val children = map["content"] as Map<String, Map<String, *>>
-
         val dElement = document.create.div {
             classes = setOf("wrapper")
-            if (children.containsKey("medunderskriver")) {
+            if (map.containsKey("medunderskriver")) {
+                val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
                 div {
                     classes = setOf("column")
-                    div { +children["medunderskriver"]!!["name"].toString() }
-                    div { +children["medunderskriver"]!!["title"].toString() }
+                    div { +medunderskriver["name"].toString() }
+                    div { +medunderskriver["title"].toString() }
                 }
             }
-            if (children.containsKey("saksbehandler")) {
+            if (map.containsKey("saksbehandler")) {
+                val saksbehandler = map["saksbehandler"] as Map<String, Map<String, *>>
                 div {
                     classes = setOf("column")
-                    div { +children["saksbehandler"]!!["name"].toString() }
-                    div { +children["saksbehandler"]!!["title"].toString() }
+                    div { +saksbehandler["name"].toString() }
+                    div { +saksbehandler["title"].toString() }
                 }
             }
-
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(dElement)
@@ -296,6 +263,18 @@ class HtmlCreator(val dataList: List<*>) {
         }
     }
 
+    private fun addCurrentDate() {
+        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("nb"))
+        val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
+
+        val div = document.create.div {
+            classes = setOf("alignRight")
+            +"Dato: $dateAsText"
+        }
+        val divElement = document.getElementById("div_content_id") as Node
+        divElement.appendChild(div)
+    }
+
     fun getDoc(): Document {
         dataList.forEach {
             processElement(it as Map<String, *>)
@@ -306,46 +285,38 @@ class HtmlCreator(val dataList: List<*>) {
 
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
-            TEMPLATE_SECTION -> addTemplateSection(map)
-            SECTION_ELEMENT -> addSectionElement(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
-            STATIC_RICH_TEXT_ELEMENT -> addStaticRichElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
-            DOCUMENT_TITLE_ELEMENT -> addDocumentTitle(map)
+            ELEMENT -> addElementWithPossiblyChildren(map)
+            DOCUMENT_LIST -> addDocumentList(map)
+            MALTEKST -> addMaltekst(map)
+            CURRENT_DATE -> addCurrentDate()
+            LEAF -> {}
         }
     }
 
     private fun Map<String, *>.getType(): ElementType {
-        if (this.containsKey("title")) {
-            return TEMPLATE_SECTION
-        } else {
-            val type = this["type"]
-            if (type != null) {
-                return when (type) {
-                    "label-content" -> LABEL_CONTENT_ELEMENT
-                    "rich-text", "static" -> STATIC_RICH_TEXT_ELEMENT
-                    "signature" -> SIGNATURE_ELEMENT
-                    "section" -> SECTION_ELEMENT
-                    "document-title" -> DOCUMENT_TITLE_ELEMENT
-                    "section-title" -> SECTION_TITLE_ELEMENT
-                    "document-list" -> DOCUMENT_LIST
-                    else -> ELEMENT
-                }
+        val type = this["type"]
+        if (type != null) {
+            return when (type) {
+                "label-content" -> LABEL_CONTENT_ELEMENT
+                "signature" -> SIGNATURE_ELEMENT
+                "document-list" -> DOCUMENT_LIST
+                "maltekst" -> MALTEKST
+                "current-date" -> CURRENT_DATE
+                else -> ELEMENT
             }
-            return LEAF
         }
+        return LEAF
     }
 }
 
 enum class ElementType {
-    TEMPLATE_SECTION,
     LABEL_CONTENT_ELEMENT,
-    STATIC_RICH_TEXT_ELEMENT,
     SIGNATURE_ELEMENT,
     ELEMENT,
     LEAF,
-    SECTION_ELEMENT,
-    DOCUMENT_TITLE_ELEMENT,
-    SECTION_TITLE_ELEMENT,
     DOCUMENT_LIST,
+    MALTEKST,
+    CURRENT_DATE,
 }
