@@ -6,6 +6,8 @@ import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.transformers.ElementType.*
+import no.nav.klage.pdfgen.transformers.ElementType.FOOTER
+import no.nav.klage.pdfgen.transformers.ElementType.HEADER
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import org.w3c.dom.Document
@@ -24,13 +26,8 @@ class HtmlCreator(val dataList: List<*>) {
         private val secureLogger = getSecureLogger()
     }
 
-    private val document: Document = createHTMLDocument()
-        .html {
-            head {
-                style {
-                    unsafe {
-                        raw(
-                            """
+    private fun getCss(footer: String) =
+        """
                                 html {
                                     white-space: pre-wrap;
                                     font-family: "Source Sans Pro" !important;
@@ -101,7 +98,7 @@ class HtmlCreator(val dataList: List<*>) {
                                     @bottom-left {
                                         font-family: "Source Sans Pro" !important;
                                         font-size: 10pt;
-                                        content: "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 OSLO\ATelefon: 21 07 17 30\Anav.no";
+                                        content: "$footer";
                                         white-space: pre-wrap;
                                     }
                                     @bottom-right {
@@ -109,16 +106,19 @@ class HtmlCreator(val dataList: List<*>) {
                                     }
                                 }
                             """.trimIndent()
-                        )
-                    }
-                }
-            }
+
+
+    private val document: Document = createHTMLDocument()
+        .html {
             body {
                 div {
                     id = "header"
                     span { +"Returadresse," }
                     br { }
-                    span { +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO" }
+                    span {
+                        id = "header_text"
+                        +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO"
+                    }
                     img { src = "nav_logo.png" }
                 }
                 br { }
@@ -129,6 +129,9 @@ class HtmlCreator(val dataList: List<*>) {
                 div { id = "div_content_id" }
             }
         }
+
+    private var footer =
+        "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 OSLO\\ATelefon: 21 07 17 30\\Anav.no"
 
     private fun addLabelContentElement(map: Map<String, *>) {
         val result = map["result"] ?: return
@@ -191,7 +194,10 @@ class HtmlCreator(val dataList: List<*>) {
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
             "page-break", "list-item-container" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
-            else -> throw RuntimeException("unknown element type: " + map["type"])
+            else -> {
+                logger.warn("unknown element type: $elementType")
+                return
+            }
         }
 
         element.visit {
@@ -279,6 +285,19 @@ class HtmlCreator(val dataList: List<*>) {
         dataList.forEach {
             processElement(it as Map<String, *>)
         }
+
+        val s = document.create.head {
+            style {
+                unsafe {
+                    raw(
+                        getCss(footer)
+                    )
+                }
+            }
+        }
+
+        document.childNodes.item(0).appendChild(s)
+
         secureLogger.debug(document.serialize())
         return document
     }
@@ -291,8 +310,19 @@ class HtmlCreator(val dataList: List<*>) {
             DOCUMENT_LIST -> addDocumentList(map)
             MALTEKST -> addMaltekst(map)
             CURRENT_DATE -> addCurrentDate()
+            HEADER -> addHeader(map)
+            FOOTER -> setFooter(map)
             LEAF -> {}
         }
+    }
+
+    private fun addHeader(map: Map<String, *>) {
+        val span = document.getElementById("header_text")
+        span.textContent = map["text"].toString()
+    }
+
+    private fun setFooter(map: Map<String, *>) {
+        footer = map["text"].toString().replace("\n", "\\A")
     }
 
     private fun Map<String, *>.getType(): ElementType {
@@ -304,6 +334,8 @@ class HtmlCreator(val dataList: List<*>) {
                 "document-list" -> DOCUMENT_LIST
                 "maltekst" -> MALTEKST
                 "current-date" -> CURRENT_DATE
+                "header" -> HEADER
+                "footer" -> FOOTER
                 else -> ELEMENT
             }
         }
@@ -319,4 +351,6 @@ enum class ElementType {
     DOCUMENT_LIST,
     MALTEKST,
     CURRENT_DATE,
+    HEADER,
+    FOOTER,
 }

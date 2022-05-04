@@ -535,6 +535,26 @@ val json = """
       "name": "Christian Skrøvseth",
       "title": "Seniorrådgiver/saksbehandler"
     }
+  },
+  {
+    "type": "header",
+    "source": "ignore-this",
+    "text": "NAV header",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "source": "ignore-this",
+    "text": "NAV\nFooter\nnav.no",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
   }
 ]
 """.trimIndent()
