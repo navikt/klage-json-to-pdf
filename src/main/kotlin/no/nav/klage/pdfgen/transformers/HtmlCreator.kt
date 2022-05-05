@@ -18,7 +18,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Suppress("UNCHECKED_CAST")
-class HtmlCreator(val dataList: List<*>) {
+class HtmlCreator(val dataList: List<Map<String, *>>) {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -117,7 +117,7 @@ class HtmlCreator(val dataList: List<*>) {
                     br { }
                     span {
                         id = "header_text"
-                        +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO"
+                        +"NAV Klageinstans"
                     }
                     img { src = "nav_logo.png" }
                 }
@@ -131,7 +131,7 @@ class HtmlCreator(val dataList: List<*>) {
         }
 
     private var footer =
-        "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 OSLO\\ATelefon: 21 07 17 30\\Anav.no"
+        "NAV Klageinstans\\Anav.no"
 
     private fun addLabelContentElement(map: Map<String, *>) {
         val result = map["result"] ?: return
@@ -283,10 +283,11 @@ class HtmlCreator(val dataList: List<*>) {
 
     fun getDoc(): Document {
         dataList.forEach {
-            processElement(it as Map<String, *>)
+            processElement(it)
         }
 
-        val s = document.create.head {
+        //add css when we have a footer set
+        val head = document.create.head {
             style {
                 unsafe {
                     raw(
@@ -296,7 +297,7 @@ class HtmlCreator(val dataList: List<*>) {
             }
         }
 
-        document.childNodes.item(0).appendChild(s)
+        document.childNodes.item(0).appendChild(head)
 
         secureLogger.debug(document.serialize())
         return document

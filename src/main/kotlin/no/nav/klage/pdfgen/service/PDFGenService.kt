@@ -38,15 +38,22 @@ data class FontMetadata(
 class PDFGenService {
 
     fun getPDFAsByteArray(json: String): ByteArray {
-        val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java))
+        val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
         val os = ByteArrayOutputStream()
         createPDFA(doc, os)
         return os.toByteArray()
     }
 
-    private fun getHTMLDocument(list: List<*>): Document {
+    private fun getHTMLDocument(list: List<Map<String, *>>): Document {
+        validateHeaderFooter(list)
         val c = HtmlCreator(list)
         return c.getDoc()
+    }
+
+    private fun validateHeaderFooter(list: List<Map<String, *>>) {
+        if (list.any { it["type"] == "header" }.xor(list.any { it["type"] == "footer" })) {
+            throw RuntimeException("Both a header and a footer must be defined.")
+        }
     }
 
     private fun createPDFA(w3doc: Document, outputStream: OutputStream) = PdfRendererBuilder()
