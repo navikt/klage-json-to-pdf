@@ -101,7 +101,7 @@ class HtmlCreator(val dataList: List<*>) {
                                     @bottom-left {
                                         font-family: "Source Sans Pro" !important;
                                         font-size: 10pt;
-                                        content: "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 OSLO\ATelefon: 21 07 17 30\Anav.no";
+                                        content: "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\ATelefon: 21 07 17 30\Anav.no";
                                         white-space: pre-wrap;
                                     }
                                     @bottom-right {
@@ -118,7 +118,7 @@ class HtmlCreator(val dataList: List<*>) {
                     id = "header"
                     span { +"Returadresse," }
                     br { }
-                    span { +"NAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 OSLO" }
+                    span { +"NAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" }
                     img { src = "nav_logo.png" }
                 }
                 br { }
