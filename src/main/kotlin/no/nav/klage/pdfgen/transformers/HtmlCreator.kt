@@ -314,6 +314,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             HEADER -> addHeader(map)
             FOOTER -> setFooter(map)
             LEAF -> {}
+            IGNORED -> {}
         }
     }
 
@@ -337,6 +338,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                 "current-date" -> CURRENT_DATE
                 "header" -> HEADER
                 "footer" -> FOOTER
+                "redigerbar-maltekst", "regelverkstekst" -> IGNORED
                 else -> ELEMENT
             }
         }
@@ -354,4 +356,5 @@ enum class ElementType {
     CURRENT_DATE,
     HEADER,
     FOOTER,
+    IGNORED,
 }
