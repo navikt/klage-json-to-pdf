@@ -27,16 +27,6 @@ val json = """
     ]
   },
   {
-    "type": "header",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": null
-  },
-  {
     "type": "maltekst",
     "section": "section-esel",
     "children": [
@@ -268,16 +258,6 @@ val json = """
     ],
     "content": null,
     "threadIds": []
-  },
-  {
-    "type": "footer",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-    "content": null
   },
   {
     "type": "regelverktekst",
