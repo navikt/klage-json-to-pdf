@@ -145,7 +145,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     }
 
     private fun addMaltekst(map: Map<String, *>) {
-        val elementList = map["maltekst"]
+        //unpack content
+        val firstContent = map["content"] as List<Map<String, *>>
+        val elementList = firstContent.first()["content"]
+
         if (elementList != null) {
             elementList as List<Map<String, *>>
         } else {
