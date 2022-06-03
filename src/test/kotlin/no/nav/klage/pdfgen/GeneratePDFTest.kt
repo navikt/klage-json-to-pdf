@@ -19,26 +19,42 @@ class GeneratePDF {
 val json = """
 [
   {
-    "type": "current-date"
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
   },
   {
-    "type": "maltekst",
+    "type": "header",
     "children": [
       {
         "text": ""
       }
     ],
-    "source": "document-title",
-    "maltekst": [
+    "threadIds": [],
+    "content": "header her"
+  },
+  {
+    "type": "footer",
+    "children": [
       {
-        "type": "heading-one",
-        "children": [
-          {
-            "text": "NAV Klageinstans har behandlet klagen din"
-          }
-        ]
+        "text": ""
       }
     ],
+    "threadIds": [],
+    "content": "footer\nher"
+  },
+  {
+    "type": "maltekst",
+    "section": "section-esel",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "content": null,
     "threadIds": []
   },
   {
@@ -50,8 +66,7 @@ val json = """
     ],
     "source": "sakenGjelder.name",
     "label": "Klager",
-    "threadIds": [],
-    "result": "Klager: KRAFTIG KAKKERLAKK"
+    "threadIds": []
   },
   {
     "type": "label-content",
@@ -62,460 +77,177 @@ val json = """
     ],
     "source": "sakenGjelder.fnr",
     "label": "Fødselsnummer",
-    "threadIds": [],
-    "result": "Fødselsnummer: 024467 01749"
+    "threadIds": []
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "redigerbar-maltekst",
+    "section": "section-rev",
     "children": [
       {
-        "text": "Prosessfullmektig: "
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Saken gjelder: Klagen din av [] på NAV []s vedtak av "
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Problemstilling: Om"
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Vedtak"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[Alt 1 stadfestelse]\n",
-        "bold": true
-      },
-      {
-        "text": "Vi er enige i vedtaket."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[Alt 2 omgjøring]\n",
-        "bold": true
-      },
-      {
-        "text": "Vi har omgjort vedtaket, slik at"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[Alt 3 avvisning]\n",
-        "bold": true
-      },
-      {
-        "text": "Vi har avvist klagen din fordi du ikke har overholdt klagefristen."
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Beslutning"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Vi har opphevet vedtaket og sendt saken tilbake til NAV [], som skal behandle den på nytt."
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "I klagen din har du lagt vekt på:"
-      }
-    ]
-  },
-  {
-    "type": "bullet-list",
-    "children": [
-      {
-        "type": "list-item",
+        "type": "paragraph",
         "children": [
           {
-            "type": "list-item-container",
-            "children": [
-              {
-                "text": "osv."
-              }
-            ]
+            "text": ""
           }
-        ]
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "I vurderingen vår har vi lagt vekt på disse dokumentene"
-      }
-    ]
-  },
-  {
-    "type": "document-list",
-    "children": [
-      {
-        "text": ""
-      }
-    ],
-    "threadIds": [],
-      "documents": [{
-        "id": "some-id",
-        "title": "Dokumenttittel"
-      }]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Vurderingen vår"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "For å ha rett til ["
-      },
-      {
-        "text": "stønad",
-        "italic": true
-      },
-      {
-        "text": "], må du"
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Konklusjonen vår"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[Vedtak]",
-        "bold": true
-      },
-      {
-        "text": "Vi har kommet fram til at du ["
-      },
-      {
-        "text": "ikke",
-        "italic": true
-      },
-      {
-        "text": "] har rett til [], og gir deg derfor ["
-      },
-      {
-        "text": "ikke medhold><medhold",
-        "italic": true
-      },
-      {
-        "text": "] i klagen din."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Vedtaket er gjort etter folketrygdloven § ["
-      },
-      {
-        "text": "hjemmel",
-        "italic": true
-      },
-      {
-        "text": "]."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[Beslutning]",
-        "bold": true
-      },
-      {
-        "text": " Vi kan ikke vurdere om du har rett til ["
-      },
-      {
-        "text": "stønad",
-        "italic": true
-      },
-      {
-        "text": "], fordi . NAV ["
-      },
-      {
-        "text": "enhet",
-        "italic": true
-      },
-      {
-        "text": "] skal behandle saken på nytt."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Saken er vurdert etter folketrygdloven §."
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Du har rett til å anke"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom fram til deg. Du finner informasjon, skjema og første side for innsending på "
-      },
-      {
-        "text": "www.nav.no/klage",
-        "underline": true
-      },
-      {
-        "text": ". Velg NAV Klageinstans ["
-      },
-      {
-        "text": "avdeling",
-        "italic": true
-      },
-      {
-        "text": "]."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Anken må være underskrevet av deg."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "I trygdesaker må du først anke til Trygderetten før du kan ta saken videre til lagmannsretten."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[",
-        "italic": true
-      },
-      {
-        "text": "Husk",
-        "bold": true,
-        "italic": true
-      },
-      {
-        "italic": true,
-        "text": ": Ta ut avsnittet om anke ved beslutning om oppheving og erstatt med]"
-      },
-      {
-        "text": "\nDenne avgjørelsen er ikke et vedtak som gjelder individuelle rettigheter eller plikter (enkeltvedtak), men en prosessuell beslutning. Du kan ikke klage eller anke over denne beslutningen, jf. forvaltningsloven §§ 2 og 28 og lov om anke til trygderetten § 2.\n"
-      },
-      {
-        "text": "[",
-        "italic": true
-      },
-      {
-        "text": "Husk",
-        "bold": true,
-        "italic": true
-      },
-      {
-        "text": ": dersom avgjørelsen delvis er et enkeltvedtak (stadfestelse/ omgjøring) og delvis en beslutning (opphevelse), kan parten påanke den delen av avgjørelsen som er et enkeltvedtak. Avsnittet om ankeadgang må da stå.]",
-        "italic": true
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Du har rett til innsyn"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Du har rett til å se dokumentene i saken din."
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Informasjon om fri rettshjelp"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "[Dette avsnittet skal bare være med ved omgjøring eller delvis omgjøring]",
-        "bold": true
-      }
-    ]
-  },
-  {
-    "type": "heading-one",
-    "children": [
-      {
-        "text": "Informasjon om dekning av sakskostnader"
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Dersom vi har gjort om vedtaket til din fordel kan du ha rett til å få dekket vesentlige kostnader som har vært nødvendige for å få endret vedtaket."
-      }
-    ]
-  },
-  {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
-    "children": [
-      {
-        "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til NAV Klageinstans Sakskostnader, Postboks 644, Lundsiden, 4606 Kristiansand."
+        ],
+        "textAlign": "text-align-left"
       }
     ]
   },
   {
     "type": "maltekst",
-    "source": "questions",
+    "section": "section-mår",
     "children": [
       {
         "text": ""
       }
     ],
-    "maltekst": [
-      {
-        "type": "heading-one",
-        "children": [
-          {
-            "text": "Har du spørsmål?"
-          }
-        ]
-      },
+    "content": null,
+    "threadIds": []
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-mår",
+    "children": [
       {
         "type": "paragraph",
-        "textAlign": "text-align-left",
         "children": [
           {
-            "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
+            "text": ""
           }
-        ]
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-ulv",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-sau",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
+  },
+  {
+    "type": "maltekst",
+    "section": "section-mus",
+    "children": [
+      {
+        "text": ""
       }
     ],
+    "content": null,
+    "threadIds": []
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-mus",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
+  },
+  {
+    "type": "maltekst",
+    "section": "section-elg",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "content": null,
+    "threadIds": []
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-elg",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
+  },
+  {
+    "type": "maltekst",
+    "section": "section-ape",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "content": null,
+    "threadIds": []
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-ape",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
+  },
+  {
+    "type": "maltekst",
+    "section": "section-gris",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "content": null,
     "threadIds": []
   },
   {
     "type": "maltekst",
-    "source": "regards",
+    "section": "section-sel",
     "children": [
       {
         "text": ""
       }
     ],
-    "maltekst": [
-      {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
-        "children": [
-          {
-            "text": "Med vennlig hilsen\nNAV Klageinstans"
-          }
-        ]
-      }
-    ],
+    "content": null,
     "threadIds": []
   },
   {
@@ -526,15 +258,41 @@ val json = """
         "text": ""
       }
     ],
-    "threadIds": [],
-    "medunderskriver": {
-      "name": "Espen",
-      "title": "Fagleder"
-    },
-    "saksbehandler": {
-      "name": "Christian Skrøvseth",
-      "title": "Seniorrådgiver/saksbehandler"
-    }
+    "threadIds": []
+  },
+  {
+    "type": "page-break",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "maltekst",
+    "section": "section-gnu",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "content": null,
+    "threadIds": []
+  },
+  {
+    "type": "regelverktekst",
+    "section": "section-gnu",
+    "children": [
+      {
+        "type": "paragraph",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "textAlign": "text-align-left"
+      }
+    ]
   }
 ]
 """.trimIndent()

@@ -320,11 +320,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
 
     private fun addHeader(map: Map<String, *>) {
         val span = document.getElementById("header_text")
-        span.textContent = map["text"].toString()
+        span.textContent = map["content"].toString()
     }
 
     private fun setFooter(map: Map<String, *>) {
-        footer = map["text"].toString().replace("\n", "\\A")
+        footer = map["content"].toString().replace("\n", "\\A")
     }
 
     private fun Map<String, *>.getType(): ElementType {
