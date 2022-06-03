@@ -146,14 +146,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
 
     private fun addMaltekst(map: Map<String, *>) {
         //unpack content
-        val firstContent = map["content"] as List<Map<String, *>>
-        val elementList = firstContent.first()["content"]
+        val firstContent = map["content"] ?: return
+        firstContent as List<Map<String, *>>
+        val elementList = firstContent.first()["content"] ?: return
 
-        if (elementList != null) {
-            elementList as List<Map<String, *>>
-        } else {
-            return
-        }
+        elementList as List<Map<String, *>>
         elementList.forEach {
             val div = document.create.div {
                 this.addElementWithPossiblyChildren(it)
