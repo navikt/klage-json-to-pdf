@@ -45,14 +45,18 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                                 .wrapper {
                                   font-size: 0;
                                 }
-                                h1 * {
+                                h1 {
                                     font-size: 16pt;
                                 }
-                                h2 * {
+                                h2 {
                                     font-size: 14pt;
+                                    margin-bottom: -12pt;
                                 }
-                                h3 * {
+                                h3 {
                                     font-size: 12pt;
+                                }
+                                .indent {
+                                    padding-left: 30pt;
                                 }
                                 #header span {
                                     font-size: 10pt;
@@ -173,6 +177,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         var children = emptyList<Map<String, *>>()
 
         val applyClasses = if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight") else mutableSetOf()
+        if (elementType == "indent") {
+            applyClasses += "indent"
+        }
 
         if (elementType != "page-break") {
             children = map["children"] as List<Map<String, *>>
@@ -193,7 +200,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
-            "page-break", "list-item-container" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
+            "page-break", "list-item-container", "indent" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
@@ -324,6 +331,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             CURRENT_DATE -> addCurrentDate()
             HEADER -> addHeader(map)
             FOOTER -> setFooter(map)
+            INDENT -> addElementWithPossiblyChildren(map)
             LEAF -> {}
             IGNORED -> {}
         }
@@ -349,6 +357,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                 "current-date" -> CURRENT_DATE
                 "header" -> HEADER
                 "footer" -> FOOTER
+                "indent" -> INDENT
                 "redigerbar-maltekst", "regelverkstekst" -> IGNORED
                 else -> ELEMENT
             }
@@ -367,5 +376,6 @@ enum class ElementType {
     CURRENT_DATE,
     HEADER,
     FOOTER,
+    INDENT,
     IGNORED,
 }
