@@ -152,7 +152,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         //unpack content
         val firstContent = map["content"] ?: return
         firstContent as List<Map<String, *>>
-        val elementList = firstContent.first()["content"] ?: return
+        val elementList = firstContent.firstOrNull()?.get("content") ?: return
 
         elementList as List<Map<String, *>>
         elementList.forEach {
