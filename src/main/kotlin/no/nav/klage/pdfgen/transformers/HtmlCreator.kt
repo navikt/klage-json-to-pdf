@@ -117,11 +117,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             body {
                 div {
                     id = "header"
-                    span { +"Returadresse," }
-                    br { }
                     span {
                         id = "header_text"
-                        +"NAV Klageinstans"
+                        +"Returadresse:\nNAV Klageinstans"
                     }
                     img { src = "nav_logo.png" }
                 }
@@ -296,7 +294,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         //defaults for now
         if (!headerAndFooterExists(dataList)) {
             val span = document.getElementById("header_text")
-            span.textContent = "NAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
+            span.textContent = "Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
 
             footer = "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
         }
