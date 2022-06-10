@@ -45,14 +45,17 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                                 .wrapper {
                                   font-size: 0;
                                 }
-                                h1 * {
+                                h1 {
                                     font-size: 16pt;
                                 }
-                                h2 * {
+                                h2 {
                                     font-size: 14pt;
                                 }
-                                h3 * {
+                                h3 {
                                     font-size: 12pt;
+                                }
+                                .indent {
+                                    padding-left: 24pt;
                                 }
                                 #header span {
                                     font-size: 10pt;
@@ -113,11 +116,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             body {
                 div {
                     id = "header"
-                    span { +"Returadresse," }
-                    br { }
                     span {
                         id = "header_text"
-                        +"NAV Klageinstans"
+                        +"Returadresse:\nNAV Klageinstans"
                     }
                     img { src = "nav_logo.png" }
                 }
@@ -145,12 +146,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     }
 
     private fun addMaltekst(map: Map<String, *>) {
-        val elementList = map["maltekst"]
-        if (elementList != null) {
-            elementList as List<Map<String, *>>
-        } else {
-            return
-        }
+        //unpack content
+        val firstContent = map["content"] ?: return
+        firstContent as List<Map<String, *>>
+        val elementList = firstContent.firstOrNull()?.get("content") ?: return
+
+        elementList as List<Map<String, *>>
         elementList.forEach {
             val div = document.create.div {
                 this.addElementWithPossiblyChildren(it)
@@ -173,6 +174,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         var children = emptyList<Map<String, *>>()
 
         val applyClasses = if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight") else mutableSetOf()
+        if (elementType == "indent") {
+            applyClasses += "indent"
+        }
 
         if (elementType != "page-break") {
             children = map["children"] as List<Map<String, *>>
@@ -193,7 +197,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
-            "page-break", "list-item-container" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
+            "page-break", "list-item-container", "indent" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
@@ -286,6 +290,14 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             processElement(it)
         }
 
+        //defaults for now
+        if (!headerAndFooterExists(dataList)) {
+            val span = document.getElementById("header_text")
+            span.textContent = "Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
+
+            footer = "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
+        }
+
         //add css when we have a footer set
         val head = document.create.head {
             style {
@@ -303,11 +315,14 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         return document
     }
 
+    private fun headerAndFooterExists(list: List<Map<String, *>>) =
+        list.any { it["type"] == "header" } && list.any { it["type"] == "footer" }
+
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
-            ELEMENT -> addElementWithPossiblyChildren(map)
+            ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
             DOCUMENT_LIST -> addDocumentList(map)
             MALTEKST -> addMaltekst(map)
             CURRENT_DATE -> addCurrentDate()
@@ -320,11 +335,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
 
     private fun addHeader(map: Map<String, *>) {
         val span = document.getElementById("header_text")
-        span.textContent = map["text"].toString()
+        span.textContent = map["content"].toString()
     }
 
     private fun setFooter(map: Map<String, *>) {
-        footer = map["text"].toString().replace("\n", "\\A")
+        footer = map["content"].toString().replace("\n", "\\A")
     }
 
     private fun Map<String, *>.getType(): ElementType {
@@ -356,5 +371,6 @@ enum class ElementType {
     CURRENT_DATE,
     HEADER,
     FOOTER,
+    INDENT,
     IGNORED,
 }
