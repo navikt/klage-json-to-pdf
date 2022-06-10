@@ -50,13 +50,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                                 }
                                 h2 {
                                     font-size: 14pt;
-                                    margin-bottom: -12pt;
                                 }
                                 h3 {
                                     font-size: 12pt;
                                 }
                                 .indent {
-                                    padding-left: 30pt;
+                                    padding-left: 24pt;
                                 }
                                 #header span {
                                     font-size: 10pt;
@@ -354,7 +353,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                 "current-date" -> CURRENT_DATE
                 "header" -> HEADER
                 "footer" -> FOOTER
-                "indent" -> INDENT
                 "redigerbar-maltekst", "regelverkstekst" -> IGNORED
                 else -> ELEMENT
             }
