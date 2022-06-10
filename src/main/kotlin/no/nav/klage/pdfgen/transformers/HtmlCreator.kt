@@ -325,13 +325,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         when (map.getType()) {
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
-            ELEMENT -> addElementWithPossiblyChildren(map)
+            ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
             DOCUMENT_LIST -> addDocumentList(map)
             MALTEKST -> addMaltekst(map)
             CURRENT_DATE -> addCurrentDate()
             HEADER -> addHeader(map)
             FOOTER -> setFooter(map)
-            INDENT -> addElementWithPossiblyChildren(map)
             LEAF -> {}
             IGNORED -> {}
         }
