@@ -4,7 +4,7 @@ val mockkVersion = "1.12.5"
 val logstashVersion = "5.1"
 val jsoupVersion = "1.11.3"
 val openHtmlToPdfVersion = "1.0.10"
-val kotlinxHtmlVersion = "0.7.2"
+val kotlinxHtmlVersion = "0.7.5"
 val springFoxVersion = "3.0.0"
 
 repositories {
