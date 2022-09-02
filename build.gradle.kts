@@ -5,7 +5,7 @@ val logstashVersion = "7.2"
 val jsoupVersion = "1.15.3"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.7.5"
-val springFoxVersion = "3.0.0"
+val springDocVersion = "1.6.11"
 
 repositories {
     mavenCentral()
@@ -28,7 +28,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
 
-    implementation("io.springfox:springfox-boot-starter:$springFoxVersion")
+    implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 
     implementation("org.jsoup:jsoup:$jsoupVersion")
     implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:$openHtmlToPdfVersion")

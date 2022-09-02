@@ -1,7 +1,7 @@
 package no.nav.klage.pdfgen.api
 
-import io.swagger.annotations.Api
-import io.swagger.annotations.ApiOperation
+import io.swagger.v3.oas.annotations.Operation
+import io.swagger.v3.oas.annotations.tags.Tag
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-@Api(tags = ["kabal-json-to-pdf"])
+@Tag(name = "kabal-json-to-pdf", description = "Create PDF from JSON")
 class PDFGenController(
     private val pdfGenService: PDFGenService
 ) {
@@ -26,9 +26,9 @@ class PDFGenController(
         private val secureLogger = getSecureLogger()
     }
 
-    @ApiOperation(
-        value = "Generate pdf from json",
-        notes = "Generate pdf from json"
+    @Operation(
+        summary = "Generate pdf from json",
+        description = "Generate pdf from json"
     )
     @ResponseBody
     @PostMapping("/topdf")
