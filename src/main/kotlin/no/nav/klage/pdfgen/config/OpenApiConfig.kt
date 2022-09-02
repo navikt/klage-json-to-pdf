@@ -11,6 +11,7 @@ class OpenApiConfig {
     @Bean
     fun apiInternal(): GroupedOpenApi {
         return GroupedOpenApi.builder()
+            .group("standard")
             .packagesToScan(PDFGenController::class.java.packageName)
             .pathsToMatch("/")
             .build()
