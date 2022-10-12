@@ -68,6 +68,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                                 p, span {
                                     font-size: 12pt;
                                 }
+                                .placeholder-text {
+                                    background-color: #EFA89D;
+                                    border-radius: 4px;
+                                }
                                 .bold {
                                     font-weight: bold;
                                 }
@@ -178,6 +182,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             applyClasses += "indent"
         }
 
+        if (elementType == "placeholder" && !placeholderTextExistsInChildren(map)) {
+            val text = map["placeholder"]
+            addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
+            return
+        }
+
         if (elementType != "page-break") {
             children = map["children"] as List<Map<String, *>>
         } else {
@@ -185,7 +195,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         }
 
         val element = when (elementType) {
-            "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
+            "standard-text", "placeholder" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-three" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
@@ -253,22 +263,21 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         divElement.appendChild(dElement)
     }
 
-    private fun Tag.addLeafElement(map: Map<String, *>) {
+    private fun Tag.addLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()) {
         val text = map["text"] ?: throw RuntimeException("no content here")
 
-        val classesToAdd = mutableSetOf<String>()
         if (map["bold"] == true) {
-            classesToAdd += "bold"
+            inputClasses += "bold"
         }
         if (map["underline"] == true) {
-            classesToAdd += "underline"
+            inputClasses += "underline"
         }
         if (map["italic"] == true) {
-            classesToAdd += "italic"
+            inputClasses += "italic"
         }
 
         this.consumer.span {
-            classes = classesToAdd
+            classes = inputClasses
             +text.toString()
         }
     }
@@ -331,6 +340,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             LEAF -> {}
             IGNORED -> {}
         }
+    }
+
+    private fun placeholderTextExistsInChildren(map: Map<String, *>): Boolean {
+        val children = map["children"] as List<Map<String, *>>
+        return children.any { it["text"] != ""}
     }
 
     private fun addHeader(map: Map<String, *>) {
