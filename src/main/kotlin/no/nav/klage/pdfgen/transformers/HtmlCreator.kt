@@ -5,6 +5,7 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import no.nav.klage.pdfgen.exception.ValidationException
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import no.nav.klage.pdfgen.transformers.ElementType.FOOTER
 import no.nav.klage.pdfgen.transformers.ElementType.HEADER
@@ -149,7 +150,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         }
     }
 
-    private fun addMaltekst(map: Map<String, *>) {
+    private fun addMaltekst(map: Map<String, *>, validationMode: Boolean = false) {
         //unpack content
         val firstContent = map["content"] ?: return
         firstContent as List<Map<String, *>>
@@ -158,22 +159,22 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         elementList as List<Map<String, *>>
         elementList.forEach {
             val div = document.create.div {
-                this.addElementWithPossiblyChildren(it)
+                this.addElementWithPossiblyChildren(it, validationMode)
             }
             val divElement = document.getElementById("div_content_id") as Node
             divElement.appendChild(div)
         }
     }
 
-    private fun addElementWithPossiblyChildren(map: Map<String, *>) {
+    private fun addElementWithPossiblyChildren(map: Map<String, *>, validationMode: Boolean = false) {
         val div = document.create.div {
-            this.addElementWithPossiblyChildren(map)
+            this.addElementWithPossiblyChildren(map, validationMode)
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(div)
     }
 
-    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
+    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>, validationMode: Boolean = false) {
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
@@ -182,7 +183,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             applyClasses += "indent"
         }
 
-        if (elementType == "placeholder" && !placeholderTextExistsInChildren(map)) {
+        if (elementType == "placeholder" && !placeholderTextExistsInChildren(map, validationMode)) {
             val text = map["placeholder"]
             addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
             return
@@ -219,7 +220,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             children.forEach {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
-                    ELEMENT -> this.addElementWithPossiblyChildren(it)
+                    ELEMENT -> this.addElementWithPossiblyChildren(it, validationMode)
                     else -> {}
                 }
             }
@@ -283,7 +284,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     }
 
     private fun addCurrentDate() {
-        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("nb"))
+        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("no"))
         val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
 
         val div = document.create.div {
@@ -294,9 +295,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         divElement.appendChild(div)
     }
 
-    fun getDoc(): Document {
+    fun getDoc(validationMode: Boolean = false): Document {
         dataList.forEach {
-            processElement(it)
+            processElement(it, validationMode)
         }
 
         //defaults for now
@@ -327,13 +328,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     private fun headerAndFooterExists(list: List<Map<String, *>>) =
         list.any { it["type"] == "header" } && list.any { it["type"] == "footer" }
 
-    private fun processElement(map: Map<String, *>) {
+    private fun processElement(map: Map<String, *>, validationMode: Boolean = false) {
         when (map.getType()) {
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
-            ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
+            ELEMENT, INDENT -> addElementWithPossiblyChildren(map, validationMode)
             DOCUMENT_LIST -> addDocumentList(map)
-            MALTEKST -> addMaltekst(map)
+            MALTEKST -> addMaltekst(map, validationMode)
             CURRENT_DATE -> addCurrentDate()
             HEADER -> addHeader(map)
             FOOTER -> setFooter(map)
@@ -342,8 +343,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         }
     }
 
-    private fun placeholderTextExistsInChildren(map: Map<String, *>): Boolean {
+    private fun placeholderTextExistsInChildren(map: Map<String, *>, validationMode: Boolean = false): Boolean {
         val children = map["children"] as List<Map<String, *>>
+        if (validationMode && children.all { it["text"] == ""}) {
+            throw ValidationException("Incomplete placeholder: " + map["placeholder"])
+        }
         return children.any { it["text"] != ""}
     }
 

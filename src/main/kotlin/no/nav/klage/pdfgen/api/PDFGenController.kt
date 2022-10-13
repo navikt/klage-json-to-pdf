@@ -49,5 +49,17 @@ class PDFGenController(
             HttpStatus.OK
         )
     }
+    @Operation(
+        summary = "Validate pdf input",
+        description = "Validate pdf input"
+    )
+    @PostMapping("/validate")
+    fun validate(
+        @RequestBody json: String
+    ) {
+        logger.debug("validtate() called. See body in secure logs")
+        secureLogger.debug("validate() called. Received json: {}", json)
 
+        pdfGenService.validateDocumentContent(json)
+    }
 }
