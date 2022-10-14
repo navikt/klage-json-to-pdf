@@ -57,7 +57,7 @@ class PDFGenController(
     fun validate(
         @RequestBody json: String
     ) {
-        logger.debug("validtate() called. See body in secure logs")
+        logger.debug("${::validate.name} called. See body in secure logs")
         secureLogger.debug("validate() called. Received json: {}", json)
 
         pdfGenService.validateDocumentContent(json)
