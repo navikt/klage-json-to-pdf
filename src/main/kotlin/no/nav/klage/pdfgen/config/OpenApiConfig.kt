@@ -13,7 +13,7 @@ class OpenApiConfig {
         return GroupedOpenApi.builder()
             .group("standard")
             .packagesToScan(PDFGenController::class.java.packageName)
-            .pathsToMatch("/")
+            .pathsToMatch("/**")
             .build()
     }
 }
