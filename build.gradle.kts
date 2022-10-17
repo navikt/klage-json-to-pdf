@@ -6,6 +6,7 @@ val jsoupVersion = "1.15.3"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.7.5"
 val springDocVersion = "1.6.11"
+val springSleuthVersion = "3.1.4"
 
 repositories {
     mavenCentral()
@@ -28,6 +29,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
+    implementation("org.springframework.cloud:spring-cloud-starter-sleuth:$springSleuthVersion")
 
     implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 
