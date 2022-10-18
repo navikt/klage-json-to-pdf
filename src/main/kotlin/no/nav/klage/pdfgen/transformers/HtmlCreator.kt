@@ -151,10 +151,21 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     }
 
     private fun addMaltekst(map: Map<String, *>, validationMode: Boolean = false) {
-        //unpack content
-        val firstContent = map["content"] ?: return
-        firstContent as List<Map<String, *>>
-        val elementList = firstContent.firstOrNull()?.get("content") ?: return
+        //support unpacking of content (old) or children (new) for compatability.
+        val elementList = when {
+            map["content"] != null -> {
+                val firstContent = map["content"]
+                firstContent as List<Map<String, *>>
+                firstContent.firstOrNull()?.get("content") ?: return
+            }
+            map["children"] != null -> {
+                map["children"]
+            }
+            else -> {
+                logger.error("neither content nor children in maltekst")
+                return
+            }
+        }
 
         elementList as List<Map<String, *>>
         elementList.forEach {

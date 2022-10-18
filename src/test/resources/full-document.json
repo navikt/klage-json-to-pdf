@@ -22,88 +22,14 @@
     "section": "section-esel",
     "children": [
       {
-        "text": ""
-      }
-    ],
-    "content": [
-      {
-        "id": "4c5e271c-6f11-456e-9e01-ae72981b995e",
-        "title": "Dokumenttittel ",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "heading-one",
+        "children": [
           {
-            "type": "heading-one",
-            "children": [
-              {
-                "text": "NAV Klageinstans har behandlet klagen din"
-              }
-            ]
+            "text": "NAV Klageinstans har behandlet klagen din"
           }
-        ],
-        "plainText": null,
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-esel"
-        ],
-        "templates": [
-          "klagevedtak-legacy",
-          "klagevedtak"
-        ],
-        "created": "2022-05-19T14:26:35.125398",
-        "modified": "2022-06-10T16:07:54.727841"
-      },
-      {
-        "id": "50ab6057-6b22-438b-adff-d8416581eeef",
-        "title": "",
-        "textType": "MALTEKST",
-        "content": [
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "daniel testplassholder "
-              },
-              {
-                "type": "placeholder",
-                "placeholder": "PLASSHOLDER",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "text": ""
-              }
-            ]
-          }
-        ],
-        "plainText": "",
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-esel",
-          "section-ulv",
-          "section-elg",
-          "section-rev",
-          "section-ape"
-        ],
-        "templates": [
-          "klagevedtak"
-        ],
-        "created": "2022-10-12T10:48:24.337309",
-        "modified": "2022-10-12T11:00:52.686119"
+        ]
       }
-    ],
-    "threadIds": []
+    ]
   },
   {
     "type": "label-content",
@@ -115,7 +41,7 @@
     "source": "sakenGjelder.name",
     "label": "Klager",
     "threadIds": [],
-    "result": "Klager: TVILSOM SAKS"
+    "result": "Klager: KRAFTIG KAKKERLAKK"
   },
   {
     "type": "label-content",
@@ -127,21 +53,60 @@
     "source": "sakenGjelder.fnr",
     "label": "Fødselsnummer",
     "threadIds": [],
-    "result": "Fødselsnummer: 254383 01286"
+    "result": "Fødselsnummer: 024467 01749"
   },
   {
     "type": "paragraph",
     "textAlign": "text-align-left",
     "children": [
       {
-        "text": " "
+        "text": "Fullmektig",
+        "bold": true
+      },
+      {
+        "text": ":"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Saken gjelder",
+        "bold": true
+      },
+      {
+        "text": ": Klagen din\t på NAV \t\tsitt vedtak av\t\t. "
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Problemstilling",
+        "bold": true
+      },
+      {
+        "text": ": Om "
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "daniels redigerbare maltekstplassholder kommer her: "
       },
       {
         "type": "placeholder",
         "placeholder": "PLASSHOLDER",
         "children": [
           {
-            "text": ""
+            "text": "dsfgdfgd \\n dfgdfgdfg"
           }
         ]
       },
@@ -155,20 +120,23 @@
     "section": "section-mår",
     "children": [
       {
-        "text": ""
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Vedtak"
+          }
+        ]
       }
-    ],
-    "content": [],
-    "threadIds": []
+    ]
   },
   {
     "type": "paragraph",
+    "textAlign": "text-align-left",
     "children": [
       {
-        "text": ""
+        "text": "Vi har [delvis] omgjort vedtaket, slik at ..."
       }
-    ],
-    "textAlign": "text-align-left"
+    ]
   },
   {
     "type": "heading-two",
@@ -201,18 +169,14 @@
     "textAlign": "text-align-left",
     "children": [
       {
-        "text": "Øyvinds redigerbare maltekstplassholder kommer her: "
+        "text": "daniels redigerbare maltekstplassholder kommer her: "
       },
       {
         "type": "placeholder",
         "placeholder": "PLASSHOLDER",
         "children": [
           {
-            "text": "Ja, dette "
-          },
-          {
-            "text": "blir saker",
-            "bold": true
+            "text": "asd asda \\n sasd"
           }
         ]
       },
@@ -252,122 +216,68 @@
     "section": "section-mus",
     "children": [
       {
-        "text": ""
-      }
-    ],
-    "content": [
-      {
-        "id": "dc7988ec-fc0c-45c1-a1b2-7c9c85b36569",
-        "title": "Tittel - Vurderingen vår",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "heading-two",
+        "children": [
           {
-            "type": "heading-two",
-            "children": [
-              {
-                "text": "Vurderingen vår"
-              }
-            ]
+            "text": "Vurderingen vår"
           }
-        ],
-        "plainText": null,
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-mus"
-        ],
-        "templates": [
-          "klagevedtak-legacy",
-          "klagevedtak"
-        ],
-        "created": "2022-05-19T11:12:55.31585",
-        "modified": "2022-06-13T11:45:28.304638"
+        ]
       },
       {
-        "id": "b62f4d73-948f-4687-8c55-b6c22d7cf33a",
-        "title": "",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
           {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
+            "text": "Du søkte om"
+          },
+          {
+            "text": " penger den ",
+            "bold": false
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Fyll ut dato her",
+            "content": "",
             "children": [
               {
-                "text": "Du søkte om"
-              },
-              {
-                "text": " penger den ",
+                "text": "asdfsdfsdfsdf \\n ",
                 "bold": false
               },
               {
-                "type": "placeholder",
-                "placeholder": "dato",
-                "children": [
-                  {
-                    "text": "innhold skrevet av ",
-                    "bold": false
-                  },
-                  {
-                    "bold": true,
-                    "text": "saksbehandler"
-                  }
-                ]
+                "bold": true,
+                "text": "sedfsdfgdfg",
+                "italic": true,
+                "underline": true
+              },
+              {
+                "bold": false,
+                "text": " "
               },
               {
                 "bold": true,
-                "text": "."
-              },
-              {
-                "bold": false,
-                "text": " Placeholder "
-              },
-              {
-                "type": "placeholder",
-                "placeholder": "test",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "bold": false,
-                "text": ". "
-              },
-              {
-                "type": "placeholder",
-                "placeholder": "Fyll inn dato her",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "bold": false,
-                "text": " Mer tekst."
+                "text": "sdfsdfgdfgdfg"
               }
             ]
+          },
+          {
+            "text": ". Vedtaket ble fattet den "
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "Skriv dato her",
+            "children": [
+              {
+                "text": "10.10.2022",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "text": "."
           }
-        ],
-        "plainText": "",
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-mus"
-        ],
-        "templates": [],
-        "created": "2022-10-11T16:36:10.817779",
-        "modified": "2022-10-12T14:20:58.309707"
+        ]
       }
-    ],
-    "threadIds": []
+    ]
   },
   {
     "type": "paragraph",
@@ -383,88 +293,41 @@
     "section": "section-elg",
     "children": [
       {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Konklusjonen vår"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Vi har kommet fram til at \t\t. Du har fått [delvis] medhold i klagen din."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Vedtaket er gjort etter \t\t § \t.\t"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
         "text": ""
       }
-    ],
-    "content": [
-      {
-        "id": "8b8cc611-7a62-4186-9755-70c55711bafb",
-        "title": "Tittel - Konklusjonen vår",
-        "textType": "MALTEKST",
-        "content": [
-          {
-            "type": "heading-two",
-            "children": [
-              {
-                "text": "Konklusjonen vår"
-              }
-            ]
-          }
-        ],
-        "plainText": null,
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-elg"
-        ],
-        "templates": [
-          "klagevedtak-legacy",
-          "klagevedtak"
-        ],
-        "created": "2022-05-19T11:12:40.790939",
-        "modified": "2022-06-13T11:45:59.827741"
-      },
-      {
-        "id": "50ab6057-6b22-438b-adff-d8416581eeef",
-        "title": "",
-        "textType": "MALTEKST",
-        "content": [
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "daniel testplassholder "
-              },
-              {
-                "type": "placeholder",
-                "placeholder": "PLASSHOLDER",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "text": ""
-              }
-            ]
-          }
-        ],
-        "plainText": "",
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-esel",
-          "section-ulv",
-          "section-elg",
-          "section-rev",
-          "section-ape"
-        ],
-        "templates": [
-          "klagevedtak"
-        ],
-        "created": "2022-10-12T10:48:24.337309",
-        "modified": "2022-10-12T11:00:52.686119"
-      }
-    ],
-    "threadIds": []
+    ]
   },
   {
     "type": "paragraph",
@@ -492,58 +355,57 @@
     "section": "section-ape",
     "children": [
       {
-        "text": ""
-      }
-    ],
-    "content": [
-      {
-        "id": "50ab6057-6b22-438b-adff-d8416581eeef",
-        "title": "",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "heading-three",
+        "children": [
           {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "daniel testplassholder "
-              },
-              {
-                "type": "placeholder",
-                "placeholder": "PLASSHOLDER",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "text": ""
-              }
-            ]
+            "text": "Du har rett til å anke"
           }
-        ],
-        "plainText": "",
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-esel",
-          "section-ulv",
-          "section-elg",
-          "section-rev",
-          "section-ape"
-        ],
-        "templates": [
-          "klagevedtak"
-        ],
-        "created": "2022-10-12T10:48:24.337309",
-        "modified": "2022-10-12T11:00:52.686119"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom fram til deg. Du finner informasjon, skjema og første side for innsending på "
+          },
+          {
+            "text": "www.nav.no/klage",
+            "underline": true
+          },
+          {
+            "text": ". "
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Anken må være underskrevet av deg."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "I trygdesaker må du først anke til Trygderetten før du kan ta saken videre til lagmannsretten."
+          }
+        ]
       }
-    ],
-    "threadIds": []
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Velg NAV Klageinstans  <enhet/avdeling>."
+      }
+    ]
   },
   {
     "type": "paragraph",
@@ -571,134 +433,89 @@
     "section": "section-gris",
     "children": [
       {
-        "text": ""
-      }
-    ],
-    "content": [
-      {
-        "id": "d3495c02-bb1f-44e7-821f-9507c52a4608",
-        "title": "Tomt innhold for sakskostnader (ikke medhold)",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "heading-two",
+        "children": [
           {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": ""
-              }
-            ]
+            "text": "Informasjon om dekning av sakskostnader"
           }
-        ],
-        "plainText": "",
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [
-          "1",
-          "2",
-          "3",
-          "6",
-          "7",
-          "8"
-        ],
-        "enheter": [],
-        "sections": [
-          "section-gris"
-        ],
-        "templates": [
-          "klagevedtak"
-        ],
-        "created": "2022-09-14T11:09:46.171693",
-        "modified": "2022-09-14T11:11:55.627738"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Dersom vi har gjort om vedtaket til din fordel kan du ha rett til å få dekket vesentlige kostnader som har vært nødvendige for å få endret vedtaket."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til NAV Klageinstans Sakskostnader, postboks 22, 4661 Kristiansand. "
+          }
+        ]
       }
-    ],
-    "threadIds": []
+    ]
   },
   {
     "type": "maltekst",
     "section": "section-sel",
     "children": [
       {
-        "text": ""
-      }
-    ],
-    "content": [
-      {
-        "id": "cf6cf64b-d464-41fa-ac3a-3112a1625092",
-        "title": "Generell informasjon",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "heading-two",
+        "children": [
           {
-            "type": "heading-two",
-            "children": [
-              {
-                "text": "Du har rett til innsyn"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Du har rett til å se dokumentene i saken din."
-              }
-            ]
-          },
-          {
-            "type": "heading-two",
-            "children": [
-              {
-                "text": "Informasjon om fri rettshjelp"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
-              }
-            ]
-          },
-          {
-            "type": "heading-two",
-            "children": [
-              {
-                "text": "Har du spørsmål?"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "children": [
-              {
-                "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
-              }
-            ]
+            "text": "Du har rett til innsyn"
           }
-        ],
-        "plainText": null,
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-sel"
-        ],
-        "templates": [
-          "klagevedtak-legacy",
-          "klagevedtak"
-        ],
-        "created": "2022-05-19T11:06:13.118438",
-        "modified": "2022-06-13T11:47:54.785902"
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Du har rett til å se dokumentene i saken din."
+          }
+        ]
+      },
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Informasjon om fri rettshjelp"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
+          }
+        ]
+      },
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Har du spørsmål?"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
+          }
+        ]
       }
-    ],
-    "threadIds": []
+    ]
   },
   {
     "type": "signature",
@@ -709,9 +526,13 @@
       }
     ],
     "threadIds": [],
-    "saksbehandler": {
+    "medunderskriver": {
       "name": "Kari Nordmann",
-      "title": "Seniorrådgiver/saksbehandler"
+      "title": "Seniorrådgiver"
+    },
+    "saksbehandler": {
+      "name": "Christian Skrøvseth",
+      "title": "Avdelingsdirektør/saksbehandler"
     }
   },
   {
@@ -737,50 +558,200 @@
     "section": "section-gnu",
     "children": [
       {
-        "text": ""
-      }
-    ],
-    "content": [
-      {
-        "id": "75ef2a36-63d3-439d-8dd5-9f28c3714afa",
-        "title": "Tittel - Regelverket som gjelder i saken ",
-        "textType": "MALTEKST",
-        "content": [
+        "type": "heading-two",
+        "children": [
           {
-            "type": "heading-two",
-            "children": [
-              {
-                "text": "Regelverket som gjelder i saken"
-              }
-            ]
+            "text": "Regelverket som gjelder i saken"
           }
-        ],
-        "plainText": null,
-        "version": 1,
-        "hjemler": [],
-        "ytelser": [],
-        "utfall": [],
-        "enheter": [],
-        "sections": [
-          "section-gnu"
-        ],
-        "templates": [
-          "klagevedtak-legacy",
-          "klagevedtak"
-        ],
-        "created": "2022-05-19T11:22:23.85064",
-        "modified": "2022-06-13T11:48:02.613297"
+        ]
       }
-    ],
-    "threadIds": []
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Folketrygdloven § 14-10 sjuende ledd (før 1. oktober 2021)",
+        "underline": true
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "\"",
+        "underline": false
+      },
+      {
+        "text": "Foreldrepenger må tas ut sammenhengende fra det tidspunkt uttaket starter, se likevel § 14-11.\""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Folketrygdloven § 14-11 (før 1. oktober 2021)",
+        "underline": true
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "\"Uttak av foreldrepenger kan utsettes"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "a)\tnår den som mottar foreldrepenger har lovbestemt ferie,​1"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "b)\tnår den som mottar foreldrepenger er i inntektsgivende arbeid på heltid,"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "c)\tdersom stønadsmottakeren på grunn av sykdom eller skade er helt avhengig av hjelp til å ta seg av barnet eller er innlagt i helseinstitusjon,"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "d)\tdersom barnet er innlagt i helseinstitusjon."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Ved forhold som nevnt i bokstav b, må det foreligge skriftlig avtale med arbeidsgiver. For selvstendig næringsdrivende og frilansere må det foreligge skriftlig avtale med Arbeids- og velferdsetaten."
+      }
+    ]
   },
   {
     "type": "paragraph",
     "children": [
       {
-        "text": ""
+        "text": "Forhold som nevnt i bokstav c må dokumenteres med legeerklæring.\""
       }
     ],
     "textAlign": "text-align-left"
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Folketrygdloven § 14-6",
+        "underline": true
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "\"Rett til foreldrepenger opptjenes gjennom yrkesaktivitet. Både moren og faren kan opptjene rett til foreldrepenger ved å være yrkesaktiv med pensjonsgivende inntekt (§ 3-15) i minst seks av de siste ti månedene før vedkommendes uttak av foreldrepenger tar til, se §§ 14-10 første og annet ledd og 14-14 annet ledd. Ved adopsjon må moren ha opptjent rett til foreldrepenger ved omsorgsovertakelsen."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Likestilt med yrkesaktivitet er tidsrom da det er gitt en ytelse til livsopphold i form av dagpenger under arbeidsløshet etter kapittel 4, sykepenger etter kapittel 8, stønad ved barns sykdom m.m. etter kapittel 9 eller arbeidsavklaringspenger etter kapittel 11, eller enten foreldrepenger eller svangerskapspenger etter kapitlet her."
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Likestilt med yrkesaktivitet er også tidsrom med"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "a.\tlønn fra arbeidsgiver under permisjon i forbindelse med videre- og etterutdanning,"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "b.\tventelønn etter lov av 4. mars 1983 nr. 3 om statens tjenestemenn m.m.​1 § 13 nr. 6,"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "c.\tvartpenger etter lov av 28. juli 1949 nr. 26 om Statens pensjonskasse § 24 tredje ledd,"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "d.\tetterlønn fra arbeidsgiver,"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "e.\tavtjening av militærtjeneste eller obligatorisk sivilforsvarstjeneste,​2"
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "f.\tytelse i medhold av midlertidig lov om kompensasjonsytelse for selvstendig næringsdrivende og frilansere som har mistet inntekt som følge av utbrudd av covid-19.\""
+      }
+    ]
   }
 ]
