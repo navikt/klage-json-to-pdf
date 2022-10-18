@@ -7,6 +7,7 @@ val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.7.5"
 val springDocVersion = "1.6.11"
 val springSleuthVersion = "3.1.4"
+val problemSpringWebStartVersion = "0.27.0"
 
 repositories {
     mavenCentral()
@@ -30,6 +31,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
     implementation("org.springframework.cloud:spring-cloud-starter-sleuth:$springSleuthVersion")
+    implementation("org.zalando:problem-spring-web-starter:$problemSpringWebStartVersion")
 
     implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
 

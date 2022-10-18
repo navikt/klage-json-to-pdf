@@ -183,10 +183,16 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             applyClasses += "indent"
         }
 
-        if (elementType == "placeholder" && !placeholderTextExistsInChildren(map, validationMode)) {
-            val text = map["placeholder"]
-            addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
-            return
+        if (elementType == "placeholder") {
+            if (!placeholderTextExistsInChildren(map)) {
+                val text = map["placeholder"]
+                if (validationMode){
+                    throw ValidationException(text.toString())
+                } else {
+                    addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
+                }
+                return
+            }
         }
 
         if (elementType != "page-break") {
@@ -208,7 +214,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
-            "page-break", "list-item-container", "indent" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
+            "page-break", "list-item-container", "indent" -> DIV(
+                initialAttributes = emptyMap(),
+                consumer = this.consumer
+            )
+
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
@@ -305,7 +315,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             val span = document.getElementById("header_text")
             span.textContent = "Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
 
-            footer = "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
+            footer =
+                "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
         }
 
         //add css when we have a footer set
@@ -343,12 +354,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         }
     }
 
-    private fun placeholderTextExistsInChildren(map: Map<String, *>, validationMode: Boolean = false): Boolean {
+    private fun placeholderTextExistsInChildren(map: Map<String, *>): Boolean {
         val children = map["children"] as List<Map<String, *>>
-        if (validationMode && children.all { it["text"] == ""}) {
-            throw ValidationException("Incomplete placeholder: " + map["placeholder"])
-        }
-        return children.any { it["text"] != ""}
+        return children.any { it["text"] != "" }
     }
 
     private fun addHeader(map: Map<String, *>) {
