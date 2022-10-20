@@ -21,6 +21,13 @@ class GeneratePDF {
     }
 
     @Test
+    fun `generate pdf from old version of full input`() {
+        val jsonData = File(path + "full-document-old.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        Files.write(Path.of("test.pdf"), data)
+    }
+
+    @Test
     fun `generate pdf from minimal input`() {
         val jsonData = File(path + "minimal.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
