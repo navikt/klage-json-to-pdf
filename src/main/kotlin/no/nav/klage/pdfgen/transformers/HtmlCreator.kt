@@ -5,6 +5,7 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import no.nav.klage.pdfgen.exception.ValidationErrorTypes
 import no.nav.klage.pdfgen.exception.ValidationException
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import no.nav.klage.pdfgen.transformers.ElementType.FOOTER
@@ -196,10 +197,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
 
         if (elementType == "placeholder") {
             if (!placeholderTextExistsInChildren(map)) {
-                val text = map["placeholder"]
                 if (validationMode){
-                    throw ValidationException(text.toString())
+                    throw ValidationException(ValidationErrorTypes.PLACEHOLDER.name)
                 } else {
+                    val text = map["placeholder"]
                     addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
                 }
                 return
