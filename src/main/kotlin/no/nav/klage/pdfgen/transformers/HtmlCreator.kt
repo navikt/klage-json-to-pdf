@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Suppress("UNCHECKED_CAST")
-class HtmlCreator(val dataList: List<Map<String, *>>) {
+class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -151,7 +151,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         }
     }
 
-    private fun addMaltekst(map: Map<String, *>, validationMode: Boolean = false) {
+    private fun addMaltekst(map: Map<String, *>) {
         //support unpacking of content (old) or children (new) for compatability.
         val elementList = when {
             map["content"] != null -> {
@@ -171,22 +171,22 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         elementList as List<Map<String, *>>
         elementList.forEach {
             val div = document.create.div {
-                this.addElementWithPossiblyChildren(it, validationMode)
+                this.addElementWithPossiblyChildren(it)
             }
             val divElement = document.getElementById("div_content_id") as Node
             divElement.appendChild(div)
         }
     }
 
-    private fun addElementWithPossiblyChildren(map: Map<String, *>, validationMode: Boolean = false) {
+    private fun addElementWithPossiblyChildren(map: Map<String, *>) {
         val div = document.create.div {
-            this.addElementWithPossiblyChildren(map, validationMode)
+            this.addElementWithPossiblyChildren(map)
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(div)
     }
 
-    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>, validationMode: Boolean = false) {
+    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
@@ -242,7 +242,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             children.forEach {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
-                    ELEMENT -> this.addElementWithPossiblyChildren(it, validationMode)
+                    ELEMENT -> this.addElementWithPossiblyChildren(it)
                     else -> {}
                 }
             }
@@ -317,9 +317,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         divElement.appendChild(div)
     }
 
-    fun getDoc(validationMode: Boolean = false): Document {
+    fun getDoc(): Document {
         dataList.forEach {
-            processElement(it, validationMode)
+            processElement(it)
         }
 
         //defaults for now
@@ -351,13 +351,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     private fun headerAndFooterExists(list: List<Map<String, *>>) =
         list.any { it["type"] == "header" } && list.any { it["type"] == "footer" }
 
-    private fun processElement(map: Map<String, *>, validationMode: Boolean = false) {
+    private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
-            ELEMENT, INDENT -> addElementWithPossiblyChildren(map, validationMode)
+            ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
             DOCUMENT_LIST -> addDocumentList(map)
-            MALTEKST -> addMaltekst(map, validationMode)
+            MALTEKST -> addMaltekst(map)
             CURRENT_DATE -> addCurrentDate()
             HEADER -> addHeader(map)
             FOOTER -> setFooter(map)

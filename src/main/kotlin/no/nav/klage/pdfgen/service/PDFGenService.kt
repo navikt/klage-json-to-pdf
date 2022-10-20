@@ -50,8 +50,8 @@ class PDFGenService {
 
     private fun getHTMLDocument(list: List<Map<String, *>>, validationMode: Boolean = false): Document {
         validateHeaderFooter(list)
-        val c = HtmlCreator(list)
-        return c.getDoc(validationMode)
+        val c = HtmlCreator(list, validationMode)
+        return c.getDoc()
     }
 
     private fun validateHeaderFooter(list: List<Map<String, *>>) {
