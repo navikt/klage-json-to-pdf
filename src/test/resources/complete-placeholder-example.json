@@ -1,0 +1,76 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Header text"
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": " "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "PLASSHOLDER",
+        "children": [
+          {
+            "text": "Og så litt tekst"
+          }
+        ]
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": " "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "PLASSHOLDER",
+        "children": [
+          {
+            "text": "Her er det "
+          },
+          {
+            "text": "MASSE TEKST!",
+            "bold": true
+          }
+        ]
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Footer text"
+  }
+]

@@ -5,6 +5,8 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import no.nav.klage.pdfgen.exception.ValidationErrorTypes
+import no.nav.klage.pdfgen.exception.ValidationException
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import no.nav.klage.pdfgen.transformers.ElementType.FOOTER
 import no.nav.klage.pdfgen.transformers.ElementType.HEADER
@@ -18,7 +20,7 @@ import java.time.format.DateTimeFormatter
 import java.util.*
 
 @Suppress("UNCHECKED_CAST")
-class HtmlCreator(val dataList: List<Map<String, *>>) {
+class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -67,6 +69,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
                                 },
                                 p, span {
                                     font-size: 12pt;
+                                }
+                                .placeholder-text {
+                                    background-color: #EFA89D;
+                                    border-radius: 4px;
                                 }
                                 .bold {
                                     font-weight: bold;
@@ -146,10 +152,21 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
     }
 
     private fun addMaltekst(map: Map<String, *>) {
-        //unpack content
-        val firstContent = map["content"] ?: return
-        firstContent as List<Map<String, *>>
-        val elementList = firstContent.firstOrNull()?.get("content") ?: return
+        //support unpacking of content (old) or children (new) for compatability.
+        val elementList = when {
+            map["content"] != null -> {
+                val firstContent = map["content"]
+                firstContent as List<Map<String, *>>
+                firstContent.firstOrNull()?.get("content") ?: return
+            }
+            map["children"] != null -> {
+                map["children"]
+            }
+            else -> {
+                logger.error("neither content nor children in maltekst")
+                return
+            }
+        }
 
         elementList as List<Map<String, *>>
         elementList.forEach {
@@ -178,6 +195,18 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             applyClasses += "indent"
         }
 
+        if (elementType == "placeholder") {
+            if (!placeholderTextExistsInChildren(map)) {
+                if (validationMode){
+                    throw ValidationException(ValidationErrorTypes.PLACEHOLDER.name)
+                } else {
+                    val text = map["placeholder"]
+                    addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
+                }
+                return
+            }
+        }
+
         if (elementType != "page-break") {
             children = map["children"] as List<Map<String, *>>
         } else {
@@ -185,7 +214,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         }
 
         val element = when (elementType) {
-            "standard-text" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
+            "standard-text", "placeholder" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
             "heading-three" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
@@ -197,7 +226,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
-            "page-break", "list-item-container", "indent" -> DIV(initialAttributes = emptyMap(), consumer = this.consumer)
+            "page-break", "list-item-container", "indent" -> DIV(
+                initialAttributes = emptyMap(),
+                consumer = this.consumer
+            )
+
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
@@ -253,28 +286,27 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
         divElement.appendChild(dElement)
     }
 
-    private fun Tag.addLeafElement(map: Map<String, *>) {
+    private fun Tag.addLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()) {
         val text = map["text"] ?: throw RuntimeException("no content here")
 
-        val classesToAdd = mutableSetOf<String>()
         if (map["bold"] == true) {
-            classesToAdd += "bold"
+            inputClasses += "bold"
         }
         if (map["underline"] == true) {
-            classesToAdd += "underline"
+            inputClasses += "underline"
         }
         if (map["italic"] == true) {
-            classesToAdd += "italic"
+            inputClasses += "italic"
         }
 
         this.consumer.span {
-            classes = classesToAdd
+            classes = inputClasses
             +text.toString()
         }
     }
 
     private fun addCurrentDate() {
-        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("nb"))
+        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("no"))
         val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
 
         val div = document.create.div {
@@ -295,7 +327,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             val span = document.getElementById("header_text")
             span.textContent = "Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
 
-            footer = "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
+            footer =
+                "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
         }
 
         //add css when we have a footer set
@@ -331,6 +364,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>) {
             LEAF -> {}
             IGNORED -> {}
         }
+    }
+
+    private fun placeholderTextExistsInChildren(map: Map<String, *>): Boolean {
+        val children = map["children"] as List<Map<String, *>>
+        return children.any { it["text"] != "" }
     }
 
     private fun addHeader(map: Map<String, *>) {
