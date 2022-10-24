@@ -152,29 +152,19 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addMaltekst(map: Map<String, *>) {
-        //support unpacking of content (old) or children (new) for compatability.
-        val elementList = when {
-            map["content"] != null -> {
-                val firstContent = map["content"]
-                firstContent as List<Map<String, *>>
-                firstContent.firstOrNull()?.get("content") ?: return
+        val elementList = map["children"]
+        if (elementList != null) {
+            elementList as List<Map<String, *>>
+            elementList.forEach {
+                val div = document.create.div {
+                    this.addElementWithPossiblyChildren(it)
+                }
+                val divElement = document.getElementById("div_content_id") as Node
+                divElement.appendChild(div)
             }
-            map["children"] != null -> {
-                map["children"]
-            }
-            else -> {
-                logger.error("neither content nor children in maltekst")
-                return
-            }
-        }
-
-        elementList as List<Map<String, *>>
-        elementList.forEach {
-            val div = document.create.div {
-                this.addElementWithPossiblyChildren(it)
-            }
-            val divElement = document.getElementById("div_content_id") as Node
-            divElement.appendChild(div)
+        } else {
+            logger.error("No children element.")
+            return
         }
     }
 
