@@ -2,6 +2,8 @@ package no.nav.klage.pdfgen.api
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
+import no.nav.klage.pdfgen.exception.ValidationException
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
@@ -49,6 +51,7 @@ class PDFGenController(
             HttpStatus.OK
         )
     }
+
     @Operation(
         summary = "Validate pdf input",
         description = "Validate pdf input"
@@ -56,10 +59,21 @@ class PDFGenController(
     @PostMapping("/validate")
     fun validate(
         @RequestBody json: String
-    ) {
+    ): DocumentValidationResponse {
         logger.debug("${::validate.name} called. See body in secure logs")
         secureLogger.debug("validate() called. Received json: {}", json)
 
-        pdfGenService.validateDocumentContent(json)
+        return try {
+            pdfGenService.validateDocumentContent(json)
+            DocumentValidationResponse()
+        } catch (ve: ValidationException) {
+            DocumentValidationResponse(
+                errors = listOf(
+                    DocumentValidationResponse.DocumentValidationError(
+                        type = "EMPTY_PLACEHOLDERS"
+                    )
+                )
+            )
+        }
     }
 }
