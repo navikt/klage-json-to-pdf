@@ -71,7 +71,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 .placeholder-text {
                                     background-color: #EFA89D;
-                                    border-radius: 4px;
+                                    border-radius: 3pt;
                                 }
                                 .bold {
                                     font-weight: bold;
@@ -87,6 +87,23 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 .pageBreak {
                                     page-break-after: always;
+                                }
+                                table {
+                                    border-spacing: 0;
+                                    border-collapse: collapse;
+                                    max-width: 100%;
+                                    margin-top: 12pt;
+                                    margin-bottom: 12pt;
+                                }
+                                td {
+                                    outline: 1pt solid black;
+                                    min-width: 12pt;
+                                    word-break: break-word;
+                                    white-space: pre-wrap;
+                                    vertical-align: top;
+                                    text-align: left;
+                                    background-color: white;
+                                    padding: 3pt;
                                 }
                                 
                                 @page {
