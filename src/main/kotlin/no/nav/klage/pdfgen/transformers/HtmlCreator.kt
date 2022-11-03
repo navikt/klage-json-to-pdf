@@ -96,14 +96,20 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     margin-bottom: 12pt;
                                 }
                                 td {
-                                    outline: 1pt solid black;
+                                    border: 1pt solid rgb(143, 143, 143);
                                     min-width: 12pt;
                                     word-break: break-word;
                                     white-space: pre-wrap;
                                     vertical-align: top;
                                     text-align: left;
-                                    background-color: white;
+                                    background-color: transparent;
                                     padding: 3pt;
+                                }
+                                tr:nth-child(odd) {
+                                  background-color: rgb(247, 247, 247);
+                                }
+                                tr:nth-child(even) {
+                                  background-color: #fff;
                                 }
                                 
                                 @page {
