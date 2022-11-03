@@ -213,8 +213,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "list-item" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
-            "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
+            "tbody" -> TBODY(initialAttributes = emptyMap(), consumer = this.consumer)
+            "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            "td" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
             "page-break", "list-item-container", "indent" -> DIV(
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
