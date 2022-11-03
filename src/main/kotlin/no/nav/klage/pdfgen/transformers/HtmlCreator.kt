@@ -104,6 +104,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     text-align: left;
                                     background-color: transparent;
                                     padding: 3pt;
+                                    padding-left: 4.25pt;
+                                    padding-right: 4.25pt;
                                 }
                                 tr:nth-child(odd) {
                                   background-color: rgb(247, 247, 247);
