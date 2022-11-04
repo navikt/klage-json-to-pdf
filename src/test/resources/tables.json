@@ -3,10 +3,89 @@
     "type": "paragraph",
     "children": [
       {
-        "text": "sdfsdfsd"
+        "text": ""
       }
     ],
     "textAlign": "text-align-left"
+  },
+  {
+    "type": "table",
+    "children": [
+      {
+        "type": "tbody",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": "Colspan her"
+                  }
+                ],
+                "colSpan": 2
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "asdasda"
+      }
+    ]
   },
   {
     "type": "table",
@@ -31,6 +110,7 @@
                 "children": [
                   {
                     "text": "Lønn",
+                    "bold": true,
                     "underline": true,
                     "italic": true
                   }
@@ -43,7 +123,8 @@
                   {
                     "text": "Skatt",
                     "underline": true,
-                    "italic": true
+                    "italic": true,
+                    "bold": true
                   }
                 ],
                 "colSpan": 1
@@ -54,7 +135,8 @@
                   {
                     "text": "Fratrekk",
                     "underline": true,
-                    "italic": true
+                    "italic": true,
+                    "bold": true
                   }
                 ],
                 "colSpan": 1
@@ -65,7 +147,8 @@
                   {
                     "text": "Dato",
                     "underline": true,
-                    "italic": true
+                    "italic": true,
+                    "bold": true
                   }
                 ],
                 "colSpan": 1
@@ -75,18 +158,10 @@
                 "colSpan": 1,
                 "children": [
                   {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
                     "text": "Kommentar",
-                    "underline": true,
-                    "italic": true
+                    "bold": true,
+                    "italic": true,
+                    "underline": true
                   }
                 ]
               }
@@ -99,7 +174,8 @@
                 "type": "td",
                 "children": [
                   {
-                    "text": ""
+                    "text": "2022",
+                    "bold": true
                   }
                 ],
                 "colSpan": 1
@@ -139,15 +215,6 @@
                   }
                 ],
                 "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               },
               {
                 "type": "td",
@@ -209,15 +276,6 @@
                   }
                 ],
                 "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               },
               {
                 "type": "td",
@@ -288,15 +346,6 @@
                     "text": ""
                   }
                 ]
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               }
             ]
           },
@@ -349,15 +398,6 @@
                   }
                 ],
                 "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               },
               {
                 "type": "td",
@@ -428,15 +468,6 @@
                     "text": ""
                   }
                 ]
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               }
             ]
           },
@@ -483,19 +514,10 @@
               },
               {
                 "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
                 "colSpan": 1,
                 "children": [
                   {
-                    "text": ""
+                    "text": "25.00.2022"
                   }
                 ]
               },
@@ -565,16 +587,7 @@
                 "colSpan": 1,
                 "children": [
                   {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": "Lønn utbetalt i sommerferien.\nSkulle egentlig vært feriepenger."
+                    "text": "Lønn utbetalt i \nsommerferien.\nSkulle egentlig vært feriepenger."
                   }
                 ]
               }
@@ -638,15 +651,6 @@
                     "text": ""
                   }
                 ]
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               }
             ]
           },
@@ -686,7 +690,7 @@
                 "type": "td",
                 "children": [
                   {
-                    "text": "1.337,-"
+                    "text": ""
                   }
                 ],
                 "colSpan": 1
@@ -699,15 +703,6 @@
                   }
                 ],
                 "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               },
               {
                 "type": "td",
@@ -769,15 +764,6 @@
                   }
                 ],
                 "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               },
               {
                 "type": "td",
@@ -852,15 +838,6 @@
                     "text": ""
                   }
                 ]
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               }
             ]
           },
@@ -913,15 +890,6 @@
                   }
                 ],
                 "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
               },
               {
                 "type": "td",
@@ -989,22 +957,170 @@
                 "colSpan": 1,
                 "children": [
                   {
-                    "text": ""
+                    "text": "Skulle vært halv skatt, \nmen betalte for mye skatt."
                   }
                 ]
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": "2023",
+                    "bold": true
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
               },
               {
                 "type": "td",
                 "colSpan": 1,
                 "children": [
                   {
-                    "text": "Skulle vært halv skatt, \nmen betalte for mye skatt."
+                    "text": ""
                   }
                 ]
               }
             ]
           }
         ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "asdads"
+      }
+    ]
+  },
+  {
+    "type": "table",
+    "children": [
+      {
+        "type": "tbody",
+        "children": [
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "colSpan": 1,
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              }
+            ]
+          },
+          {
+            "type": "tr",
+            "children": [
+              {
+                "type": "td",
+                "colSpan": 1,
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ]
+              },
+              {
+                "type": "td",
+                "children": [
+                  {
+                    "text": ""
+                  }
+                ],
+                "colSpan": 1
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "asdfasdf"
       }
     ]
   }
