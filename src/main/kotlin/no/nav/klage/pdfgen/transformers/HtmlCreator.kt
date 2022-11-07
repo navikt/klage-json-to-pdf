@@ -71,7 +71,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 .placeholder-text {
                                     background-color: #EFA89D;
-                                    border-radius: 4px;
+                                    border-radius: 3pt;
                                 }
                                 .bold {
                                     font-weight: bold;
@@ -87,6 +87,31 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 .pageBreak {
                                     page-break-after: always;
+                                }
+                                table {
+                                    border-spacing: 0;
+                                    border-collapse: collapse;
+                                    max-width: 100%;
+                                    margin-top: 12pt;
+                                    margin-bottom: 12pt;
+                                }
+                                td {
+                                    border: 1pt solid rgb(143, 143, 143);
+                                    min-width: 12pt;
+                                    word-break: break-word;
+                                    white-space: pre-wrap;
+                                    vertical-align: top;
+                                    text-align: left;
+                                    background-color: transparent;
+                                    padding: 3pt;
+                                    padding-left: 4.25pt;
+                                    padding-right: 4.25pt;
+                                }
+                                tr:nth-child(odd) {
+                                  background-color: rgb(247, 247, 247);
+                                }
+                                tr:nth-child(even) {
+                                  background-color: #fff;
                                 }
                                 
                                 @page {
@@ -213,8 +238,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "list-item" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "table-row" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
-            "table-cell" -> TD(initialAttributes = emptyMap(), consumer = this.consumer)
+            "tbody" -> TBODY(initialAttributes = emptyMap(), consumer = this.consumer)
+            "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            "td" -> TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
             "page-break", "list-item-container", "indent" -> DIV(
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
