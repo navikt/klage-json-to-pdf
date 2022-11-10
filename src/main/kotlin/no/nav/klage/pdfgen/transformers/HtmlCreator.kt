@@ -113,6 +113,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 tr:nth-child(even) {
                                   background-color: #fff;
                                 }
+                                td > ul, td > ol {
+                                  margin-top: 0;
+                                }
                                 
                                 @page {
                                     margin: 15mm 20mm 20mm 20mm;
