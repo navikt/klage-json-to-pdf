@@ -179,9 +179,20 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
-        val applyClasses = if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight") else mutableSetOf()
+        val applyClasses =
+            if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight")
+            else mutableSetOf()
         if (elementType == "indent") {
             applyClasses += "indent"
+        }
+
+        if (map["indent"] == true) {
+            val indent = map["indent"] as Int
+            if (elementType == "p") {
+                applyClasses += "padding-left: ${24 * indent}pt"
+            } else if (elementType in listOf("bullet-list", "numbered-list")) {
+                applyClasses += "padding-left: ${(24 * indent) + 12}pt"
+            }
         }
 
         if (elementType == "placeholder") {
