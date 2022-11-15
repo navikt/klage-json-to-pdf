@@ -95,6 +95,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
                                 }
+                                tr {
+                                    min-height: 24pt;
+                                }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
                                     min-width: 12pt;
