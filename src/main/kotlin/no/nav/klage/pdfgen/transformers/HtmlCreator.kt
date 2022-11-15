@@ -214,12 +214,14 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             applyClasses += "indent"
         }
 
-        if (map["indent"] == true) {
+        val inlineStyles = mutableSetOf<String>()
+
+        if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            if (elementType == "p") {
-                applyClasses += "padding-left: ${24 * indent}pt"
+            if (elementType == "paragraph") {
+                inlineStyles += "padding-left: ${24 * indent}pt"
             } else if (elementType in listOf("bullet-list", "numbered-list")) {
-                applyClasses += "padding-left: ${(24 * indent) + 12}pt"
+                inlineStyles += "padding-left: ${(24 * indent) + 12}pt"
             }
         }
 
@@ -268,6 +270,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         element.visit {
             classes = applyClasses
+            style = inlineStyles.joinToString(";")
             children.forEach {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
