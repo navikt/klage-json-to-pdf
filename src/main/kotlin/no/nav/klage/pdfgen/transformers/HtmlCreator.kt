@@ -95,6 +95,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
                                 }
+                                tr {
+                                    min-height: 24pt;
+                                }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
                                     min-width: 12pt;
@@ -112,6 +115,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 tr:nth-child(even) {
                                   background-color: #fff;
+                                }
+                                td > ul, td > ol {
+                                  margin-top: 0;
                                 }
                                 
                                 @page {
@@ -204,9 +210,22 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
-        val applyClasses = if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight") else mutableSetOf()
+        val applyClasses =
+            if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight")
+            else mutableSetOf()
         if (elementType == "indent") {
             applyClasses += "indent"
+        }
+
+        val inlineStyles = mutableSetOf<String>()
+
+        if (map.containsKey("indent")) {
+            val indent = map["indent"] as Int
+            if (elementType == "paragraph") {
+                inlineStyles += "padding-left: ${24 * indent}pt"
+            } else if (elementType in listOf("bullet-list", "numbered-list")) {
+                inlineStyles += "padding-left: ${(24 * indent) + 12}pt"
+            }
         }
 
         if (elementType == "placeholder") {
@@ -254,6 +273,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         element.visit {
             classes = applyClasses
+            style = inlineStyles.joinToString(";")
             children.forEach {
                 when (it.getType()) {
                     LEAF -> this.addLeafElement(it)
