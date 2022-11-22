@@ -5,7 +5,7 @@ val logstashVersion = "7.2"
 val jsoupVersion = "1.15.3"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.8.0"
-val springDocVersion = "1.6.11"
+val springDocVersion = "1.6.13"
 val springSleuthVersion = "3.1.5"
 val problemSpringWebStartVersion = "0.27.0"
 
