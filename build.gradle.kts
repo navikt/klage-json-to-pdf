@@ -5,12 +5,11 @@ val logstashVersion = "7.2"
 val jsoupVersion = "1.15.3"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.8.0"
-val springDocVersion = "1.6.14"
+val springDocVersion = "2.0.2"
 val problemSpringWebStartVersion = "0.27.0"
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 plugins {
@@ -35,7 +34,7 @@ dependencies {
 
     implementation("org.zalando:problem-spring-web-starter:$problemSpringWebStartVersion")
 
-    implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
 
     implementation("org.jsoup:jsoup:$jsoupVersion")
     implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:$openHtmlToPdfVersion")
