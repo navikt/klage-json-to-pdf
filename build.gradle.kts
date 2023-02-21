@@ -1,39 +1,40 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val mockkVersion = "1.13.3"
+val mockkVersion = "1.13.4"
 val logstashVersion = "7.2"
 val jsoupVersion = "1.15.3"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.8.0"
-val springDocVersion = "1.6.14"
-val springSleuthVersion = "3.1.5"
+val springDocVersion = "2.0.2"
 val problemSpringWebStartVersion = "0.27.0"
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 plugins {
-    val kotlinVersion = "1.7.22"
+    val kotlinVersion = "1.8.10"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "2.7.5"
+    id("org.springframework.boot") version "3.0.2"
     idea
 }
 
 apply(plugin = "io.spring.dependency-management")
 
 dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.7.22")
+    implementation("org.jetbrains.kotlin:kotlin-stdlib:1.8.10")
 
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
     implementation("org.springframework.boot:spring-boot-starter-webflux")
-    implementation("org.springframework.cloud:spring-cloud-starter-sleuth:$springSleuthVersion")
+
+    implementation("io.micrometer:micrometer-registry-prometheus")
+    implementation("io.micrometer:micrometer-tracing-bridge-brave")
+
     implementation("org.zalando:problem-spring-web-starter:$problemSpringWebStartVersion")
 
-    implementation("org.springdoc:springdoc-openapi-ui:$springDocVersion")
+    implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
 
     implementation("org.jsoup:jsoup:$jsoupVersion")
     implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:$openHtmlToPdfVersion")
@@ -52,7 +53,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test") {
         exclude(group = "org.junit.vintage")
     }
-    testImplementation("org.mockito:mockito-inline:4.10.0")
+    testImplementation("org.mockito:mockito-inline:5.1.1")
 }
 
 idea {
