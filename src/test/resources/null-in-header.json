@@ -1,0 +1,60 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": null
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": "Noterer litt her, jeg."
+      }
+    ],
+    "textAlign": "text-align-left",
+    "indent": 0
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "indent": 0,
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "indent": 0,
+    "children": [
+      {
+        "text": "Og kanskje litt mer?"
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": null
+  }
+]

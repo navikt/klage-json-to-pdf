@@ -420,11 +420,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun addHeader(map: Map<String, *>) {
         val span = document.getElementById("header_text")
-        span.textContent = map["content"].toString()
+        span.textContent = map["content"]?.toString()
     }
 
     private fun setFooter(map: Map<String, *>) {
-        footer = map["content"].toString().replace("\n", "\\A")
+        footer = map["content"]?.toString()?.replace("\n", "\\A") ?: ""
     }
 
     private fun Map<String, *>.getType(): ElementType {

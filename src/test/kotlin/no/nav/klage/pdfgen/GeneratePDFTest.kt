@@ -42,6 +42,13 @@ class GeneratePDF {
     }
 
     @Test
+    fun `generate pdf with null in header`() {
+        val jsonData = File(path + "null-in-header.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        Files.write(Path.of("test.pdf"), data)
+    }
+
+    @Test
     fun `input without header throws error`(){
         val jsonData = File(path + "no-header.json").readText()
         assertThrows<RuntimeException> { PDFGenService().getPDFAsByteArray(jsonData) }
