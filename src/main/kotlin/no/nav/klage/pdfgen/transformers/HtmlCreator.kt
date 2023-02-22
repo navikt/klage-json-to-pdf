@@ -60,6 +60,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 #header span {
                                     font-size: 10pt;
+                                    white-space: pre;
                                 }
                                 img {
                                     display: block;
@@ -420,7 +421,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun addHeader(map: Map<String, *>) {
         val span = document.getElementById("header_text")
-        span.textContent = map["content"]?.toString()
+        span.textContent = map["content"]?.toString() ?: " "
     }
 
     private fun setFooter(map: Map<String, *>) {
