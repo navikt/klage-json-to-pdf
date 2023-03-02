@@ -353,7 +353,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addCurrentDate() {
-        val formatter = DateTimeFormatter.ofPattern("dd. MMMM yyyy", Locale.forLanguageTag("no"))
+        val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
         val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
 
         val div = document.create.div {
