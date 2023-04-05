@@ -1,4 +1,4 @@
-# klage-json-to-pdf
+# kabal-json-to-pdf
 
 One exposed endpoint: /topdf
 
