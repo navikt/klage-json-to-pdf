@@ -1,12 +1,11 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val mockkVersion = "1.13.4"
+val mockkVersion = "1.13.5"
 val logstashVersion = "7.3"
 val jsoupVersion = "1.15.4"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.8.0"
 val springDocVersion = "2.1.0"
-val problemSpringWebStartVersion = "0.28.0"
 
 repositories {
     mavenCentral()
@@ -31,8 +30,6 @@ dependencies {
 
     implementation("io.micrometer:micrometer-registry-prometheus")
     implementation("io.micrometer:micrometer-tracing-bridge-brave")
-
-    implementation("org.zalando:problem-spring-web-starter:$problemSpringWebStartVersion")
 
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:$springDocVersion")
 
