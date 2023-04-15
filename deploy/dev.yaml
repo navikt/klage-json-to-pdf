@@ -1,5 +1,6 @@
 ingresses:
   - https://kabal-json-to-pdf.dev.nav.no
+  - https://kabal-json-to-pdf.intern.dev.nav.no
 externalHosts:
 springProfile: dev-gcp
 envs:
