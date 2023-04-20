@@ -1,0 +1,93 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Header text"
+  },
+  {
+    "type": "regelverk",
+    "children": [
+      {
+        "type": "page-break",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-gnu",
+        "children": [
+          {
+            "type": "heading-two",
+            "children": [
+              {
+                "text": "Regelverket som gjelder i saken"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "regelverk-container",
+        "children": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "Daniels test"
+              }
+            ],
+            "textAlign": "text-align-left",
+            "indent": 0
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Avsnitt 2"
+              }
+            ]
+          },
+          {
+            "type": "paragraph",
+            "textAlign": "text-align-left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Avsnitt 3"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Footer text"
+  }
+]
+
