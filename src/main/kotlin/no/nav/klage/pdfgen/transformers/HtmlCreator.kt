@@ -5,7 +5,8 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
-import no.nav.klage.pdfgen.exception.ValidationException
+import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
+import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import no.nav.klage.pdfgen.transformers.ElementType.FOOTER
 import no.nav.klage.pdfgen.transformers.ElementType.HEADER
@@ -199,6 +200,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addRegelverkContainer(map: Map<String, *>) {
+        if (validationMode && map["children"] == null || (map["children"] as List<Map<String, *>>).isEmpty()) {
+            throw EmptyRegelverkException("Empty regelverk")
+        }
         addElements(map)
     }
 
@@ -264,8 +268,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         if (elementType == "placeholder") {
             if (!placeholderTextExistsInChildren(map)) {
-                if (validationMode){
-                    throw ValidationException("Placeholder error")
+                if (validationMode) {
+                    throw EmptyPlaceholderException("Placeholder error")
                 } else {
                     val text = map["placeholder"]
                     addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))

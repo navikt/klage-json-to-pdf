@@ -1,6 +1,7 @@
 package no.nav.klage.pdfgen
 
-import no.nav.klage.pdfgen.exception.ValidationException
+import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
+import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.PDFGenService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -64,13 +65,19 @@ class GeneratePDF {
     @Test
     fun `validate pdf with incomplete placeholder throws exception`() {
         val jsonData = File(path + "incomplete-placeholder-example.json").readText()
-        assertThrows<ValidationException> { PDFGenService().validateDocumentContent(jsonData) }
+        assertThrows<EmptyPlaceholderException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 
     @Test
     fun `validate pdf with complete placeholders passes`() {
         val jsonData = File(path + "complete-placeholder-example.json").readText()
         PDFGenService().validateDocumentContent(jsonData)
+    }
+
+    @Test
+    fun `validate pdf with incomplete regelverk throws exception`() {
+        val jsonData = File(path + "empty-regelverk-container.json").readText()
+        assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 
     @Test
