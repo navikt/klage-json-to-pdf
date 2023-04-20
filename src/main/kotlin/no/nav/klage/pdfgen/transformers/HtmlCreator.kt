@@ -195,6 +195,14 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addMaltekst(map: Map<String, *>) {
+        addElements(map)
+    }
+
+    private fun addRegelverkContainer(map: Map<String, *>) {
+        addElements(map)
+    }
+
+    private fun addElements(map: Map<String, *>) {
         val elementList = map["children"]
         if (elementList != null) {
             elementList as List<Map<String, *>>
@@ -222,10 +230,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             logger.error("No children element.")
             return
         }
-    }
-
-    private fun addRegelverkContainer(map: Map<String, *>) {
-        addMaltekst(map)
     }
 
     private fun addElementWithPossiblyChildren(map: Map<String, *>) {
