@@ -195,6 +195,14 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addMaltekst(map: Map<String, *>) {
+        addElements(map)
+    }
+
+    private fun addRegelverkContainer(map: Map<String, *>) {
+        addElements(map)
+    }
+
+    private fun addElements(map: Map<String, *>) {
         val elementList = map["children"]
         if (elementList != null) {
             elementList as List<Map<String, *>>
@@ -204,6 +212,19 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 }
                 val divElement = document.getElementById("div_content_id") as Node
                 divElement.appendChild(div)
+            }
+        } else {
+            logger.error("No children element.")
+            return
+        }
+    }
+
+    private fun addRegelverk(map: Map<String, *>) {
+        val elementList = map["children"]
+        if (elementList != null) {
+            elementList as List<Map<String, *>>
+            elementList.forEach {
+                processElement(it)
             }
         } else {
             logger.error("No children element.")
@@ -401,6 +422,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun processElement(map: Map<String, *>) {
         when (map.getType()) {
+            REGELVERK -> addRegelverk(map)
+            REGELVERK_CONTAINER -> addRegelverkContainer(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
             ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
@@ -440,6 +463,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 "header" -> HEADER
                 "footer" -> FOOTER
                 "redigerbar-maltekst", "regelverkstekst" -> IGNORED
+                "regelverk" -> REGELVERK
+                "regelverk-container" -> REGELVERK_CONTAINER
                 else -> ELEMENT
             }
         }
@@ -454,6 +479,8 @@ enum class ElementType {
     LEAF,
     DOCUMENT_LIST,
     MALTEKST,
+    REGELVERK,
+    REGELVERK_CONTAINER,
     CURRENT_DATE,
     HEADER,
     FOOTER,
