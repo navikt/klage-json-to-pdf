@@ -87,8 +87,14 @@ class GeneratePDF {
     }
 
     @Test
-    fun `validate pdf with empty text throws exception`() {
-        val jsonData = File(path + "empty-text-with-regelverk.json").readText()
+    fun `validate pdf with text somewhere in regelverk passes`() {
+        val jsonData = File(path + "not-all-empty-text-regelverk.json").readText()
+        PDFGenService().validateDocumentContent(jsonData)
+    }
+
+    @Test
+    fun `validate pdf with only empty texts in regelverk throws exception`() {
+        val jsonData = File(path + "all-empty-text-regelverk.json").readText()
         assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 

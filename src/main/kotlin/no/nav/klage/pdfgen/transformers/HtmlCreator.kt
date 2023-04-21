@@ -203,18 +203,30 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         if (validationMode) {
             if (map["children"] == null || (map["children"] as List<Map<String, *>>).isEmpty()) {
                 throw EmptyRegelverkException("Empty regelverk")
-            } else if (
-                (map["children"] as List<Map<String, *>>).size == 1 &&
-                (map["children"] as List<Map<String, *>>)[0]["type"] == "paragraph" &&
-                ((map["children"] as List<Map<String, *>>)[0]["children"] as List<Map<String, *>>).size == 1 &&
-                (((map["children"] as List<Map<String, *>>)[0]["children"] as List<Map<String, *>>)[0]["text"] as String).trim()
-                    .isEmpty()
-            ) {
+            } else if (getTexts(map).isEmpty()) {
                 throw EmptyRegelverkException("Empty regelverk")
             }
         }
 
         addElements(map)
+    }
+
+    private fun getTexts(map: Map<String, *>): List<String> {
+        val texts = mutableListOf<String>()
+
+        if (map["text"] != null && (map["text"] as String).isNotBlank()) {
+            texts += (map["text"] as String)
+        }
+
+        return if (map["children"] == null || (map["children"] as List<Map<String, *>>).isEmpty()) {
+            texts
+        } else {
+            val children = (map["children"] as List<Map<String, *>>)
+            children.forEach {
+                texts.addAll(getTexts(it))
+            }
+            texts
+        }
     }
 
     private fun addElements(map: Map<String, *>) {

@@ -1,0 +1,555 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Returadresse,\nNAV Klageinstans Nord, Postboks 2363, 9271 Tromsø"
+  },
+  {
+    "type": "maltekst",
+    "section": "section-esel",
+    "children": [
+      {
+        "type": "heading-one",
+        "children": [
+          {
+            "text": "NAV Klageinstans har behandlet klagen din"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "label-content",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "source": "sakenGjelder.name",
+    "label": "Klager",
+    "threadIds": [],
+    "result": "Klager: KRAFTIG KAKKERLAKK"
+  },
+  {
+    "type": "label-content",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "source": "sakenGjelder.fnr",
+    "label": "Fødselsnummer",
+    "threadIds": [],
+    "result": "Fødselsnummer: 024467 01749"
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Fullmektig",
+        "bold": true
+      },
+      {
+        "text": ": "
+      },
+      {
+        "text": ""
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Saken gjelder",
+        "bold": true
+      },
+      {
+        "text": ": Klagen din av "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "dato",
+        "content": "",
+        "children": [
+          {
+            "text": "wefwef"
+          }
+        ]
+      },
+      {
+        "text": " på NAV "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "enhet",
+        "content": "",
+        "children": [
+          {
+            "text": "wefwef"
+          }
+        ]
+      },
+      {
+        "text": " sitt vedtak av "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "dato",
+        "content": "",
+        "children": [
+          {
+            "text": "wefwef"
+          }
+        ]
+      },
+      {
+        "text": ". "
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Problemstilling",
+        "bold": true
+      },
+      {
+        "text": ": Om "
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "maltekst",
+    "section": "section-mår",
+    "children": [
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Vedtak"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Vi har [delvis] omgjort vedtaket, slik at ..."
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "heading-two",
+    "children": [
+      {
+        "text": "I klagen din har du lagt vekt på:"
+      }
+    ]
+  },
+  {
+    "type": "bullet-list",
+    "children": [
+      {
+        "type": "list-item",
+        "children": [
+          {
+            "type": "list-item-container",
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "heading-two",
+    "children": [
+      {
+        "text": "I vurderingen vår har vi lagt vekt på disse dokumentene:"
+      }
+    ]
+  },
+  {
+    "type": "bullet-list",
+    "children": [
+      {
+        "type": "list-item",
+        "children": [
+          {
+            "type": "list-item-container",
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "maltekst",
+    "section": "section-mus",
+    "children": [
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Vurderingen vår"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": " "
+      }
+    ],
+    "textAlign": "text-align-left",
+    "indent": 0
+  },
+  {
+    "type": "maltekst",
+    "section": "section-elg",
+    "children": [
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Konklusjonen vår"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Vi har kommet frem til at \t\t. Du har fått [delvis] medhold i klagen din."
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "paragraph",
+    "textAlign": "text-align-left",
+    "children": [
+      {
+        "text": "Vedtaket er gjort etter "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "lov",
+        "content": "",
+        "children": [
+          {
+            "text": "wef"
+          }
+        ]
+      },
+      {
+        "text": " § "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "hjemmel",
+        "content": "",
+        "children": [
+          {
+            "text": "ef"
+          }
+        ]
+      },
+      {
+        "text": "w."
+      }
+    ],
+    "indent": 0
+  },
+  {
+    "type": "maltekst",
+    "section": "section-ape",
+    "children": [
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Du har rett til å anke"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom fram til deg. Du finner informasjon, skjema og første side for innsending på "
+          },
+          {
+            "text": "www.nav.no/klage",
+            "underline": true
+          },
+          {
+            "text": ". Velg NAV Klageinstans "
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "enhet/avdeling",
+            "content": "",
+            "children": [
+              {
+                "text": "wefwe"
+              }
+            ]
+          },
+          {
+            "text": "."
+          }
+        ],
+        "indent": 0
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Anken må være underskrevet av deg."
+          }
+        ],
+        "indent": 0
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "I trygdesaker må du først anke til Trygderetten før du kan ta saken videre til lagmannsretten."
+          }
+        ],
+        "indent": 0
+      }
+    ]
+  },
+  {
+    "type": "paragraph",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "textAlign": "text-align-left",
+    "indent": 0
+  },
+  {
+    "type": "maltekst",
+    "section": "section-gris",
+    "children": [
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Informasjon om dekning av sakskostnader"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Dersom vi har gjort om vedtaket til din fordel kan du ha rett til å få dekket vesentlige kostnader som har vært nødvendige for å få endret vedtaket."
+          }
+        ],
+        "indent": 0
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til NAV Klageinstans Sakskostnader, postboks 22, 4661 Kristiansand. "
+          }
+        ],
+        "indent": 0
+      }
+    ]
+  },
+  {
+    "type": "maltekst",
+    "section": "section-sel",
+    "children": [
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Du har rett til innsyn"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Du har rett til å se dokumentene i saken din."
+          }
+        ],
+        "indent": 0
+      },
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Informasjon om fri rettshjelp"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
+          }
+        ],
+        "indent": 0
+      },
+      {
+        "type": "heading-two",
+        "children": [
+          {
+            "text": "Har du spørsmål?"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "textAlign": "text-align-left",
+        "children": [
+          {
+            "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
+          }
+        ],
+        "indent": 0
+      }
+    ]
+  },
+  {
+    "type": "signature",
+    "useShortName": false,
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "saksbehandler": {
+      "name": "Daniel",
+      "title": "Avdelingsdirektør/saksbehandler"
+    }
+  },
+  {
+    "type": "footer",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Postadresse: NAV Klageinstans Nord // Postboks 2363 // 9271 Tromsø\nTelefon: 55 55 33 33\nnav.no"
+  },
+  {
+    "type": "regelverk",
+    "children": [
+      {
+        "type": "page-break",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "maltekst",
+        "section": "section-gnu",
+        "children": [
+          {
+            "type": "heading-two",
+            "children": [
+              {
+                "text": "Regelverket som gjelder i saken"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "regelverk-container",
+        "children": [
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "  "
+                  }
+                ],
+                "textAlign": "text-align-left",
+                "indent": 0
+              }
+            ],
+            "textAlign": "text-align-left",
+            "indent": 0
+          },
+          {
+            "type": "paragraph",
+            "children": [
+              {
+                "text": "   "
+              }
+            ],
+            "textAlign": "text-align-left",
+            "indent": 0
+          }
+        ]
+      }
+    ]
+  }
+]
