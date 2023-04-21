@@ -200,9 +200,20 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addRegelverkContainer(map: Map<String, *>) {
-        if (validationMode && map["children"] == null || (map["children"] as List<Map<String, *>>).isEmpty()) {
-            throw EmptyRegelverkException("Empty regelverk")
+        if (validationMode) {
+            if (map["children"] == null || (map["children"] as List<Map<String, *>>).isEmpty()) {
+                throw EmptyRegelverkException("Empty regelverk")
+            } else if (
+                (map["children"] as List<Map<String, *>>).size == 1 &&
+                (map["children"] as List<Map<String, *>>)[0]["type"] == "paragraph" &&
+                ((map["children"] as List<Map<String, *>>)[0]["children"] as List<Map<String, *>>).size == 1 &&
+                (((map["children"] as List<Map<String, *>>)[0]["children"] as List<Map<String, *>>)[0]["text"] as String).trim()
+                    .isEmpty()
+            ) {
+                throw EmptyRegelverkException("Empty regelverk")
+            }
         }
+
         addElements(map)
     }
 

@@ -465,31 +465,11 @@
             "type": "paragraph",
             "children": [
               {
-                "text": "Daniels test"
+                "text": ""
               }
             ],
             "textAlign": "text-align-left",
             "indent": 0
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "indent": 0,
-            "children": [
-              {
-                "text": "Avsnitt 2"
-              }
-            ]
-          },
-          {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
-            "indent": 0,
-            "children": [
-              {
-                "text": "Avsnitt 3"
-              }
-            ]
           }
         ]
       }

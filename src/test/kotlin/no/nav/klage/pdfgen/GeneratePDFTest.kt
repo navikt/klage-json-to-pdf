@@ -75,8 +75,20 @@ class GeneratePDF {
     }
 
     @Test
+    fun `validate pdf with complete regelverk passes`() {
+        val jsonData = File(path + "complete-with-regelverk.json").readText()
+        PDFGenService().validateDocumentContent(jsonData)
+    }
+
+    @Test
     fun `validate pdf with incomplete regelverk throws exception`() {
         val jsonData = File(path + "empty-regelverk-container.json").readText()
+        assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
+    }
+
+    @Test
+    fun `validate pdf with empty text throws exception`() {
+        val jsonData = File(path + "empty-text-with-regelverk.json").readText()
         assertThrows<EmptyRegelverkException> { PDFGenService().validateDocumentContent(jsonData) }
     }
 
