@@ -84,10 +84,40 @@
         "text": ": Klagen din av "
       },
       {
+        "type": "placeholder",
+        "placeholder": "dato",
+        "content": "",
+        "children": [
+          {
+            "text": "wefwef"
+          }
+        ]
+      },
+      {
         "text": " på NAV "
       },
       {
+        "type": "placeholder",
+        "placeholder": "enhet",
+        "content": "",
+        "children": [
+          {
+            "text": "wefwef"
+          }
+        ]
+      },
+      {
         "text": " sitt vedtak av "
+      },
+      {
+        "type": "placeholder",
+        "placeholder": "dato",
+        "content": "",
+        "children": [
+          {
+            "text": "wefwef"
+          }
+        ]
       },
       {
         "text": ". "
@@ -205,7 +235,7 @@
     "type": "paragraph",
     "children": [
       {
-        "text": ""
+        "text": " "
       }
     ],
     "textAlign": "text-align-left",
@@ -243,10 +273,30 @@
         "text": "Vedtaket er gjort etter "
       },
       {
+        "type": "placeholder",
+        "placeholder": "lov",
+        "content": "",
+        "children": [
+          {
+            "text": "wef"
+          }
+        ]
+      },
+      {
         "text": " § "
       },
       {
-        "text": "."
+        "type": "placeholder",
+        "placeholder": "hjemmel",
+        "content": "",
+        "children": [
+          {
+            "text": "ef"
+          }
+        ]
+      },
+      {
+        "text": "w."
       }
     ],
     "indent": 0
@@ -276,6 +326,16 @@
           },
           {
             "text": ". Velg NAV Klageinstans "
+          },
+          {
+            "type": "placeholder",
+            "placeholder": "enhet/avdeling",
+            "content": "",
+            "children": [
+              {
+                "text": "wefwe"
+              }
+            ]
           },
           {
             "text": "."
@@ -465,7 +525,14 @@
             "type": "paragraph",
             "children": [
               {
-                "text": "Daniels test"
+                "type": "paragraph",
+                "children": [
+                  {
+                    "text": "a"
+                  }
+                ],
+                "textAlign": "text-align-left",
+                "indent": 0
               }
             ],
             "textAlign": "text-align-left",
@@ -473,23 +540,13 @@
           },
           {
             "type": "paragraph",
-            "textAlign": "text-align-left",
-            "indent": 0,
             "children": [
               {
-                "text": "Avsnitt 2"
+                "text": "   "
               }
-            ]
-          },
-          {
-            "type": "paragraph",
+            ],
             "textAlign": "text-align-left",
-            "indent": 0,
-            "children": [
-              {
-                "text": "Avsnitt 3"
-              }
-            ]
+            "indent": 0
           }
         ]
       }

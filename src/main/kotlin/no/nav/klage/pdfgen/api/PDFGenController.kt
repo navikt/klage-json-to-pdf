@@ -3,7 +3,8 @@ package no.nav.klage.pdfgen.api
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
-import no.nav.klage.pdfgen.exception.ValidationException
+import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
+import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
@@ -66,11 +67,19 @@ class PDFGenController(
         return try {
             pdfGenService.validateDocumentContent(json)
             DocumentValidationResponse()
-        } catch (ve: ValidationException) {
+        } catch (epe: EmptyPlaceholderException) {
             DocumentValidationResponse(
                 errors = listOf(
                     DocumentValidationResponse.DocumentValidationError(
                         type = "EMPTY_PLACEHOLDERS"
+                    )
+                )
+            )
+        } catch (ere: EmptyRegelverkException) {
+            DocumentValidationResponse(
+                errors = listOf(
+                    DocumentValidationResponse.DocumentValidationError(
+                        type = "EMPTY_REGELVERK"
                     )
                 )
             )
