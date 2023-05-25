@@ -325,7 +325,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
             )
-
+            "empty-void" -> return //ignore
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
