@@ -4,7 +4,7 @@ val mockkVersion = "1.13.5"
 val logstashVersion = "7.4"
 val jsoupVersion = "1.16.1"
 val openHtmlToPdfVersion = "1.0.10"
-val kotlinxHtmlVersion = "0.9.0"
+val kotlinxHtmlVersion = "0.9.1"
 val springDocVersion = "2.1.0"
 
 repositories {
@@ -15,7 +15,7 @@ plugins {
     val kotlinVersion = "1.9.0"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.1.1"
+    id("org.springframework.boot") version "3.1.2"
     idea
 }
 
