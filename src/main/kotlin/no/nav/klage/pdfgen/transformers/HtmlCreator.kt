@@ -259,6 +259,21 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
     }
 
+
+//TODO: Finn ut behovet for validering.
+    private fun addRedigerbarMaltekst(map: Map<String, *>) {
+        val elementList = map["children"]
+        if (elementList != null) {
+            elementList as List<Map<String, *>>
+            elementList.forEach {
+                processElement(it)
+            }
+        } else {
+            logger.error("No children element.")
+            return
+        }
+    }
+
     private fun addElementWithPossiblyChildren(map: Map<String, *>) {
         val div = document.create.div {
             this.addElementWithPossiblyChildren(map)
@@ -272,7 +287,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         var children = emptyList<Map<String, *>>()
 
         val applyClasses =
-            if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight")
+            if ((map["textAlign"] == "text-align-right")|| (map["align"] == "right")) mutableSetOf("alignRight")
             else mutableSetOf()
         if (elementType == "indent") {
             applyClasses += "indent"
@@ -282,9 +297,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            if (elementType == "paragraph") {
+            if (elementType in listOf("paragraph", "p")) {
                 inlineStyles += "padding-left: ${24 * indent}pt"
-            } else if (elementType in listOf("bullet-list", "numbered-list")) {
+            } else if (elementType in listOf("bullet-list", "numbered-list", "ul", "ol")) {
                 inlineStyles += "padding-left: ${(24 * indent) + 12}pt"
             }
         }
@@ -309,19 +324,19 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         val element = when (elementType) {
             "standard-text", "placeholder" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-three" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-one", "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-two", "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "heading-three", "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
             "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
-            "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "list-item" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
+            "paragraph", "p" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
+            "bullet-list", "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "numbered-list", "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "list-item", "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "tbody" -> TBODY(initialAttributes = emptyMap(), consumer = this.consumer)
             "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "td" -> TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
-            "page-break", "list-item-container", "indent" -> DIV(
+            "page-break", "list-item-container", "indent", "lic" -> DIV(
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
             )
@@ -451,6 +466,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         when (map.getType()) {
             REGELVERK -> addRegelverk(map)
             REGELVERK_CONTAINER -> addRegelverkContainer(map)
+            REDIGERBAR_MALTEKST -> addRedigerbarMaltekst(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
             ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
@@ -489,7 +505,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 "current-date" -> CURRENT_DATE
                 "header" -> HEADER
                 "footer" -> FOOTER
-                "redigerbar-maltekst", "regelverkstekst" -> IGNORED
+                "redigerbar-maltekst" -> REDIGERBAR_MALTEKST
+                "regelverkstekst" -> IGNORED
                 "regelverk" -> REGELVERK
                 "regelverk-container" -> REGELVERK_CONTAINER
                 else -> ELEMENT
@@ -508,6 +525,7 @@ enum class ElementType {
     MALTEKST,
     REGELVERK,
     REGELVERK_CONTAINER,
+    REDIGERBAR_MALTEKST,
     CURRENT_DATE,
     HEADER,
     FOOTER,
