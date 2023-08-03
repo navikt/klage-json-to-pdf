@@ -287,7 +287,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         var children = emptyList<Map<String, *>>()
 
         val applyClasses =
-            if ((map["textAlign"] == "text-align-right")|| (map["align"] == "right")) mutableSetOf("alignRight")
+            if ((map["textAlign"] == "text-align-right") || (map["align"] == "right")) mutableSetOf("alignRight")
             else mutableSetOf()
         if (elementType == "indent") {
             applyClasses += "indent"
