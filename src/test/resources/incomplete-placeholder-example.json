@@ -29,7 +29,13 @@
         "placeholder": "PLASSHOLDER",
         "children": [
           {
-            "text": ""
+            "text": "\u200B"
+          },
+          {
+            "text": " "
+          },
+          {
+            "text": null
           }
         ]
       },

@@ -18,6 +18,7 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
+import kotlin.math.roundToInt
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
@@ -235,7 +236,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             elementList as List<Map<String, *>>
             elementList.forEach {
                 val div = document.create.div {
-                    this.addElementWithPossiblyChildren(it)
+                    this.addElementWithPossiblyChildren(map = it, parentMap = null)
                 }
                 val divElement = document.getElementById("div_content_id") as Node
                 divElement.appendChild(div)
@@ -276,13 +277,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun addElementWithPossiblyChildren(map: Map<String, *>) {
         val div = document.create.div {
-            this.addElementWithPossiblyChildren(map)
+            this.addElementWithPossiblyChildren(map = map, parentMap = null)
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(div)
     }
 
-    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
+    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>, parentMap: Map<String, *>?) {
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
@@ -305,7 +306,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
 
         if (elementType == "placeholder") {
-            if (!placeholderTextExistsInChildren(map)) {
+            if (placeholderTextMissingInChildren(map)) {
                 if (validationMode) {
                     throw EmptyPlaceholderException("Placeholder error")
                 } else {
@@ -335,7 +336,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             "tbody" -> TBODY(initialAttributes = emptyMap(), consumer = this.consumer)
             "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
-            "td" -> TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
+            "td" -> {
+                if (map.containsKey("colSpan")) {
+                    TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
+                } else {
+                    TD(initialAttributes = emptyMap(), consumer = this.consumer)
+                }
+            }
             "page-break", "list-item-container", "indent", "lic" -> DIV(
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
@@ -350,11 +357,40 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         element.visit {
             classes = applyClasses
             style = inlineStyles.joinToString(";")
-            children.forEach {
-                when (it.getType()) {
-                    LEAF -> this.addLeafElement(it)
-                    ELEMENT -> this.addElementWithPossiblyChildren(it)
-                    else -> {}
+
+            if (this is TABLE && map.containsKey("colSizes")) {
+                val colSizesInPx = map["colSizes"] as List<Int>
+                colGroup {
+                    style = "width: 100%;"
+                    colSizesInPx.forEach {colSizeInPx ->
+                        col {
+                            style = "width: ${(colSizeInPx * 0.75).roundToInt()}pt;"
+                        }
+                    }
+                }
+            }
+
+            if (this is TD && parentMap != null && parentMap.containsKey("size")) {
+                val heightInPx = parentMap["size"] as Int
+                div {
+                    style = "min-height: ${(heightInPx * 0.75).roundToInt()}pt;"
+
+                    children.forEach {
+                        when (it.getType()) {
+                            LEAF -> this.addLeafElement(it)
+                            ELEMENT -> this.addElementWithPossiblyChildren(map = it, parentMap = map)
+                            else -> {}
+                        }
+                    }
+
+                }
+            } else {
+                children.forEach {
+                    when (it.getType()) {
+                        LEAF -> this.addLeafElement(it)
+                        ELEMENT -> this.addElementWithPossiblyChildren(map = it, parentMap = map)
+                        else -> {}
+                    }
                 }
             }
         }
@@ -480,9 +516,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
     }
 
-    private fun placeholderTextExistsInChildren(map: Map<String, *>): Boolean {
+    private fun placeholderTextMissingInChildren(map: Map<String, *>): Boolean {
         val children = map["children"] as List<Map<String, *>>
-        return children.any { it["text"] != "" }
+        return children.any { it["text"] == null || it["text"].toString().trim('​').trim().isEmpty() }
     }
 
     private fun addHeader(map: Map<String, *>) {

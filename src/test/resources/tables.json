@@ -12,6 +12,79 @@
     "type": "table",
     "children": [
       {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "text": "1"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "text": "2"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "size": 38
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "text": "3"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "type": "p",
+                "children": [
+                  {
+                    "text": "4"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "size": 75
+      }
+    ],
+    "colSizes": [
+      0,
+      110
+    ]
+  },
+  {
+    "type": "table",
+    "children": [
+      {
         "type": "tbody",
         "children": [
           {
