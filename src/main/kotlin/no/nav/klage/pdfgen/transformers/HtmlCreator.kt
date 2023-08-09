@@ -96,7 +96,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     max-width: 100%;
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
-                                    width: 128pt;
                                 }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
@@ -327,7 +326,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "bullet-list", "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
             "numbered-list", "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "list-item", "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
-            "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
+            "table" -> {
+                val colSizesInPx = map["colSizes"] as List<Int>
+                inlineStyles += "width: ${(colSizesInPx.sum() * pxToPtRatio)}pt;"
+                TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
+            }
             "tr" -> {
                 if (map.containsKey("size")) {
                     val heightInPx = map["size"] as Int
@@ -431,7 +434,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun Tag.addLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()) {
-        val text = map["text"] ?: throw RuntimeException("no content here")
+        var text = map["text"] ?: throw RuntimeException("no content here")
+        text as String
+        if (text.isEmpty()) {
+            text = "\uFEFF"
+        }
 
         if (map["bold"] == true) {
             inputClasses += "bold"
@@ -445,7 +452,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         this.consumer.span {
             classes = inputClasses
-            +text.toString()
+            +text
         }
     }
 
