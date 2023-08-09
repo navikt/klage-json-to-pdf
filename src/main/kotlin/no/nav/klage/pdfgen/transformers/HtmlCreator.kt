@@ -103,15 +103,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
-                                    min-width: 12pt;
+                                    min-width: 36pt;
                                     word-break: break-word;
                                     white-space: pre-wrap;
                                     vertical-align: top;
                                     text-align: left;
                                     background-color: transparent;
-                                    padding: 3pt;
-                                    padding-left: 4.25pt;
-                                    padding-right: 4.25pt;
+                                    padding: 4pt;
                                 }
                                 tr:nth-child(odd) {
                                   background-color: rgb(247, 247, 247);
@@ -236,7 +234,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             elementList as List<Map<String, *>>
             elementList.forEach {
                 val div = document.create.div {
-                    this.addElementWithPossiblyChildren(map = it, parentMap = null)
+                    this.addElementWithPossiblyChildren(map = it)
                 }
                 val divElement = document.getElementById("div_content_id") as Node
                 divElement.appendChild(div)
@@ -277,13 +275,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun addElementWithPossiblyChildren(map: Map<String, *>) {
         val div = document.create.div {
-            this.addElementWithPossiblyChildren(map = map, parentMap = null)
+            this.addElementWithPossiblyChildren(map = map)
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(div)
     }
 
-    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>, parentMap: Map<String, *>?) {
+    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
@@ -334,7 +332,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "numbered-list", "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "list-item", "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            "tr" -> {
+                if (map.containsKey("size")) {
+                    val heightInPx = map["size"] as Int
+                    inlineStyles += "height: ${(heightInPx * pxToPtRatio).roundToInt()}pt;"
+                }
+                TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            }
             "td" -> {
                 if (map.containsKey("colSpan")) {
                     TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
@@ -357,6 +361,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             classes = applyClasses
             style = inlineStyles.joinToString(";")
 
+            //special handling for tables
             if (this is TABLE) {
                 if (map.containsKey("colSizes")) {
                     val colSizesInPx = map["colSizes"] as List<Int>
@@ -364,7 +369,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         style = "width: 100%;"
                         colSizesInPx.forEach { colSizeInPx ->
                             col {
-                                style = "width: ${(colSizeInPx * 0.75).roundToInt()}pt;"
+                                style = "width: ${(colSizeInPx * pxToPtRatio).roundToInt()}pt;"
                             }
                         }
                     }
@@ -372,28 +377,21 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
                 //wrap in tbody
                 tbody {
-                    loopOverChildren(children, map)
-                }
-            } else if (this is TD && parentMap != null && parentMap.containsKey("size")) {
-                val heightInPx = parentMap["size"] as Int
-                div {
-                    style = "min-height: ${(heightInPx * 0.75).roundToInt()}pt;"
-                    loopOverChildren(children, map)
+                    loopOverChildren(children)
                 }
             } else {
-                loopOverChildren(children, map)
+                loopOverChildren(children)
             }
         }
     }
 
     private fun HTMLTag.loopOverChildren(
         children: List<Map<String, *>>,
-        map: Map<String, *>
     ) {
         children.forEach {
             when (it.getType()) {
                 LEAF -> this.addLeafElement(it)
-                ELEMENT -> this.addElementWithPossiblyChildren(map = it, parentMap = map)
+                ELEMENT -> this.addElementWithPossiblyChildren(map = it)
                 else -> {}
             }
         }
@@ -494,6 +492,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).appendChild(head)
 
+        println(document.serialize())
         secureLogger.debug(document.serialize())
         return document
     }
@@ -571,3 +570,5 @@ enum class ElementType {
     INDENT,
     IGNORED,
 }
+
+const val pxToPtRatio = 0.75
