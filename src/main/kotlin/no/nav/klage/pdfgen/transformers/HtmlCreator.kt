@@ -69,7 +69,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     width: 100pt;
                                     float: right;
                                 }
-                                p, span {
+                                p {
                                     font-size: 12pt;
                                 }
                                 .placeholder-text {
