@@ -32,15 +32,15 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private fun getCss(footer: String) =
         """
                                 html {
-                                    white-space: pre-wrap;
                                     font-family: "Source Sans Pro" !important;
                                     box-sizing: border-box;
                                 }
                                 *, ::before, ::after {
                                   box-sizing: inherit;
+                                  word-wrap: break-word;
                                 }
                                 .column {
-                                  font-size: 16px;
+                                  font-size: 12pt;
                                   display: inline-block;
                                   width: 50%;
                                 }
@@ -68,7 +68,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     display: block;
                                     width: 100pt;
                                     float: right;
-                                },
+                                }
                                 p, span {
                                     font-size: 12pt;
                                 }
@@ -104,7 +104,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
                                     min-width: 36pt;
-                                    word-break: break-word;
+                                    word-wrap: break-word;
                                     white-space: pre-wrap;
                                     vertical-align: top;
                                     text-align: left;
