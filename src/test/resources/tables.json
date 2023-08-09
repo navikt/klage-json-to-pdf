@@ -85,67 +85,62 @@
     "type": "table",
     "children": [
       {
-        "type": "tbody",
+        "type": "tr",
         "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Colspan her"
-                  }
-                ],
-                "colSpan": 2
+                "text": "Colspan her"
               }
-            ]
+            ],
+            "colSpan": 2
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": ""
+              }
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": ""
+              }
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
           }
         ]
       }
@@ -164,935 +159,930 @@
     "type": "table",
     "children": [
       {
-        "type": "tbody",
+        "type": "tr",
         "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Lønn",
-                    "bold": true,
-                    "underline": true,
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Lønn",
+                "bold": true,
+                "underline": true,
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Skatt",
-                    "underline": true,
-                    "italic": true,
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Skatt",
+                "underline": true,
+                "italic": true,
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Fratrekk",
-                    "underline": true,
-                    "italic": true,
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Fratrekk",
+                "underline": true,
+                "italic": true,
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Dato",
-                    "underline": true,
-                    "italic": true,
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Dato",
+                "underline": true,
+                "italic": true,
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": "Kommentar",
-                    "bold": true,
-                    "italic": true,
-                    "underline": true
-                  }
-                ]
+                "text": "Kommentar",
+                "bold": true,
+                "italic": true,
+                "underline": true
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "2022",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "Januar",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": "Første lønn i året."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "Februar",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "Mars",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "April",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "Mai",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
+              {
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": "25.00.2022"
               }
             ]
           },
           {
-            "type": "tr",
+            "type": "td",
+            "colSpan": 1,
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "2022",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Januar",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Juni",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": "Første lønn i året."
-                  }
-                ]
+                "text": "Lønn utbetalt i \nsommerferien.\nSkulle egentlig vært feriepenger."
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Februar",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Juli",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Mars",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "August",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "April",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "September",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Mai",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Oktober",
+                "bold": true,
+                "underline": false
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true,
+                "underline": false
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-",
+                "underline": false
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "1.337,-",
+                "underline": false
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ]
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Juni",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "November",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": "Lønn utbetalt i \nsommerferien.\nSkulle egentlig vært feriepenger."
-                  }
-                ]
+                "text": ""
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Juli",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "Desember",
+                "bold": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "30.000,-",
+                "italic": true
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "7.000,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "1.337,-"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": "25.00.2022"
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": "Skulle vært halv skatt, \nmen betalte for mye skatt."
               }
             ]
-          },
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "August",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": "2023",
+                "bold": true
               }
-            ]
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "September",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Oktober",
-                    "bold": true,
-                    "underline": false
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true,
-                    "underline": false
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-",
-                    "underline": false
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-",
-                    "underline": false
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "November",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "Desember",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "30.000,-",
-                    "italic": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "7.000,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "1.337,-"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "25.00.2022"
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": "Skulle vært halv skatt, \nmen betalte for mye skatt."
-                  }
-                ]
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
           },
           {
-            "type": "tr",
+            "type": "td",
+            "colSpan": 1,
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": "2023",
-                    "bold": true
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
-              {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
+                "text": ""
               }
             ]
           }
@@ -1113,76 +1103,71 @@
     "type": "table",
     "children": [
       {
-        "type": "tbody",
+        "type": "tr",
         "children": [
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
-              },
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          },
+          {
+            "type": "td",
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
+              {
+                "text": ""
               }
             ]
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
+                "text": ""
+              }
+            ],
+            "colSpan": 1
+          }
+        ]
+      },
+      {
+        "type": "tr",
+        "children": [
+          {
+            "type": "td",
+            "colSpan": 1,
+            "children": [
               {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
+                "text": ""
               }
             ]
           },
           {
-            "type": "tr",
+            "type": "td",
             "children": [
               {
-                "type": "td",
-                "colSpan": 1,
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ]
-              },
-              {
-                "type": "td",
-                "children": [
-                  {
-                    "text": ""
-                  }
-                ],
-                "colSpan": 1
+                "text": ""
               }
-            ]
+            ],
+            "colSpan": 1
           }
         ]
       }

@@ -334,7 +334,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "numbered-list", "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "list-item", "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "tbody" -> TBODY(initialAttributes = emptyMap(), consumer = this.consumer)
             "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
             "td" -> {
                 if (map.containsKey("colSpan")) {
@@ -358,40 +357,44 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             classes = applyClasses
             style = inlineStyles.joinToString(";")
 
-            if (this is TABLE && map.containsKey("colSizes")) {
-                val colSizesInPx = map["colSizes"] as List<Int>
-                colGroup {
-                    style = "width: 100%;"
-                    colSizesInPx.forEach {colSizeInPx ->
-                        col {
-                            style = "width: ${(colSizeInPx * 0.75).roundToInt()}pt;"
+            if (this is TABLE) {
+                if (map.containsKey("colSizes")) {
+                    val colSizesInPx = map["colSizes"] as List<Int>
+                    colGroup {
+                        style = "width: 100%;"
+                        colSizesInPx.forEach { colSizeInPx ->
+                            col {
+                                style = "width: ${(colSizeInPx * 0.75).roundToInt()}pt;"
+                            }
                         }
                     }
                 }
-            }
 
-            if (this is TD && parentMap != null && parentMap.containsKey("size")) {
+                //wrap in tbody
+                tbody {
+                    loopOverChildren(children, map)
+                }
+            } else if (this is TD && parentMap != null && parentMap.containsKey("size")) {
                 val heightInPx = parentMap["size"] as Int
                 div {
                     style = "min-height: ${(heightInPx * 0.75).roundToInt()}pt;"
-
-                    children.forEach {
-                        when (it.getType()) {
-                            LEAF -> this.addLeafElement(it)
-                            ELEMENT -> this.addElementWithPossiblyChildren(map = it, parentMap = map)
-                            else -> {}
-                        }
-                    }
-
+                    loopOverChildren(children, map)
                 }
             } else {
-                children.forEach {
-                    when (it.getType()) {
-                        LEAF -> this.addLeafElement(it)
-                        ELEMENT -> this.addElementWithPossiblyChildren(map = it, parentMap = map)
-                        else -> {}
-                    }
-                }
+                loopOverChildren(children, map)
+            }
+        }
+    }
+
+    private fun HTMLTag.loopOverChildren(
+        children: List<Map<String, *>>,
+        map: Map<String, *>
+    ) {
+        children.forEach {
+            when (it.getType()) {
+                LEAF -> this.addLeafElement(it)
+                ELEMENT -> this.addElementWithPossiblyChildren(map = it, parentMap = map)
+                else -> {}
             }
         }
     }
