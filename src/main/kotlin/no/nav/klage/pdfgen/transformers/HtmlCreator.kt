@@ -18,7 +18,6 @@ import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
-import kotlin.math.roundToInt
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
@@ -97,13 +96,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     max-width: 100%;
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
-                                }
-                                tr {
-                                    min-height: 24pt;
+                                    width: 128pt;
                                 }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
-                                    min-width: 36pt;
                                     word-wrap: break-word;
                                     white-space: pre-wrap;
                                     vertical-align: top;
@@ -335,7 +331,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "tr" -> {
                 if (map.containsKey("size")) {
                     val heightInPx = map["size"] as Int
-                    inlineStyles += "height: ${(heightInPx * pxToPtRatio).roundToInt()}pt;"
+                    inlineStyles += "height: ${(heightInPx * pxToPtRatio)}pt;"
                 }
                 TR(initialAttributes = emptyMap(), consumer = this.consumer)
             }
@@ -369,7 +365,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         style = "width: 100%;"
                         colSizesInPx.forEach { colSizeInPx ->
                             col {
-                                style = "width: ${(colSizeInPx * pxToPtRatio).roundToInt()}pt;"
+                                style = "width: ${(colSizeInPx * pxToPtRatio)}pt; min-width: 1pt;"
                             }
                         }
                     }
