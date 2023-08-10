@@ -523,8 +523,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).appendChild(head)
 
-        println(document.serialize())
-
         secureLogger.debug(document.serialize())
         return document
     }
