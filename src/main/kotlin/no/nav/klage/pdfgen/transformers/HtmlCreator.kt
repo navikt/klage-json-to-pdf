@@ -34,6 +34,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     font-family: "Source Sans Pro" !important;
                                     box-sizing: border-box;
                                     font-weight: 400;
+                                    letter-spacing: 0;
                                 }
                                 *, ::before, ::after {
                                   box-sizing: inherit;
