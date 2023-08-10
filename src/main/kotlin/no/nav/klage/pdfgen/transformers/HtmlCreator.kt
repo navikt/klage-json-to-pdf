@@ -81,6 +81,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 p {
                                     font-size: 12pt;
+                                    margin-top: 1em;
                                 }
                                 .placeholder-text {
                                     background-color: #EFA89D;
@@ -153,7 +154,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                   page-break-inside: avoid;
                                 }
                                 
-                                ol, ul > ol, ul {
+                                li > ul, li > ol {
                                   margin-top: 0;
                                 }
                                 
@@ -534,6 +535,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
 
         document.childNodes.item(0).appendChild(head)
+
+        println(document.serialize())
 
         secureLogger.debug(document.serialize())
         return document
