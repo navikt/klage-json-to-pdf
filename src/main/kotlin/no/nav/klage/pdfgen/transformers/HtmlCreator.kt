@@ -56,6 +56,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 h3 {
                                     font-size: 12pt;
                                 }
+                                h1, h2, h3 {
+                                    font-weight: 600;
+                                    margin-top: 1em;
+                                    margin-bottom: 0;
+                                }
                                 .indent {
                                     padding-left: 24pt;
                                 }
@@ -108,6 +113,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     text-align: left;
                                     background-color: transparent;
                                     padding: 4pt;
+                                    padding-left: 3pt;
+                                    padding-right: 3pt;
                                 }
                                 tr:nth-child(odd) {
                                   background-color: rgb(247, 247, 247);
@@ -337,7 +344,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> {
                 val colSizesInPx = map["colSizes"] as List<Int>
-                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size}pt;"
+                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size + 1}pt;"
                 TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             }
 
@@ -379,7 +386,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         style = "width: 100%;"
                         colSizesInPx.forEach { colSizeInPx ->
                             col {
-                                style = "width: ${(colSizeInPx * pxToPtRatio)}pt; min-width: 1pt;"
+                                style = "width: ${(colSizeInPx.coerceAtLeast(48) * pxToPtRatio)}pt; min-width: 1pt;"
                             }
                         }
                     }
