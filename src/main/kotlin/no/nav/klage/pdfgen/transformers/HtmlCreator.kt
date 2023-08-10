@@ -110,6 +110,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
                                     page-break-inside: avoid;
+                                    -fs-border-rendering: no-bevel;
                                 }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
@@ -156,7 +157,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 
                                 @page {
-                                    margin: 15mm 20mm 20mm 20mm;
+                                    margin: 20mm;
+                                    margin-top: 15mm;
+                                    size: a4;
+                                    padding: 0;
                                     @bottom-left {
                                         content: "";
                                     }
@@ -168,7 +172,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
 
                                 @page :first {
-                                    margin: 15mm 20mm 30mm 20mm;
+                                    margin-bottom: 30mm;
                                     @bottom-left {
                                         font-family: "Source Sans Pro" !important;
                                         font-size: 10pt;
@@ -281,7 +285,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
 
-//TODO: Finn ut behovet for validering.
+    //TODO: Finn ut behovet for validering.
     private fun addRedigerbarMaltekst(map: Map<String, *>) {
         val elementList = map["children"]
         if (elementList != null) {
@@ -323,9 +327,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
             if (elementType in listOf("p")) {
-                inlineStyles += "padding-left: ${24 * indent}pt"
-            } else if (elementType in listOf("ul", "ol")) {
-                inlineStyles += "padding-left: ${(24 * indent) + 12}pt"
+                val padding = if (map["align"] == "right") "right" else "left"
+                inlineStyles += "padding-$padding: ${24 * indent}pt"
             }
         }
 
@@ -385,6 +388,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
             )
+
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
