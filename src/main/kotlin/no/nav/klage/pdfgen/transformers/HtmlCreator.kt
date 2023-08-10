@@ -56,7 +56,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 h3 {
                                     font-size: 12pt;
                                 }
-                                h1, h2, h3 {
+                                h1, h2, h3, h4, h5, h6 {
                                     font-weight: 600;
                                     margin-top: 1em;
                                     margin-bottom: 0;
@@ -81,7 +81,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     border-radius: 3pt;
                                 }
                                 .bold {
-                                    font-weight: bold;
+                                    font-weight: 600;
                                 }
                                 .underline {
                                     text-decoration: underline;
