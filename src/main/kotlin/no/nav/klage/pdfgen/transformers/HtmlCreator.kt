@@ -144,6 +144,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                   margin-top: 12pt;
                                 }
                                 
+                                ol, ul > ol, ul {
+                                  margin-top: 0;
+                                }
+                                
                                 @page {
                                     margin: 15mm 20mm 20mm 20mm;
                                     @bottom-left {
@@ -518,6 +522,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
 
         document.childNodes.item(0).appendChild(head)
+
+        println(document.serialize())
 
         secureLogger.debug(document.serialize())
         return document
