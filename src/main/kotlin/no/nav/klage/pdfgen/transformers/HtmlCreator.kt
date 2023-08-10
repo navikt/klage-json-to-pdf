@@ -366,7 +366,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> {
                 val colSizesInPx = map["colSizes"] as List<Int>
-                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size + 1}pt;"
+                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size}pt;"
                 TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             }
 
