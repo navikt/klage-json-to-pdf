@@ -1,12 +1,12 @@
 [
   {
-    "type": "paragraph",
+    "type": "p",
     "children": [
       {
         "text": ""
       }
     ],
-    "textAlign": "text-align-left"
+    "align": "left"
   },
   {
     "type": "table",

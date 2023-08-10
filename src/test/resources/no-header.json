@@ -32,7 +32,7 @@
         "textType": "MALTEKST",
         "content": [
           {
-            "type": "heading-two",
+            "type": "h2",
             "children": [
               {
                 "text": "Regelverket som gjelder i saken"
@@ -60,12 +60,12 @@
     "threadIds": []
   },
   {
-    "type": "paragraph",
+    "type": "p",
     "children": [
       {
         "text": ""
       }
     ],
-    "textAlign": "text-align-left"
+    "align": "left"
   }
 ]

@@ -18,18 +18,18 @@
     "content": null
   },
   {
-    "type": "paragraph",
+    "type": "p",
     "children": [
       {
         "text": "Noterer litt her, jeg."
       }
     ],
-    "textAlign": "text-align-left",
+    "align": "left",
     "indent": 0
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "indent": 0,
     "children": [
       {
@@ -38,8 +38,8 @@
     ]
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "indent": 0,
     "children": [
       {
