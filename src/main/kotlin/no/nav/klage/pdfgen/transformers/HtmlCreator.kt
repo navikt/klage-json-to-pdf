@@ -46,6 +46,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 /* Fjerner spacing mellom inline-blockene */
                                 .wrapper {
                                   font-size: 0;
+                                  page-break-before: avoid;
                                 }
                                 h1 {
                                     font-size: 16pt;
@@ -60,6 +61,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     font-weight: 600;
                                     margin-top: 1em;
                                     margin-bottom: 0;
+                                    page-break-after: avoid;
                                 }
                                 .indent {
                                     padding-left: 24pt;
@@ -104,6 +106,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     max-width: 100%;
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
+                                    page-break-inside: avoid;
                                 }
                                 td {
                                     border: 1pt solid rgb(143, 143, 143);
@@ -142,6 +145,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                   padding-left: 18pt;
                                   margin: 0;
                                   margin-top: 12pt;
+                                  page-break-inside: avoid;
                                 }
                                 
                                 ol, ul > ol, ul {
