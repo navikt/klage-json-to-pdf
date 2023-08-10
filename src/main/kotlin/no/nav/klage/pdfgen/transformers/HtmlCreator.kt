@@ -138,6 +138,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                   margin-bottom: 0;
                                 }
                                 
+                                ol, ul {
+                                  padding-left: 18pt;
+                                  margin: 0;
+                                  margin-top: 12pt;
+                                }
+                                
                                 @page {
                                     margin: 15mm 20mm 20mm 20mm;
                                     @bottom-left {
