@@ -87,6 +87,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 .alignRight {
                                     text-align: right;
                                 }
+                                .alignLeft {
+                                    text-align: left;
+                                }
                                 .pageBreak {
                                     page-break-after: always;
                                 }
@@ -263,7 +266,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 processElement(it)
             }
         } else {
-            logger.error("No children element.")
+            logger.error("No children element for redigerbar maltekst.")
             return
         }
     }
@@ -281,8 +284,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         var children = emptyList<Map<String, *>>()
 
         val applyClasses =
-            if ((map["textAlign"] == "text-align-right") || (map["align"] == "right")) mutableSetOf("alignRight")
-            else mutableSetOf()
+            if ((map["textAlign"] == "text-align-right") || (map["align"] == "right")) {
+                mutableSetOf("alignRight")
+            } else if ((map["align"] == "left")) {
+                mutableSetOf("alignLeft")
+            } else mutableSetOf()
+
         if (elementType == "indent") {
             applyClasses += "indent"
         }
@@ -291,9 +298,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            if (elementType in listOf("paragraph", "p")) {
+            if (elementType in listOf("p")) {
                 inlineStyles += "padding-left: ${24 * indent}pt"
-            } else if (elementType in listOf("bullet-list", "numbered-list", "ul", "ol")) {
+            } else if (elementType in listOf("ul", "ol")) {
                 inlineStyles += "padding-left: ${(24 * indent) + 12}pt"
             }
         }
@@ -318,19 +325,22 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         val element = when (elementType) {
             "standard-text", "placeholder" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-one", "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-two", "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-three", "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
-            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "paragraph", "p" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
-            "bullet-list", "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "numbered-list", "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "list-item", "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h4" -> H4(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h5" -> H5(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h6" -> H6(initialAttributes = emptyMap(), consumer = this.consumer)
+            "p" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
+            "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> {
                 val colSizesInPx = map["colSizes"] as List<Int>
                 inlineStyles += "width: ${(colSizesInPx.sum() * pxToPtRatio) + colSizesInPx.size}pt;"
                 TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             }
+
             "tr" -> {
                 if (map.containsKey("size")) {
                     val heightInPx = map["size"] as Int
@@ -338,6 +348,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 }
                 TR(initialAttributes = emptyMap(), consumer = this.consumer)
             }
+
             "td" -> {
                 if (map.containsKey("colSpan")) {
                     TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
@@ -345,11 +356,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                     TD(initialAttributes = emptyMap(), consumer = this.consumer)
                 }
             }
-            "page-break", "list-item-container", "indent", "lic" -> DIV(
+
+            "page-break", "indent", "lic" -> DIV(
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
             )
-            "empty-void" -> return //ignore
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
@@ -547,7 +558,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 "header" -> HEADER
                 "footer" -> FOOTER
                 "redigerbar-maltekst" -> REDIGERBAR_MALTEKST
-                "regelverkstekst" -> IGNORED
                 "regelverk" -> REGELVERK
                 "regelverk-container" -> REGELVERK_CONTAINER
                 else -> ELEMENT
