@@ -38,6 +38,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 *, ::before, ::after {
                                   box-sizing: inherit;
                                   word-wrap: break-word;
+                                  padding: 0;
+                                  margin: 0;
                                 }
                                 .column {
                                   font-size: 12pt;
