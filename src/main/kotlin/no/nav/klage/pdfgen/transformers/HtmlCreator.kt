@@ -328,10 +328,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            if (elementType in listOf("p")) {
-                val padding = if (map["align"] == "right") "right" else "left"
-                inlineStyles += "padding-$padding: ${24 * indent}pt"
-            }
+            val padding = if (map["align"] == "right") "right" else "left"
+            inlineStyles += "padding-$padding: ${24 * indent}pt"
         }
 
         if (elementType == "placeholder") {
