@@ -115,7 +115,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     -fs-border-rendering: no-bevel;
                                 }
                                 td {
-                                    border: 1pt solid rgb(143, 143, 143);
+                                    border: 1pt solid #8F8F8F;
                                     word-wrap: break-word;
                                     white-space: pre-wrap;
                                     vertical-align: top;
@@ -148,7 +148,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 
                                 ol, ul {
-                                  padding-left: 18pt;
+                                  padding-left: 12pt;
                                   margin: 0;
                                   margin-top: 12pt;
                                   page-break-inside: avoid;
@@ -320,16 +320,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 mutableSetOf("alignLeft")
             } else mutableSetOf()
 
-        if (elementType == "indent") {
-            applyClasses += "indent"
-        }
-
         val inlineStyles = mutableSetOf<String>()
 
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            val padding = if (map["align"] == "right") "right" else "left"
-            inlineStyles += "padding-$padding: ${24 * indent}pt"
+            val alignment = if (map["align"] == "right") "right" else "left"
+            inlineStyles += "margin-$alignment: ${24 * indent}pt"
         }
 
         if (elementType == "placeholder") {
@@ -363,8 +359,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> {
-                val colSizesInPx = map["colSizes"] as List<Int>
-                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size}pt;"
+//                val colSizesInPx = map["colSizes"] as List<Int>
+//                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size}pt;"
                 TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             }
 
@@ -404,10 +400,14 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 if (map.containsKey("colSizes")) {
                     val colSizesInPx = map["colSizes"] as List<Int>
                     colGroup {
-                        style = "width: 100%;"
                         colSizesInPx.forEach { colSizeInPx ->
+                            val width = if (colSizeInPx == 0) {
+                                "auto"
+                            } else {
+                                (colSizeInPx.coerceAtLeast(48) * pxToPtRatio).toString() + "pt"
+                            }
                             col {
-                                style = "width: ${(colSizeInPx.coerceAtLeast(48) * pxToPtRatio)}pt; min-width: 1pt;"
+                                style = "width: ${width}; min-width: 36pt;"
                             }
                         }
                     }
