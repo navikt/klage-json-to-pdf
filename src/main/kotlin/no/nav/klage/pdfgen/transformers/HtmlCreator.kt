@@ -533,9 +533,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             }
         }
 
-        document.childNodes.item(0).appendChild(head)
-
-        println(document.serialize(prettyPrint = false))
+        document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
 
         secureLogger.debug(document.serialize())
         return document
