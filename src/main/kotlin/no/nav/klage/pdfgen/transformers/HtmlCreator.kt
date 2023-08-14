@@ -124,6 +124,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     padding: 4pt;
                                     padding-left: 3pt;
                                     padding-right: 3pt;
+                                    min-width: 36pt;
                                 }
                                 tr:nth-child(odd) {
                                   background-color: rgb(247, 247, 247);
@@ -407,7 +408,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 (colSizeInPx.coerceAtLeast(48) * pxToPtRatio).toString() + "pt"
                             }
                             col {
-                                style = "width: ${width}; min-width: 36pt;"
+                                style = "width: ${width};"
                             }
                         }
                     }
@@ -534,7 +535,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).appendChild(head)
 
-        println(document.serialize())
+        println(document.serialize(prettyPrint = false))
 
         secureLogger.debug(document.serialize())
         return document
