@@ -33,7 +33,7 @@
         "section": "section-gnu",
         "children": [
           {
-            "type": "heading-two",
+            "type": "h2",
             "children": [
               {
                 "text": "Regelverket som gjelder i saken"
@@ -46,18 +46,18 @@
         "type": "regelverk-container",
         "children": [
           {
-            "type": "paragraph",
+            "type": "p",
             "children": [
               {
                 "text": "Daniels test"
               }
             ],
-            "textAlign": "text-align-left",
+            "align": "left",
             "indent": 0
           },
           {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
+            "type": "p",
+            "align": "left",
             "indent": 0,
             "children": [
               {
@@ -66,8 +66,8 @@
             ]
           },
           {
-            "type": "paragraph",
-            "textAlign": "text-align-left",
+            "type": "p",
+            "align": "left",
             "indent": 0,
             "children": [
               {

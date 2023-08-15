@@ -33,7 +33,7 @@
         "section": "section-gnu",
         "children": [
           {
-            "type": "heading-two",
+            "type": "h2",
             "children": [
               {
                 "text": "Regelverket som gjelder i saken"

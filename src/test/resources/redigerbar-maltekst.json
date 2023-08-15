@@ -1,0 +1,64 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Header text"
+  },
+  {
+    "type": "redigerbar-maltekst",
+    "section": "section-elg",
+    "children": [
+      {
+        "type": "p",
+        "children": [{
+          "text": "Vi har kommet frem til at \t\t. Du har fått [delvis] medhold i klagen din."
+        }],
+        "indent": 0,
+        "align": "left"
+      },
+      {
+        "type": "p",
+        "children": [
+          { "text": "Vedtaket er gjort etter " },
+          {
+            "type": "placeholder",
+            "placeholder": "lov",
+            "children": [{ "text": "ditten" }]
+          },
+          { "text": " § " },
+          {
+            "type": "placeholder",
+            "placeholder": "hjemmel",
+            "children": [{ "text": "datten" }]
+          },
+          { "text": "." }
+        ],
+        "indent": 0,
+        "align": "left"
+      }
+    ]
+  },
+  {
+    "type": "footer",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Footer text"
+  }
+]

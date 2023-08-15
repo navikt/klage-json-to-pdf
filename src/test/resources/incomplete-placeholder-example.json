@@ -18,8 +18,8 @@
     "content": "Header text"
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": " "
@@ -29,7 +29,13 @@
         "placeholder": "PLASSHOLDER",
         "children": [
           {
-            "text": ""
+            "text": "\u200B"
+          },
+          {
+            "text": " "
+          },
+          {
+            "text": null
           }
         ]
       },
@@ -39,8 +45,8 @@
     ]
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": " "

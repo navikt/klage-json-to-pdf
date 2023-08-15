@@ -31,21 +31,26 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private fun getCss(footer: String) =
         """
                                 html {
-                                    white-space: pre-wrap;
                                     font-family: "Source Sans Pro" !important;
                                     box-sizing: border-box;
+                                    font-weight: 400;
+                                    letter-spacing: 0;
                                 }
                                 *, ::before, ::after {
                                   box-sizing: inherit;
+                                  word-wrap: break-word;
+                                  padding: 0;
+                                  margin: 0;
                                 }
                                 .column {
-                                  font-size: 16px;
+                                  font-size: 12pt;
                                   display: inline-block;
                                   width: 50%;
                                 }
                                 /* Fjerner spacing mellom inline-blockene */
                                 .wrapper {
                                   font-size: 0;
+                                  page-break-before: avoid;
                                 }
                                 h1 {
                                     font-size: 16pt;
@@ -55,6 +60,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 h3 {
                                     font-size: 12pt;
+                                }
+                                h1, h2, h3, h4, h5, h6 {
+                                    font-weight: 600;
+                                    margin-top: 1em;
+                                    margin-bottom: 0;
+                                    page-break-after: avoid;
                                 }
                                 .indent {
                                     padding-left: 24pt;
@@ -67,16 +78,17 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     display: block;
                                     width: 100pt;
                                     float: right;
-                                },
-                                p, span {
+                                }
+                                p {
                                     font-size: 12pt;
+                                    margin-top: 1em;
                                 }
                                 .placeholder-text {
                                     background-color: #EFA89D;
                                     border-radius: 3pt;
                                 }
                                 .bold {
-                                    font-weight: bold;
+                                    font-weight: 600;
                                 }
                                 .underline {
                                     text-decoration: underline;
@@ -87,6 +99,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 .alignRight {
                                     text-align: right;
                                 }
+                                .alignLeft {
+                                    text-align: left;
+                                }
                                 .pageBreak {
                                     page-break-after: always;
                                 }
@@ -96,21 +111,20 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     max-width: 100%;
                                     margin-top: 12pt;
                                     margin-bottom: 12pt;
-                                }
-                                tr {
-                                    min-height: 24pt;
+                                    page-break-inside: avoid;
+                                    -fs-border-rendering: no-bevel;
                                 }
                                 td {
-                                    border: 1pt solid rgb(143, 143, 143);
-                                    min-width: 12pt;
-                                    word-break: break-word;
+                                    border: 1pt solid #8F8F8F;
+                                    word-wrap: break-word;
                                     white-space: pre-wrap;
                                     vertical-align: top;
                                     text-align: left;
                                     background-color: transparent;
-                                    padding: 3pt;
-                                    padding-left: 4.25pt;
-                                    padding-right: 4.25pt;
+                                    padding: 4pt;
+                                    padding-left: 3pt;
+                                    padding-right: 3pt;
+                                    min-width: 36pt;
                                 }
                                 tr:nth-child(odd) {
                                   background-color: rgb(247, 247, 247);
@@ -134,8 +148,22 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                   margin-bottom: 0;
                                 }
                                 
+                                ol, ul {
+                                  padding-left: 12pt;
+                                  margin: 0;
+                                  margin-top: 12pt;
+                                  page-break-inside: avoid;
+                                }
+                                
+                                li > ul, li > ol {
+                                  margin-top: 0;
+                                }
+                                
                                 @page {
-                                    margin: 15mm 20mm 20mm 20mm;
+                                    margin: 20mm;
+                                    margin-top: 15mm;
+                                    size: a4;
+                                    padding: 0;
                                     @bottom-left {
                                         content: "";
                                     }
@@ -147,7 +175,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
 
                                 @page :first {
-                                    margin: 15mm 20mm 30mm 20mm;
+                                    margin-bottom: 30mm;
                                     @bottom-left {
                                         font-family: "Source Sans Pro" !important;
                                         font-size: 10pt;
@@ -235,7 +263,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             elementList as List<Map<String, *>>
             elementList.forEach {
                 val div = document.create.div {
-                    this.addElementWithPossiblyChildren(it)
+                    this.addElementWithPossiblyChildren(map = it)
                 }
                 val divElement = document.getElementById("div_content_id") as Node
                 divElement.appendChild(div)
@@ -259,9 +287,24 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
     }
 
+
+    //TODO: Finn ut behovet for validering.
+    private fun addRedigerbarMaltekst(map: Map<String, *>) {
+        val elementList = map["children"]
+        if (elementList != null) {
+            elementList as List<Map<String, *>>
+            elementList.forEach {
+                processElement(it)
+            }
+        } else {
+            logger.error("No children element for redigerbar maltekst.")
+            return
+        }
+    }
+
     private fun addElementWithPossiblyChildren(map: Map<String, *>) {
         val div = document.create.div {
-            this.addElementWithPossiblyChildren(map)
+            this.addElementWithPossiblyChildren(map = map)
         }
         val divElement = document.getElementById("div_content_id") as Node
         divElement.appendChild(div)
@@ -272,25 +315,22 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         var children = emptyList<Map<String, *>>()
 
         val applyClasses =
-            if (map["textAlign"] == "text-align-right") mutableSetOf("alignRight")
-            else mutableSetOf()
-        if (elementType == "indent") {
-            applyClasses += "indent"
-        }
+            if ((map["textAlign"] == "text-align-right") || (map["align"] == "right")) {
+                mutableSetOf("alignRight")
+            } else if ((map["align"] == "left")) {
+                mutableSetOf("alignLeft")
+            } else mutableSetOf()
 
         val inlineStyles = mutableSetOf<String>()
 
         if (map.containsKey("indent")) {
             val indent = map["indent"] as Int
-            if (elementType == "paragraph") {
-                inlineStyles += "padding-left: ${24 * indent}pt"
-            } else if (elementType in listOf("bullet-list", "numbered-list")) {
-                inlineStyles += "padding-left: ${(24 * indent) + 12}pt"
-            }
+            val alignment = if (map["align"] == "right") "right" else "left"
+            inlineStyles += "margin-$alignment: ${24 * indent}pt"
         }
 
         if (elementType == "placeholder") {
-            if (!placeholderTextExistsInChildren(map)) {
+            if (placeholderTextMissingInChildren(map)) {
                 if (validationMode) {
                     throw EmptyPlaceholderException("Placeholder error")
                 } else {
@@ -309,23 +349,43 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         val element = when (elementType) {
             "standard-text", "placeholder" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-one" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-two" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "heading-three" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
-            "blockquote" -> BLOCKQUOTE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "paragraph" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
-            "bullet-list" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "numbered-list" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "list-item" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
-            "table" -> TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
-            "tbody" -> TBODY(initialAttributes = emptyMap(), consumer = this.consumer)
-            "tr" -> TR(initialAttributes = emptyMap(), consumer = this.consumer)
-            "td" -> TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
-            "page-break", "list-item-container", "indent" -> DIV(
+            "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h4" -> H4(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h5" -> H5(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h6" -> H6(initialAttributes = emptyMap(), consumer = this.consumer)
+            "p" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
+            "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
+            "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
+            "table" -> {
+//                val colSizesInPx = map["colSizes"] as List<Int>
+//                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size}pt;"
+                TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
+            }
+
+            "tr" -> {
+                if (map.containsKey("size")) {
+                    val heightInPx = map["size"] as Int
+                    inlineStyles += "height: ${(heightInPx * pxToPtRatio)}pt;"
+                }
+                TR(initialAttributes = emptyMap(), consumer = this.consumer)
+            }
+
+            "td" -> {
+                if (map.containsKey("colSpan")) {
+                    TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
+                } else {
+                    TD(initialAttributes = emptyMap(), consumer = this.consumer)
+                }
+            }
+
+            "page-break", "indent", "lic" -> DIV(
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
             )
-            "empty-void" -> return //ignore
+
             else -> {
                 logger.warn("unknown element type: $elementType")
                 return
@@ -335,12 +395,43 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         element.visit {
             classes = applyClasses
             style = inlineStyles.joinToString(";")
-            children.forEach {
-                when (it.getType()) {
-                    LEAF -> this.addLeafElement(it)
-                    ELEMENT -> this.addElementWithPossiblyChildren(it)
-                    else -> {}
+
+            //special handling for tables
+            if (this is TABLE) {
+                if (map.containsKey("colSizes")) {
+                    val colSizesInPx = map["colSizes"] as List<Int>
+                    colGroup {
+                        colSizesInPx.forEach { colSizeInPx ->
+                            val width = if (colSizeInPx == 0) {
+                                "auto"
+                            } else {
+                                (colSizeInPx.coerceAtLeast(48) * pxToPtRatio).toString() + "pt"
+                            }
+                            col {
+                                style = "width: ${width};"
+                            }
+                        }
+                    }
                 }
+
+                //wrap in tbody
+                tbody {
+                    loopOverChildren(children)
+                }
+            } else {
+                loopOverChildren(children)
+            }
+        }
+    }
+
+    private fun HTMLTag.loopOverChildren(
+        children: List<Map<String, *>>,
+    ) {
+        children.forEach {
+            when (it.getType()) {
+                LEAF -> this.addLeafElement(it)
+                ELEMENT -> this.addElementWithPossiblyChildren(map = it)
+                else -> {}
             }
         }
     }
@@ -383,7 +474,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun Tag.addLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()) {
-        val text = map["text"] ?: throw RuntimeException("no content here")
+        var text = map["text"] ?: throw RuntimeException("no content here")
+        text as String
+        if (text.isEmpty()) {
+            text = "\uFEFF"
+        }
 
         if (map["bold"] == true) {
             inputClasses += "bold"
@@ -397,7 +492,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         this.consumer.span {
             classes = inputClasses
-            +text.toString()
+            +text
         }
     }
 
@@ -438,7 +533,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             }
         }
 
-        document.childNodes.item(0).appendChild(head)
+        document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
 
         secureLogger.debug(document.serialize())
         return document
@@ -451,6 +546,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         when (map.getType()) {
             REGELVERK -> addRegelverk(map)
             REGELVERK_CONTAINER -> addRegelverkContainer(map)
+            REDIGERBAR_MALTEKST -> addRedigerbarMaltekst(map)
             LABEL_CONTENT_ELEMENT -> addLabelContentElement(map)
             SIGNATURE_ELEMENT -> addSignatureElement(map)
             ELEMENT, INDENT -> addElementWithPossiblyChildren(map)
@@ -464,9 +560,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
     }
 
-    private fun placeholderTextExistsInChildren(map: Map<String, *>): Boolean {
+    private fun placeholderTextMissingInChildren(map: Map<String, *>): Boolean {
         val children = map["children"] as List<Map<String, *>>
-        return children.any { it["text"] != "" }
+        return children.any { it["text"] == null || it["text"].toString().trim('​').trim().isEmpty() }
     }
 
     private fun addHeader(map: Map<String, *>) {
@@ -489,7 +585,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 "current-date" -> CURRENT_DATE
                 "header" -> HEADER
                 "footer" -> FOOTER
-                "redigerbar-maltekst", "regelverkstekst" -> IGNORED
+                "redigerbar-maltekst" -> REDIGERBAR_MALTEKST
                 "regelverk" -> REGELVERK
                 "regelverk-container" -> REGELVERK_CONTAINER
                 else -> ELEMENT
@@ -508,9 +604,12 @@ enum class ElementType {
     MALTEKST,
     REGELVERK,
     REGELVERK_CONTAINER,
+    REDIGERBAR_MALTEKST,
     CURRENT_DATE,
     HEADER,
     FOOTER,
     INDENT,
     IGNORED,
 }
+
+const val pxToPtRatio = 0.75

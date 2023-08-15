@@ -57,6 +57,13 @@ class GeneratePDF {
     }
 
     @Test
+    fun `generate pdf with redigerbar maltekst`() {
+        val jsonData = File(path + "redigerbar-maltekst.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        Files.write(Path.of("test.pdf"), data)
+    }
+
+    @Test
     fun `input without header throws error`(){
         val jsonData = File(path + "no-header.json").readText()
         assertThrows<RuntimeException> { PDFGenService().getPDFAsByteArray(jsonData) }

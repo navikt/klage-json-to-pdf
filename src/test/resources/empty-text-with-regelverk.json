@@ -22,7 +22,7 @@
     "section": "section-esel",
     "children": [
       {
-        "type": "heading-one",
+        "type": "h1",
         "children": [
           {
             "text": "NAV Klageinstans har behandlet klagen din"
@@ -56,8 +56,8 @@
     "result": "Fødselsnummer: 024467 01749"
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": "Fullmektig",
@@ -73,8 +73,8 @@
     "indent": 0
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": "Saken gjelder",
@@ -96,8 +96,8 @@
     "indent": 0
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": "Problemstilling",
@@ -114,7 +114,7 @@
     "section": "section-mår",
     "children": [
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Vedtak"
@@ -124,8 +124,8 @@
     ]
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": "Vi har [delvis] omgjort vedtaket, slik at ..."
@@ -134,7 +134,7 @@
     "indent": 0
   },
   {
-    "type": "heading-two",
+    "type": "h2",
     "children": [
       {
         "text": "I klagen din har du lagt vekt på:"
@@ -142,13 +142,13 @@
     ]
   },
   {
-    "type": "bullet-list",
+    "type": "ul",
     "children": [
       {
-        "type": "list-item",
+        "type": "li",
         "children": [
           {
-            "type": "list-item-container",
+            "type": "lic",
             "children": [
               {
                 "text": ""
@@ -161,7 +161,7 @@
     "indent": 0
   },
   {
-    "type": "heading-two",
+    "type": "h2",
     "children": [
       {
         "text": "I vurderingen vår har vi lagt vekt på disse dokumentene:"
@@ -169,13 +169,13 @@
     ]
   },
   {
-    "type": "bullet-list",
+    "type": "ul",
     "children": [
       {
-        "type": "list-item",
+        "type": "li",
         "children": [
           {
-            "type": "list-item-container",
+            "type": "lic",
             "children": [
               {
                 "text": ""
@@ -192,7 +192,7 @@
     "section": "section-mus",
     "children": [
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Vurderingen vår"
@@ -202,13 +202,13 @@
     ]
   },
   {
-    "type": "paragraph",
+    "type": "p",
     "children": [
       {
         "text": ""
       }
     ],
-    "textAlign": "text-align-left",
+    "align": "left",
     "indent": 0
   },
   {
@@ -216,7 +216,7 @@
     "section": "section-elg",
     "children": [
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Konklusjonen vår"
@@ -226,8 +226,8 @@
     ]
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": "Vi har kommet frem til at \t\t. Du har fått [delvis] medhold i klagen din."
@@ -236,8 +236,8 @@
     "indent": 0
   },
   {
-    "type": "paragraph",
-    "textAlign": "text-align-left",
+    "type": "p",
+    "align": "left",
     "children": [
       {
         "text": "Vedtaket er gjort etter "
@@ -256,7 +256,7 @@
     "section": "section-ape",
     "children": [
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Du har rett til å anke"
@@ -264,8 +264,8 @@
         ]
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Hvis du mener dette vedtaket er feil, kan du anke til Trygderetten innen seks uker fra den datoen vedtaket kom fram til deg. Du finner informasjon, skjema og første side for innsending på "
@@ -284,8 +284,8 @@
         "indent": 0
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Anken må være underskrevet av deg."
@@ -294,8 +294,8 @@
         "indent": 0
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "I trygdesaker må du først anke til Trygderetten før du kan ta saken videre til lagmannsretten."
@@ -306,13 +306,13 @@
     ]
   },
   {
-    "type": "paragraph",
+    "type": "p",
     "children": [
       {
         "text": ""
       }
     ],
-    "textAlign": "text-align-left",
+    "align": "left",
     "indent": 0
   },
   {
@@ -320,7 +320,7 @@
     "section": "section-gris",
     "children": [
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Informasjon om dekning av sakskostnader"
@@ -328,8 +328,8 @@
         ]
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Dersom vi har gjort om vedtaket til din fordel kan du ha rett til å få dekket vesentlige kostnader som har vært nødvendige for å få endret vedtaket."
@@ -338,8 +338,8 @@
         "indent": 0
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Dette må du søke om innen tre uker fra den datoen dette vedtaket er kommet fram til deg. Når du søker om å få dekket utgifter til juridisk bistand, må du legge ved spesifisert timeliste og faktura. Søknaden sender du til NAV Klageinstans Sakskostnader, postboks 22, 4661 Kristiansand. "
@@ -354,7 +354,7 @@
     "section": "section-sel",
     "children": [
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Du har rett til innsyn"
@@ -362,8 +362,8 @@
         ]
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Du har rett til å se dokumentene i saken din."
@@ -372,7 +372,7 @@
         "indent": 0
       },
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Informasjon om fri rettshjelp"
@@ -380,8 +380,8 @@
         ]
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
@@ -390,7 +390,7 @@
         "indent": 0
       },
       {
-        "type": "heading-two",
+        "type": "h2",
         "children": [
           {
             "text": "Har du spørsmål?"
@@ -398,8 +398,8 @@
         ]
       },
       {
-        "type": "paragraph",
-        "textAlign": "text-align-left",
+        "type": "p",
+        "align": "left",
         "children": [
           {
             "text": "Du finner mer informasjon på nav.no. Hvis du ikke finner svar på spørsmålet ditt, kontakt oss på nav.no/kontakt."
@@ -449,7 +449,7 @@
         "section": "section-gnu",
         "children": [
           {
-            "type": "heading-two",
+            "type": "h2",
             "children": [
               {
                 "text": "Regelverket som gjelder i saken"
@@ -462,13 +462,13 @@
         "type": "regelverk-container",
         "children": [
           {
-            "type": "paragraph",
+            "type": "p",
             "children": [
               {
                 "text": ""
               }
             ],
-            "textAlign": "text-align-left",
+            "align": "left",
             "indent": 0
           }
         ]
