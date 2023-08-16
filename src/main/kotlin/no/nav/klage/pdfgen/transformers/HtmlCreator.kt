@@ -450,7 +450,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun addSignatureElement(map: Map<String, *>) {
         val dElement = document.create.div {
-            style = "margin-top: 12pt"
+            style = "margin-top: 24pt;"
             classes = setOf("wrapper")
             if (map.containsKey("medunderskriver")) {
                 val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
