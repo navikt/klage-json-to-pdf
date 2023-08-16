@@ -35,6 +35,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                     box-sizing: border-box;
                                     font-weight: 400;
                                     letter-spacing: 0;
+                                    white-space: pre-wrap;
                                 }
                                 *, ::before, ::after {
                                   box-sizing: inherit;
@@ -72,7 +73,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 #header span {
                                     font-size: 10pt;
-                                    white-space: pre;
                                 }
                                 img {
                                     display: block;
@@ -117,7 +117,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 td {
                                     border: 1pt solid #8F8F8F;
                                     word-wrap: break-word;
-                                    white-space: pre-wrap;
                                     vertical-align: top;
                                     text-align: left;
                                     background-color: transparent;
@@ -451,6 +450,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
     private fun addSignatureElement(map: Map<String, *>) {
         val dElement = document.create.div {
+            style = "margin-top: 12pt"
             classes = setOf("wrapper")
             if (map.containsKey("medunderskriver")) {
                 val medunderskriver = map["medunderskriver"] as Map<String, Map<String, *>>
