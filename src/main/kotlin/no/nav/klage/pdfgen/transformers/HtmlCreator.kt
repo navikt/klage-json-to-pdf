@@ -359,8 +359,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
             "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
             "table" -> {
-//                val colSizesInPx = map["colSizes"] as List<Int>
-//                inlineStyles += "width: ${(colSizesInPx.sumOf { it.coerceAtLeast(48) } * pxToPtRatio) + colSizesInPx.size}pt;"
                 TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
             }
 
@@ -384,6 +382,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 initialAttributes = emptyMap(),
                 consumer = this.consumer
             )
+
+            "empty-void" -> {
+                //just ignore
+                return
+            }
 
             else -> {
                 logger.warn("unknown element type: $elementType")
