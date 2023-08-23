@@ -166,9 +166,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
             "regelverk-container" -> {
                 if (validationMode) {
-                    if (children.isEmpty()) {
-                        throw EmptyRegelverkException("Empty regelverk")
-                    } else if (getTexts(map).isEmpty()) {
+                    if (children.isEmpty() || getTexts(map).isEmpty()) {
                         throw EmptyRegelverkException("Empty regelverk")
                     }
                 }
