@@ -102,6 +102,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "li" -> document.create.li()
             "table" -> {
                 val table = document.create.table {
+                    classes = applyClasses
+                    style = inlineStyles.joinToString(";")
                     if (map.containsKey("colSizes")) {
                         val colSizesInPx = map["colSizes"] as List<Int>
                         colGroup {
