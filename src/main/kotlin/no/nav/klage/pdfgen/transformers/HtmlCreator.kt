@@ -5,7 +5,6 @@ import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
-import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.transformers.ElementType.*
 import no.nav.klage.pdfgen.transformers.ElementType.FOOTER
@@ -13,7 +12,7 @@ import no.nav.klage.pdfgen.transformers.ElementType.HEADER
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import org.w3c.dom.Document
-import org.w3c.dom.Node
+import org.w3c.dom.Element
 import java.time.ZoneId
 import java.time.ZonedDateTime
 import java.time.format.DateTimeFormatter
@@ -70,6 +69,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                                 }
                                 .indent {
                                     padding-left: 24pt;
+                                }
+                                #header {
+                                    margin-bottom: 48pt;
                                 }
                                 #header span {
                                     font-size: 10pt;
@@ -190,6 +192,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private val document: Document = createHTMLDocument()
         .html {
             body {
+                id = "body"
                 div {
                     id = "header"
                     span {
@@ -198,12 +201,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                     }
                     img { src = "nav_logo.png" }
                 }
-                br { }
-                br { }
-                br { }
-                br { }
-
-                div { id = "div_content_id" }
             }
         }
 
@@ -213,11 +210,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private fun addLabelContentElement(map: Map<String, *>) {
         val result = map["result"] ?: return
 
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.append {
-            div {
-                p { +"$result" }
-            }
+        val body = document.getElementById("body")
+        body.append {
+            p { +"$result" }
         }
     }
 
@@ -260,11 +255,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         if (elementList != null) {
             elementList as List<Map<String, *>>
             elementList.forEach {
-                val div = document.create.div {
-                    this.addElementWithPossiblyChildren(map = it)
-                }
-                val divElement = document.getElementById("div_content_id") as Node
-                divElement.appendChild(div)
+                val element = createElementWithPossiblyChildren(map = it)
+                val body = document.getElementById("body")
+                body.appendChild(element)
             }
         } else {
             logger.error("No children element.")
@@ -301,14 +294,12 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun addElementWithPossiblyChildren(map: Map<String, *>) {
-        val div = document.create.div {
-            this.addElementWithPossiblyChildren(map = map)
-        }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(div)
+        val element = createElementWithPossiblyChildren(map = map)
+        val body = document.getElementById("body")
+        body.appendChild(element)
     }
 
-    private fun Tag.addElementWithPossiblyChildren(map: Map<String, *>) {
+    private fun createElementWithPossiblyChildren(map: Map<String, *>): Element {
         val elementType = map["type"]
         var children = emptyList<Map<String, *>>()
 
@@ -327,112 +318,67 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             inlineStyles += "margin-$alignment: ${24 * indent}pt"
         }
 
-        if (elementType == "placeholder") {
-            if (placeholderTextMissingInChildren(map)) {
-                if (validationMode) {
-                    throw EmptyPlaceholderException("Placeholder error")
-                } else {
-                    val text = map["placeholder"]
-                    addLeafElement(mapOf("text" to text), mutableSetOf("placeholder-text"))
-                }
-                return
-            }
-        }
-
         if (elementType != "page-break") {
             children = map["children"] as List<Map<String, *>>
         } else {
-            applyClasses.add("pageBreak")
+                applyClasses.add("pageBreak")
         }
 
         val element = when (elementType) {
-            "standard-text", "placeholder" -> SPAN(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h1" -> H1(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h2" -> H2(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h3" -> H3(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h4" -> H4(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h5" -> H5(initialAttributes = emptyMap(), consumer = this.consumer)
-            "h6" -> H6(initialAttributes = emptyMap(), consumer = this.consumer)
-            "p" -> P(initialAttributes = emptyMap(), consumer = this.consumer)
-            "ul" -> UL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "ol" -> OL(initialAttributes = emptyMap(), consumer = this.consumer)
-            "li" -> LI(initialAttributes = emptyMap(), consumer = this.consumer)
+            "h1" -> document.create.h1()
+            "h2" -> document.create.h2()
+            "h3" -> document.create.h3()
+            "p" -> document.create.p()
+            "ul" -> document.create.ul()
+            "ol" -> document.create.ol()
+            "li" -> document.create.li()
             "table" -> {
-                TABLE(initialAttributes = emptyMap(), consumer = this.consumer)
+                document.create.table()
             }
-
             "tr" -> {
                 if (map.containsKey("size")) {
                     val heightInPx = map["size"] as Int
                     inlineStyles += "height: ${(heightInPx * pxToPtRatio)}pt;"
                 }
-                TR(initialAttributes = emptyMap(), consumer = this.consumer)
-            }
-
-            "td" -> {
-                if (map.containsKey("colSpan")) {
-                    TD(initialAttributes = mapOf("colspan" to map["colSpan"].toString()), consumer = this.consumer)
-                } else {
-                    TD(initialAttributes = emptyMap(), consumer = this.consumer)
+                document.create.tr {
+                    style = "height: ${(heightInPx * pxToPtRatio)}pt;"
                 }
             }
-
-            "page-break", "indent", "lic" -> DIV(
-                initialAttributes = emptyMap(),
-                consumer = this.consumer
-            )
-
+            "td" -> document.create.td()
+            "page-break", "lic" -> document.create.div()
             "empty-void" -> {
                 //just ignore
-                return
+                document.create.div()
             }
 
             else -> {
                 logger.warn("unknown element type: $elementType")
-                return
+                document.create.div()
             }
         }
 
-        element.visit {
-            classes = applyClasses
-            style = inlineStyles.joinToString(";")
-
-            //special handling for tables
-            if (this is TABLE) {
-                if (map.containsKey("colSizes")) {
-                    val colSizesInPx = map["colSizes"] as List<Int>
-                    colGroup {
-                        colSizesInPx.forEach { colSizeInPx ->
-                            val width = if (colSizeInPx == 0) {
-                                "auto"
-                            } else {
-                                (colSizeInPx.coerceAtLeast(48) * pxToPtRatio).toString() + "pt"
-                            }
-                            col {
-                                style = "width: ${width};"
-                            }
-                        }
-                    }
-                }
-
-                //wrap in tbody
-                tbody {
-                    loopOverChildren(children)
-                }
-            } else {
-                loopOverChildren(children)
-            }
+        if (applyClasses.isNotEmpty()) {
+            element.setAttribute("class", applyClasses.joinToString(" "))
         }
+        if (inlineStyles.isNotEmpty()) {
+            element.setAttribute("style", inlineStyles.joinToString(";"))
+        }
+
+        loopOverChildren(children).forEach {
+            element.appendChild(it)
+        }
+
+        return element
     }
 
-    private fun HTMLTag.loopOverChildren(
+    private fun loopOverChildren(
         children: List<Map<String, *>>,
-    ) {
-        children.forEach {
+    ): List<Element> {
+        return children.map {
             when (it.getType()) {
-                LEAF -> this.addLeafElement(it)
-                ELEMENT -> this.addElementWithPossiblyChildren(map = it)
-                else -> {}
+                LEAF -> createLeafElement(it)
+                ELEMENT -> createElementWithPossiblyChildren(map = it)
+                else -> { throw RuntimeException("")}
             }
         }
     }
@@ -446,8 +392,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 }
             }
         }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(dElement)
+        val body = document.getElementById("body")
+        body.appendChild(dElement)
     }
 
     private fun addSignatureElement(map: Map<String, *>) {
@@ -471,11 +417,11 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 }
             }
         }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(dElement)
+        val body = document.getElementById("body")
+        body.appendChild(dElement)
     }
 
-    private fun Tag.addLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()) {
+    private fun createLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()): Element {
         var text = map["text"] ?: throw RuntimeException("no content here")
         text as String
         if (text.isEmpty()) {
@@ -492,7 +438,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             inputClasses += "italic"
         }
 
-        this.consumer.span {
+        return document.create.span {
             classes = inputClasses
             +text
         }
@@ -506,8 +452,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             classes = setOf("alignRight")
             +"Dato: $dateAsText"
         }
-        val divElement = document.getElementById("div_content_id") as Node
-        divElement.appendChild(div)
+        val body = document.getElementById("body")
+        body.appendChild(div)
     }
 
     fun getDoc(): Document {
@@ -536,6 +482,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
 
         document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
+
+        println(document.serialize(prettyPrint = false))
 
         secureLogger.debug(document.serialize())
         return document
