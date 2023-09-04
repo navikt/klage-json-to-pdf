@@ -1,6 +1,7 @@
 package no.nav.klage.pdfgen.transformers
 
 import kotlinx.html.*
+import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
@@ -29,17 +30,21 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             body {
                 id = "body"
                 header {
-                    span {
+                    div {
                         id = "header_text"
-                        +"Returadresse:\nNAV Klageinstans"
                     }
-                    img { src = "nav_logo.png" }
+                    div {
+                        id = "logo_and_current_date"
+                        div {
+                            id = "logo"
+                            img { src = "nav_logo.png" }
+                        }
+                    }
                 }
             }
         }
 
-    private var footer =
-        "NAV Klageinstans\\Anav.no"
+    private var footer = ""
 
     private fun getTexts(map: Map<String, *>): List<String> {
         val texts = mutableListOf<String>()
@@ -206,16 +211,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 })
             }
 
-            "current-date" -> {
-                val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
-                val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
-
-                return listOf(document.create.div {
-                    classes = setOf("alignRight")
-                    +"Dato: $dateAsText"
-                })
-            }
-
             "empty-void" -> document.create.div()
 
             else -> {
@@ -250,6 +245,20 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         }
     }
 
+    private fun setCurrentDate() {
+        val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
+        val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
+
+        document.getElementById("logo_and_current_date").append {
+            div {
+                div {
+                    id = "current_date"
+                    +"Dato: $dateAsText"
+                }
+            }
+        }
+    }
+
     private fun createLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()): Element {
         var text = map["text"] ?: throw RuntimeException("no content here")
         text as String
@@ -278,15 +287,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             processElement(it)
         }
 
-        //defaults for now
-        if (!headerAndFooterExists(dataList)) {
-            val span = document.getElementById("header_text")
-            span.textContent = "Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
-
-            footer =
-                "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
-        }
-
         //add css when we have a footer set
         val head = document.create.head {
             style {
@@ -300,16 +300,15 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
 
+        println(document.serialize())
         secureLogger.debug(document.serialize())
         return document
     }
 
-    private fun headerAndFooterExists(list: List<Map<String, *>>) =
-        list.any { it["type"] == "header" } && list.any { it["type"] == "footer" }
-
     private fun processElement(map: Map<String, *>) {
         when (map["type"]) {
             "header" -> setHeaderText(map)
+            "current-date" -> setCurrentDate()
             "footer" -> setFooter(map)
             else -> addElementWithPossiblyChildren(map)
         }
@@ -330,6 +329,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun isElement(node: Map<String, *>): Boolean {
+        //and not currentDate
         return node.containsKey("type")
     }
 }
