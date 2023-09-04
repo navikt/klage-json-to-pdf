@@ -42,17 +42,31 @@ fun getCss(footer: String) = """
         margin-bottom: 0;
         page-break-after: avoid;
     }
+    #header_text {
+        float: left;
+        width: 60%;        
+    }
     header {
-        margin-bottom: 48pt;
+        margin-bottom: 24pt;
+        height: 80pt;
     }
     header span {
         font-size: 10pt;
     }
-    img {
-        display: block;
-        width: 100pt;
+    #logo_and_current_date {
+        width: 30%;
         float: right;
     }
+    #current_date {
+        white-space: nowrap;
+        float: right;
+        margin-top: 6pt;
+    }
+    #logo img {
+        display: block;
+        height: 60pt;
+        float: right;
+    }    
     p {
         font-size: 12pt;
         margin-top: 1em;

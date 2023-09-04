@@ -1,6 +1,7 @@
 package no.nav.klage.pdfgen.transformers
 
 import kotlinx.html.*
+import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
@@ -29,10 +30,16 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             body {
                 id = "body"
                 header {
-                    span {
+                    div {
                         id = "header_text"
                     }
-                    img { src = "nav_logo.png" }
+                    div {
+                        id = "logo_and_current_date"
+                        div {
+                            id = "logo"
+                            img { src = "nav_logo.png" }
+                        }
+                    }
                 }
             }
         }
@@ -204,16 +211,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 })
             }
 
-            "current-date" -> {
-                val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
-                val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
-
-                return listOf(document.create.div {
-                    classes = setOf("alignRight")
-                    +"Dato: $dateAsText"
-                })
-            }
-
             "empty-void" -> document.create.div()
 
             else -> {
@@ -244,6 +241,20 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 createElementsWithPossiblyChildren(map = it)
             } else {
                 listOf(createLeafElement(it))
+            }
+        }
+    }
+
+    private fun setCurrentDate() {
+        val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
+        val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
+
+        document.getElementById("logo_and_current_date").append {
+            div {
+                div {
+                    id = "current_date"
+                    +"Dato: $dateAsText"
+                }
             }
         }
     }
@@ -289,6 +300,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
 
+        println(document.serialize())
         secureLogger.debug(document.serialize())
         return document
     }
@@ -296,6 +308,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private fun processElement(map: Map<String, *>) {
         when (map["type"]) {
             "header" -> setHeaderText(map)
+            "current-date" -> setCurrentDate()
             "footer" -> setFooter(map)
             else -> addElementWithPossiblyChildren(map)
         }
@@ -316,6 +329,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun isElement(node: Map<String, *>): Boolean {
+        //and not currentDate
         return node.containsKey("type")
     }
 }
