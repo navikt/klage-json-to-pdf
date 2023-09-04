@@ -278,15 +278,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             processElement(it)
         }
 
-        //defaults for now
-        if (!headerAndFooterExists(dataList)) {
-            val span = document.getElementById("header_text")
-            span.textContent = "Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim"
-
-            footer =
-                "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 21 07 17 30\\Anav.no"
-        }
-
         //add css when we have a footer set
         val head = document.create.head {
             style {
@@ -303,9 +294,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         secureLogger.debug(document.serialize())
         return document
     }
-
-    private fun headerAndFooterExists(list: List<Map<String, *>>) =
-        list.any { it["type"] == "header" } && list.any { it["type"] == "footer" }
 
     private fun processElement(map: Map<String, *>) {
         when (map["type"]) {
