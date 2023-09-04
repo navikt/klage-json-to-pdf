@@ -31,15 +31,13 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 header {
                     span {
                         id = "header_text"
-                        +"Returadresse:\nNAV Klageinstans"
                     }
                     img { src = "nav_logo.png" }
                 }
             }
         }
 
-    private var footer =
-        "NAV Klageinstans\\Anav.no"
+    private var footer = ""
 
     private fun getTexts(map: Map<String, *>): List<String> {
         val texts = mutableListOf<String>()
