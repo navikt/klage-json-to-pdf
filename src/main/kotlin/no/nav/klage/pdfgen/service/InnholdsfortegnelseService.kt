@@ -52,7 +52,7 @@ class InnholdsfortegnelseService {
                                     td { +"${counter++} av $totalCount" }
                                     td { +it.tittel }
                                     td { +it.tema }
-                                    td { +it.dato.toString() }
+                                    td { +it.opprettet.toLocalDate().toString() }
                                     td { +it.avsenderMottaker }
                                     td { +it.saksnummer }
                                     td { +it.type }
@@ -81,7 +81,7 @@ class InnholdsfortegnelseService {
                                     td { +"${counter++} av $totalCount" }
                                     td { +it.tittel }
                                     td { +it.tema }
-                                    td { +it.dato.toString() }
+                                    td { +it.opprettet.toLocalDate().toString() }
                                     td { +it.avsenderMottaker }
                                     td { +it.saksnummer }
                                     td { +it.type }
