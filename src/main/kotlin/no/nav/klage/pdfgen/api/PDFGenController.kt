@@ -3,8 +3,10 @@ package no.nav.klage.pdfgen.api
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
+import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
@@ -20,7 +22,8 @@ import org.springframework.web.bind.annotation.RestController
 @RestController
 @Tag(name = "kabal-json-to-pdf", description = "Create PDF from JSON")
 class PDFGenController(
-    private val pdfGenService: PDFGenService
+    private val pdfGenService: PDFGenService,
+    private val innholdsfortegnelseService: InnholdsfortegnelseService,
 ) {
 
     companion object {
@@ -46,6 +49,30 @@ class PDFGenController(
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
         responseHeaders.add("Content-Disposition", "inline; filename=file.pdf")
+        return ResponseEntity(
+            data,
+            responseHeaders,
+            HttpStatus.OK
+        )
+    }
+
+    @Operation(
+        summary = "Generate pdf from json",
+        description = "Generate pdf from json"
+    )
+    @ResponseBody
+    @PostMapping("/toinnholdsfortegnelse")
+    fun toInnholdsfortegnelsePDF(
+        @RequestBody input: InnholdsfortegnelseRequest,
+    ): ResponseEntity<ByteArray> {
+        logger.debug("toInnholdsfortegnelsePDF() called. See body in secure logs")
+        secureLogger.debug("toInnholdsfortegnelsePDF() called. Received input: {}", input)
+
+        val data = innholdsfortegnelseService.getInnholdsfortegnelsePDFAsByteArray(input)
+
+        val responseHeaders = HttpHeaders()
+        responseHeaders.contentType = MediaType.APPLICATION_PDF
+        responseHeaders.add("Content-Disposition", "inline; filename=innholdsfortegnelse.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
