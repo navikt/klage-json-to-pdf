@@ -183,7 +183,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
             "label-content" -> {
                 val result = map["result"] ?: ""
-                return listOf(document.create.p {
+                return listOf(document.create.span {
                     +"$result"
                 })
             }
