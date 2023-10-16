@@ -300,7 +300,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
 
-        println(document.serialize())
         secureLogger.debug(document.serialize())
         return document
     }
