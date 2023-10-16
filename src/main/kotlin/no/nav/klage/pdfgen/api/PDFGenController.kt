@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.ResponseBody
 import org.springframework.web.bind.annotation.RestController
+import org.w3c.dom.Document
 
 @RestController
 @Tag(name = "kabal-json-to-pdf", description = "Create PDF from JSON")
@@ -51,6 +52,21 @@ class PDFGenController(
             responseHeaders,
             HttpStatus.OK
         )
+    }
+
+    @Operation(
+        summary = "Generate html from json",
+        description = "Generate html from json"
+    )
+    @ResponseBody
+    @PostMapping("/tohtml")
+    fun toHTML(
+        @RequestBody json: String
+    ): Document {
+        logger.debug("toHTML() called. See body in secure logs")
+        secureLogger.debug("toHTML() called. Received json: {}", json)
+
+        return pdfGenService.getHTMLDocument(json)
     }
 
     @Operation(
