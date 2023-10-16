@@ -11,12 +11,14 @@ import com.openhtmltopdf.svgsupport.BatikSVGDrawer
 import no.nav.klage.pdfgen.Application
 import no.nav.klage.pdfgen.transformers.HtmlCreator
 import org.apache.pdfbox.io.IOUtils
+import org.apache.pdfbox.pdmodel.PDDocument
+import org.fit.pdfdom.PDFDomTree
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
-import java.io.OutputStream
+import java.io.*
+import java.nio.charset.StandardCharsets
+
 
 val objectMapper: ObjectMapper = ObjectMapper()
     .registerKotlinModule()
@@ -46,6 +48,22 @@ class PDFGenService {
 
     fun getHTMLDocument(json: String): Document {
         return getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
+    }
+
+    fun getPdfToHTMLDocument(json: String): String {
+        val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
+        val os = ByteArrayOutputStream()
+        createPDFA(doc, os)
+        val outputStream = os.toByteArray()
+
+        val pdf: PDDocument = PDDocument.load(outputStream)
+        val parser = PDFDomTree()
+        val baos = ByteArrayOutputStream()
+        val output: Writer = PrintWriter(baos, true, StandardCharsets.UTF_8)
+        parser.writeText(pdf, output)
+        output.close()
+        pdf.close()
+        return String(baos.toByteArray(), StandardCharsets.UTF_8)
     }
 
     fun validateDocumentContent(json: String) {

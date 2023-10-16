@@ -61,13 +61,28 @@ class PDFGenController(
     )
     @ResponseBody
     @PostMapping("/tohtml")
-    fun toHTML(
+    fun toHtml(
         @RequestBody json: String
     ): String {
-        logger.debug("toHTML() called. See body in secure logs")
-        secureLogger.debug("toHTML() called. Received json: {}", json)
+        logger.debug("toHtml() called. See body in secure logs")
+        secureLogger.debug("toHtml() called. Received json: {}", json)
 
         return pdfGenService.getHTMLDocument(json).serialize(prettyPrint = false)
+    }
+
+    @Operation(
+        summary = "Generate pdf then html from json",
+        description = "Generate pdf then html from json"
+    )
+    @ResponseBody
+    @PostMapping("/topdftohtml")
+    fun toPdfToHtml(
+        @RequestBody json: String
+    ): String {
+        logger.debug("toPdfToHtml() called. See body in secure logs")
+        secureLogger.debug("toPdfToHtml() called. Received json: {}", json)
+
+        return pdfGenService.getPdfToHTMLDocument(json)
     }
 
     @Operation(
