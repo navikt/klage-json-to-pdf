@@ -2,6 +2,7 @@ package no.nav.klage.pdfgen.api
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
@@ -62,11 +63,11 @@ class PDFGenController(
     @PostMapping("/tohtml")
     fun toHTML(
         @RequestBody json: String
-    ): Document {
+    ): String {
         logger.debug("toHTML() called. See body in secure logs")
         secureLogger.debug("toHTML() called. Received json: {}", json)
 
-        return pdfGenService.getHTMLDocument(json)
+        return pdfGenService.getHTMLDocument(json).serialize(prettyPrint = false)
     }
 
     @Operation(
