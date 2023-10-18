@@ -183,7 +183,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
             "label-content" -> {
                 val result = map["result"] ?: ""
-                return listOf(document.create.p {
+                return listOf(document.create.span {
                     +"$result"
                 })
             }
@@ -300,7 +300,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
 
         document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
 
-        println(document.serialize())
         secureLogger.debug(document.serialize())
         return document
     }
