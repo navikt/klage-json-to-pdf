@@ -22,89 +22,52 @@ class InnholdsfortegnelseService {
     }
 
     private fun getHTMLDocument(input: InnholdsfortegnelseRequest): Document {
-
         var counter = 1
-        val totalCount = input.dokumenterUnderArbeid.size + input.journalfoerteDokumenter.size
+        val totalCount = input.documents.size
 
         val document = createHTMLDocument()
             .html {
+                head {
+                    style {
+                        unsafe {
+                            raw(
+                                getCss("")
+                            )
+                        }
+                    }
+                }
                 body {
                     id = "body"
                     h1 { +"Innholdsfortegnelse" }
 
-                    if (input.dokumenterUnderArbeid.isNotEmpty()) {
-                        h3 { +"Ikke (enda) journalførte dokumenter" }
-
+                    if (input.documents.isNotEmpty()) {
                         table {
                             thead {
                                 tr {
                                     th { +"Nummer" }
-                                    th { +"Tittel" }
-                                    th { +"Tema" }
                                     th { +"Dato" }
-                                    th { +"Mottaker" }
+                                    th { +"Tema" }
                                     th { +"Saksnummer" }
-                                    th { +"Type" }
+                                    th { +"Avsender/Mottaker" }
+                                    th { +"Tittel" }
                                 }
                             }
-                            input.dokumenterUnderArbeid.forEach {
+                            input.documents.forEach {
                                 tr {
                                     td { +"${counter++} av $totalCount" }
-                                    td { +it.tittel }
+                                    td { +it.dato.toString() }
                                     td { +it.tema }
-                                    td { +it.opprettet.toLocalDate().toString() }
-                                    td { +it.avsenderMottaker }
                                     td { +it.saksnummer }
-                                    td { +it.type }
-                                }
-                            }
-                        }
-                    }
-
-                    if (input.journalfoerteDokumenter.isNotEmpty()) {
-                        h3 { +"Journalførte dokumenter" }
-
-                        table {
-                            thead {
-                                tr {
-                                    th { +"Nummer" }
-                                    th { +"Tittel" }
-                                    th { +"Tema" }
-                                    th { +"Dato" }
-                                    th { +"Avsender/mottaker" }
-                                    th { +"Saksnummer" }
-                                    th { +"Type" }
-                                }
-                            }
-                            input.journalfoerteDokumenter.forEach {
-                                tr {
-                                    td { +"${counter++} av $totalCount" }
+                                    td { +it.avsenderMottaker }
                                     td { +it.tittel }
-                                    td { +it.tema }
-                                    td { +it.opprettet.toLocalDate().toString() }
-                                    td { +it.avsenderMottaker }
-                                    td { +it.saksnummer }
-                                    td { +it.type }
                                 }
                             }
                         }
                     }
                 }
             }
-        //add css when we have a footer set
-        val head = document.create.head {
-            style {
-                unsafe {
-                    raw(
-                        getCss("footer")
-                    )
-                }
-            }
-        }
 
-        document.childNodes.item(0).insertBefore(head, document.childNodes.item(0).firstChild)
-
-        println(document.serialize())
+//        println(document.serialize())
 
         return document
     }
