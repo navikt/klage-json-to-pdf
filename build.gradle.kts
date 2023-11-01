@@ -6,7 +6,6 @@ val jsoupVersion = "1.16.1"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.9.1"
 val springDocVersion = "2.2.0"
-val pdf2DomVersion = "2.0.3"
 
 repositories {
     mavenCentral()
@@ -38,8 +37,6 @@ dependencies {
     implementation("com.openhtmltopdf:openhtmltopdf-pdfbox:$openHtmlToPdfVersion")
     implementation("com.openhtmltopdf:openhtmltopdf-slf4j:$openHtmlToPdfVersion")
     implementation("com.openhtmltopdf:openhtmltopdf-svg-support:$openHtmlToPdfVersion")
-
-    implementation("net.sf.cssbox:pdf2dom:$pdf2DomVersion")
 
     implementation("ch.qos.logback:logback-classic")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")

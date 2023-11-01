@@ -11,14 +11,12 @@ import com.openhtmltopdf.svgsupport.BatikSVGDrawer
 import no.nav.klage.pdfgen.Application
 import no.nav.klage.pdfgen.transformers.HtmlCreator
 import org.apache.pdfbox.io.IOUtils
-import org.apache.pdfbox.pdmodel.PDDocument
-import org.fit.pdfdom.PDFDomTree
 import org.springframework.core.io.ClassPathResource
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
-import java.io.*
-import java.nio.charset.StandardCharsets
-
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
+import java.io.OutputStream
 
 val objectMapper: ObjectMapper = ObjectMapper()
     .registerKotlinModule()
