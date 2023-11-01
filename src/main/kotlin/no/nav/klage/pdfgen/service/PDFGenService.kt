@@ -44,6 +44,10 @@ class PDFGenService {
         return os.toByteArray()
     }
 
+    fun getHTMLDocument(json: String): Document {
+        return getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
+    }
+
     fun validateDocumentContent(json: String) {
         getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>, true)
     }
