@@ -71,21 +71,6 @@ class PDFGenController(
     }
 
     @Operation(
-        summary = "Generate pdf then html from json",
-        description = "Generate pdf then html from json"
-    )
-    @ResponseBody
-    @PostMapping("/topdftohtml")
-    fun toPdfToHtml(
-        @RequestBody json: String
-    ): String {
-        logger.debug("toPdfToHtml() called. See body in secure logs")
-        secureLogger.debug("toPdfToHtml() called. Received json: {}", json)
-
-        return pdfGenService.getPdfToHTMLDocument(json)
-    }
-
-    @Operation(
         summary = "Validate pdf input",
         description = "Validate pdf input"
     )

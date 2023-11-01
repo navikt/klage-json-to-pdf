@@ -50,22 +50,6 @@ class PDFGenService {
         return getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
     }
 
-    fun getPdfToHTMLDocument(json: String): String {
-        val doc = getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>)
-        val os = ByteArrayOutputStream()
-        createPDFA(doc, os)
-        val outputStream = os.toByteArray()
-
-        val pdf: PDDocument = PDDocument.load(outputStream)
-        val parser = PDFDomTree()
-        val baos = ByteArrayOutputStream()
-        val output: Writer = PrintWriter(baos, true, StandardCharsets.UTF_8)
-        parser.writeText(pdf, output)
-        output.close()
-        pdf.close()
-        return String(baos.toByteArray(), StandardCharsets.UTF_8)
-    }
-
     fun validateDocumentContent(json: String) {
         getHTMLDocument(jacksonObjectMapper().readValue(json, List::class.java) as List<Map<String, *>>, true)
     }

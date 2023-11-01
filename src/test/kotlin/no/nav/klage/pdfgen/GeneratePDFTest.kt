@@ -5,6 +5,7 @@ import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.PDFGenService
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import kotlinx.html.dom.serialize
 import java.io.File
 import java.nio.file.Files
 import java.nio.file.Path
@@ -13,6 +14,13 @@ import java.nio.file.Path
 class GeneratePDF {
 
     val path = "src/test/resources/"
+
+    @Test
+    fun `generate html from full input`() {
+        val jsonData = File(path + "full-document.json").readText()
+        val data = PDFGenService().getHTMLDocument(jsonData)
+        Files.writeString(Path.of("test.html"), data.serialize(prettyPrint = false))
+    }
 
     @Test
     fun `generate pdf from full input`() {
