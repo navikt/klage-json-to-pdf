@@ -167,7 +167,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 }
             }
 
-            "maltekst", "redigerbar-maltekst", "regelverk" -> return loopOverChildren(children)
+            "maltekst", "redigerbar-maltekst", "regelverk", "maltekstseksjon" -> return loopOverChildren(children)
 
             "regelverk-container" -> {
                 if (validationMode) {
