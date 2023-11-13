@@ -1,14 +1,12 @@
 package no.nav.klage.pdfgen
 
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
+import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest.Document.Type
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
-import no.nav.klage.pdfgen.api.view.Type
 import org.junit.jupiter.api.Test
 import java.nio.file.Files
 import java.nio.file.Path
 import java.time.LocalDate
-import java.time.LocalDateTime
-
 
 class GenerateInnholdsfortegnelsePDFTest {
 
