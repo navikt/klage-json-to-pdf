@@ -2,6 +2,7 @@ package no.nav.klage.pdfgen
 
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
+import no.nav.klage.pdfgen.api.view.Type
 import org.junit.jupiter.api.Test
 import java.nio.file.Files
 import java.nio.file.Path
@@ -16,40 +17,40 @@ class GenerateInnholdsfortegnelsePDFTest {
         val data = InnholdsfortegnelseService().getInnholdsfortegnelsePDFAsByteArray(InnholdsfortegnelseRequest(
             documents = listOf(
                 InnholdsfortegnelseRequest.Document(
-                    tittel = "Vedtak 2024",
-                    tema = "Foreldrepenger",
+                    tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
+                    tema = "Kompensasjon for selvstendig næringsdrivende/frilansere",
                     dato = LocalDate.now(),
-                    avsenderMottaker = "Kalle Anka, Kajsa Anka",
+                    avsenderMottaker = "Kalle Anka",
                     saksnummer = "123456",
-                    type = "U"
+                    type = Type.U
                 ),
                 InnholdsfortegnelseRequest.Document(
                     tittel = "ROL notat 2023",
-                    tema = "Foreldrepenger",
+                    tema = "Arbeidsrådgivning - psykologtjenester",
                     dato = LocalDate.now(),
-                    avsenderMottaker = "Kalle Anka, Kajsa Anka",
+                    avsenderMottaker = "Kajsa Anka",
                     saksnummer = "123456",
-                    type = "U"
+                    type = Type.I
                 ),
                 InnholdsfortegnelseRequest.Document(
                     tittel = "Vedtak 2022",
-                    tema = "Foreldrepenger",
+                    tema = "Helsetjenester og ortopediske hjelpemidler",
                     dato = LocalDate.now().minusMonths(4),
-                    avsenderMottaker = "Kalle Anka, Kajsa Anka",
+                    avsenderMottaker = "Mette Wendy Lindberg Gulbrandsen",
                     saksnummer = "123456",
-                    type = "U"
+                    type = Type.N
                 ),
                 InnholdsfortegnelseRequest.Document(
-                    tittel = "Klage 2021",
+                    tittel = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et",
                     tema = "Foreldrepenger",
                     dato = LocalDate.now().minusMonths(5),
                     avsenderMottaker = "Knatte Anka",
-                    saksnummer = "123456",
-                    type = "I"
+                    saksnummer = "123456", 
+                    type = Type.U
                 ),
             ),
         ))
-        Files.write(Path.of("test.pdf"), data)
+        Files.write(Path.of("vedleggsliste.pdf"), data)
     }
 
 }

@@ -5,7 +5,8 @@ import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
-import no.nav.klage.pdfgen.transformers.getCss
+import no.nav.klage.pdfgen.api.view.Type
+import no.nav.klage.pdfgen.transformers.getVedleggsoversiktCss
 import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
@@ -31,7 +32,7 @@ class InnholdsfortegnelseService {
                     style {
                         unsafe {
                             raw(
-                                getCss("")
+                                getVedleggsoversiktCss("")
                             )
                         }
                     }
@@ -44,22 +45,79 @@ class InnholdsfortegnelseService {
                         table {
                             thead {
                                 tr {
-                                    th { +"Nummer" }
-                                    th { +"Dato" }
-                                    th { +"Tema" }
-                                    th { +"Saksnummer" }
-                                    th { +"Avsender/Mottaker" }
+                                    th { 
+                                        classes = setOf("white-space-no-wrap")
+                                        +"Nr."
+                                    }
+                                    th {
+                                        classes = setOf("white-space-no-wrap")
+                                         +"Dato"
+                                    }
                                     th { +"Tittel" }
+
                                 }
                             }
-                            input.documents.forEach {
-                                tr {
-                                    td { +"${counter++} av $totalCount" }
-                                    td { +it.dato.toString() }
-                                    td { +it.tema }
-                                    td { +it.saksnummer }
-                                    td { +it.avsenderMottaker }
-                                    td { +it.tittel }
+                            
+                            tbody {
+                                input.documents.forEachIndexed { index, it ->
+                                    tr {
+                                        classes = setOf(if (index % 2 == 0) "even" else "odd")
+                                        
+                                        td { 
+                                          classes = setOf("white-space-no-wrap")
+                                          +"${counter++} av $totalCount" 
+                                        }
+                                        td { 
+                                            classes = setOf("white-space-no-wrap")
+                                            +it.dato.toString()
+                                        }
+                                        td { +it.tittel }
+    
+                                    }
+                                    
+                                    tr {
+                                        classes = setOf("extra-row", if (index % 2 == 0) "even" else "odd")
+                                        td { 
+                                            colSpan = "3"
+
+                                            div {
+                                                label { +"Saksnr.: "}
+                                                span { 
+                                                    classes = setOf("saksnummer")
+                                                    +it.saksnummer
+                                                 }
+                                            }
+                                            
+                                            when(it.type) {
+                                                Type.I -> div {
+                                                    div {
+                                                        label {+"Avsender: "}
+                                                        span {+it.avsenderMottaker}
+                                                    }
+                                                    div {
+                                                        label {+"Mottaker: "}
+                                                        span {+"NAV"}
+                                                    }
+                                                }
+                                                Type.U -> div {
+                                                    div {
+                                                        label {+"Avsender: "}
+                                                        span {+"NAV"}
+                                                    }
+                                                    div {
+                                                        label {+"Mottaker: "}
+                                                        span {+it.avsenderMottaker}
+                                                    }
+                                                }
+                                                Type.N -> div {+"Notat"; classes = setOf("bold")}
+                                            }
+
+                                            div {
+                                                label { +"Tema: "}
+                                                span { +it.tema }
+                                            }
+                                        }
+                                    }
                                 }
                             }
                         }
@@ -67,7 +125,7 @@ class InnholdsfortegnelseService {
                 }
             }
 
-//        println(document.serialize())
+       println(document.serialize())
 
         return document
     }

@@ -11,6 +11,12 @@ data class DocumentValidationResponse(
     )
 }
 
+public enum class Type {
+    I,
+    U,
+    N,
+}
+
 data class InnholdsfortegnelseRequest(
     val documents: List<Document>,
 ) {
@@ -20,6 +26,6 @@ data class InnholdsfortegnelseRequest(
         val dato: LocalDate,
         val avsenderMottaker: String,
         val saksnummer: String,
-        val type: String,
+        val type: Type,
     )
 }
