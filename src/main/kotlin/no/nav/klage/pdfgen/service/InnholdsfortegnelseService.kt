@@ -11,6 +11,9 @@ import no.nav.klage.pdfgen.util.createPDFA
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
+import java.time.format.DateTimeFormatter
+import java.time.ZoneId
+import java.util.Locale
 
 @Service
 class InnholdsfortegnelseService {
@@ -21,6 +24,8 @@ class InnholdsfortegnelseService {
         createPDFA(doc, os)
         return os.toByteArray()
     }
+
+    private val DATE_FORMAT = DateTimeFormatter.ofPattern("dd. MMM yyyy", Locale("nb", "NO")).withZone(ZoneId.of("Europe/Oslo"))
 
     private fun getHTMLDocument(input: InnholdsfortegnelseRequest): Document {
         var counter = 1
@@ -39,7 +44,7 @@ class InnholdsfortegnelseService {
                 }
                 body {
                     id = "body"
-                    h1 { +"Innholdsfortegnelse" }
+                    h1 { +"Vedleggsliste" }
 
                     if (input.documents.isNotEmpty()) {
                         table {
@@ -69,7 +74,7 @@ class InnholdsfortegnelseService {
                                         }
                                         td { 
                                             classes = setOf("white-space-no-wrap")
-                                            +it.dato.toString()
+                                            +it.dato.format(DATE_FORMAT)
                                         }
                                         td { +it.tittel }
     
