@@ -48,7 +48,7 @@ class GenerateInnholdsfortegnelsePDFTest {
                 ),
             ),
         ))
-        Files.write(Path.of("vedleggsliste.pdf"), data)
+        Files.write(Path.of("vedleggsoversikt.pdf"), data)
     }
 
 }

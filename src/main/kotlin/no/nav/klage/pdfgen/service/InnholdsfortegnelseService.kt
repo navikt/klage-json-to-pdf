@@ -43,7 +43,7 @@ class InnholdsfortegnelseService {
                 }
                 body {
                     id = "body"
-                    h1 { +"Vedleggsliste" }
+                    h1 { +"Vedleggsoversikt" }
 
                     if (input.documents.isNotEmpty()) {
                         table {

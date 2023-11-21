@@ -72,7 +72,7 @@ class PDFGenController(
 
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
-        responseHeaders.add("Content-Disposition", "inline; filename=innholdsfortegnelse.pdf")
+        responseHeaders.add("Content-Disposition", "inline; filename=vedleggsoversikt.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
