@@ -26,7 +26,6 @@ fun getVedleggsoversiktCss() = """
         margin-top: 24pt;
         border-collapse: collapse;
         width: 100%;
-        -fs-table-paginate: paginate;
         font-size: 12pt;
     }
 
@@ -34,8 +33,16 @@ fun getVedleggsoversiktCss() = """
         background-color: #E0E3E6;
     }
 
+    tr, td {
+        page-break-inside: avoid;
+    }
+
+    .extra-row {
+        page-break-before: avoid;
+    }
+
     td, th {
-        padding: 8pt;
+        padding: 6pt;
         word-break: keep-all;
         white-space: normal;
     }
@@ -52,11 +59,6 @@ fun getVedleggsoversiktCss() = """
         white-space: nowrap;
     }
 
-    .saksnummer {
-        display: inline-block;
-        min-width: 35pt;
-    }
-
     label {
         font-weight: 600;
         margin-left: 8pt;
@@ -71,11 +73,19 @@ fun getVedleggsoversiktCss() = """
     }
 
     .extra-row td {
-        padding-top: 4pt;
-        padding-bottom: 8pt;
+        padding-top: 6pt;
+        padding-bottom: 6pt;
     }
 
     .bold {
         font-weight: 600;
+    }
+
+    .combined-row-item {
+        margin-right: 6pt;
+    }
+
+    .combined-row-item:last-child {
+        margin-right: 0;
     }
     """.trimIndent() 

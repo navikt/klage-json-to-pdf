@@ -84,39 +84,46 @@ class InnholdsfortegnelseService {
                                             colSpan = "3"
 
                                             div {
-                                                label { +"Saksnr.: " }
+                                                classes = setOf("combined-row")                                    
                                                 span {
-                                                    classes = setOf("saksnummer")
-                                                    +it.saksnummer
-                                                }
-                                            }
-
-                                            when (it.type) {
-                                                Type.I -> div {
-                                                    div {
-                                                        label { +"Avsender: " }
-                                                        span { +it.avsenderMottaker }
-                                                    }
-                                                    div {
-                                                        label { +"Mottaker: " }
-                                                        span { +"NAV" }
+                                                    classes = setOf("combined-row-item")
+                                                    label { +"Saksnr.: " }
+                                                    span {
+                                                        +it.saksnummer
                                                     }
                                                 }
 
-                                                Type.U -> div {
-                                                    div {
-                                                        label { +"Avsender: " }
-                                                        span { +"NAV" }
+                                                when (it.type) {
+                                                    Type.I -> span {
+                                                        span {
+                                                            classes = setOf("combined-row-item")
+                                                            label { +"Avsender: " }
+                                                            span { +it.avsenderMottaker }
+                                                        }
+                                                        span {
+                                                            classes = setOf("combined-row-item")
+                                                            label { +"Mottaker: " }
+                                                            span { +"NAV" }
+                                                        }
                                                     }
-                                                    div {
-                                                        label { +"Mottaker: " }
-                                                        span { +it.avsenderMottaker }
-                                                    }
-                                                }
 
-                                                Type.N -> div {
-                                                    classes = setOf("bold")
-                                                    +"Notat"
+                                                    Type.U -> span {
+                                                        span {
+                                                            classes = setOf("combined-row-item")
+                                                            label { +"Avsender: " }
+                                                            span { +"NAV" }
+                                                        }
+                                                        span {
+                                                            classes = setOf("combined-row-item")
+                                                            label { +"Mottaker: " }
+                                                            span { +it.avsenderMottaker }
+                                                        }
+                                                    }
+
+                                                    Type.N -> span {
+                                                        classes = setOf("bold", "combined-row-item")
+                                                        +"Notat"
+                                                    }
                                                 }
                                             }
 
