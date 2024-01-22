@@ -75,7 +75,7 @@ fun getCss(footer: String) = """
         background-color: #EFA89D;
         border-radius: 3pt;
     }
-    .bold {
+    b, .bold {
         font-weight: 600;
     }
     .underline {
