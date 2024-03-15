@@ -207,7 +207,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         div {
                             classes = setOf("column")
                             div { +medunderskriver["name"].toString() }
-                            div { +medunderskriver["title"].toString() }
+                            if (medunderskriver["title"] != null) {
+                                div { +medunderskriver["title"]!!.toString() }
+                            }
                         }
                     }
                     if (map.containsKey("saksbehandler")) {
@@ -215,7 +217,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         div {
                             classes = setOf("column")
                             div { +saksbehandler["name"].toString() }
-                            div { +saksbehandler["title"].toString() }
+                            if (saksbehandler["title"] != null) {
+                                div { +saksbehandler["title"]!!.toString() }
+                            }
                         }
                     }
                 })
