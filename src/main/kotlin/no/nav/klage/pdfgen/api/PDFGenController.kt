@@ -8,6 +8,7 @@ import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
+import no.nav.klage.pdfgen.service.SvarbrevService
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import org.springframework.http.HttpHeaders
@@ -24,6 +25,7 @@ import org.springframework.web.bind.annotation.RestController
 class PDFGenController(
     private val pdfGenService: PDFGenService,
     private val innholdsfortegnelseService: InnholdsfortegnelseService,
+    private val svarbrevService: SvarbrevService,
 ) {
 
     companion object {
@@ -73,6 +75,28 @@ class PDFGenController(
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
         responseHeaders.add("Content-Disposition", "inline; filename=vedleggsoversikt.pdf")
+        return ResponseEntity(
+            data,
+            responseHeaders,
+            HttpStatus.OK
+        )
+    }
+
+    @Operation(
+        summary = "Generate svarbrev",
+        description = "Generate svarbrev"
+    )
+    @ResponseBody
+    @PostMapping("/svarbrev")
+    fun generateSvarbrev(
+    ): ResponseEntity<ByteArray> {
+        logger.debug("generateSvarbrev() called. See body in secure logs")
+
+        val data = svarbrevService.getSvarbrevAsByteArray()
+
+        val responseHeaders = HttpHeaders()
+        responseHeaders.contentType = MediaType.APPLICATION_PDF
+        responseHeaders.add("Content-Disposition", "inline; filename=svarbrev.pdf")
         return ResponseEntity(
             data,
             responseHeaders,
