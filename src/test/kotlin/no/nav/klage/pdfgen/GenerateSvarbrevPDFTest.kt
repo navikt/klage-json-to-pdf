@@ -13,6 +13,7 @@ class GenerateSvarbrevPDFTest {
     fun `generate pdf from full input`() {
         val data = SvarbrevService().getSvarbrevAsByteArray(
             SvarbrevRequest(
+                title = "Svarbrev",
                 sakenGjelder = SvarbrevRequest.SakenGjelder(name = "First Last", fnr = "12345678910"),
                 enhetsnavn = "NAV Klageinstans Oslo",
                 ytelsenavn = "Foreldrepenger",
