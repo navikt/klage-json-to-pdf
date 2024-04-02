@@ -36,7 +36,7 @@ class SvarbrevService {
                 }
                 body {
                     id = "body"
-                    h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.enhetsnavn}" }
+                    h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn}" }
                     p {
                         +"Gjelder: "
                         span { +svarbrevRequest.sakenGjelder.name }
