@@ -33,6 +33,7 @@ class SvarbrevService {
                             )
                         }
                     }
+                    title(svarbrevRequest.title)
                 }
                 body {
                     id = "body"
