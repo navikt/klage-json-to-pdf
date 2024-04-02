@@ -29,7 +29,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss("")
+                                getCss()
                             )
                         }
                     }

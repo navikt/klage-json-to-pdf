@@ -3,7 +3,7 @@ package no.nav.klage.pdfgen.transformers
 import org.intellij.lang.annotations.Language
 
 @Language("css")
-fun getCss(footer: String) = """
+fun getCss(footer: String = "") = """
     html {
         font-family: "Source Sans Pro" !important;
         box-sizing: border-box;
