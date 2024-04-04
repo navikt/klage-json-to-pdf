@@ -1,7 +1,6 @@
 package no.nav.klage.pdfgen.transformers
 
 import kotlinx.html.*
-import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
@@ -9,12 +8,10 @@ import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
+import no.nav.klage.pdfgen.util.getFormattedDate
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
+import java.time.LocalDate
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
@@ -34,11 +31,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         id = "header_text"
                     }
                     div {
-                        id = "logo_and_current_date"
-                        div {
-                            id = "logo"
-                            img { src = "nav_logo.png" }
-                        }
+                        id = "logo"
+                        img { src = "nav_logo.png" }
                     }
                 }
             }
@@ -207,7 +201,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         div {
                             classes = setOf("column")
                             div { +medunderskriver["name"].toString() }
-                            div { +medunderskriver["title"].toString() }
+                            if (medunderskriver["title"] != null) {
+                                div { +medunderskriver["title"]!!.toString() }
+                            }
                         }
                     }
                     if (map.containsKey("saksbehandler")) {
@@ -215,9 +211,18 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         div {
                             classes = setOf("column")
                             div { +saksbehandler["name"].toString() }
-                            div { +saksbehandler["title"].toString() }
+                            if (saksbehandler["title"] != null) {
+                                div { +saksbehandler["title"]!!.toString() }
+                            }
                         }
                     }
+                })
+            }
+
+            "current-date" -> {
+                return listOf(document.create.div {
+                    classes = setOf("current-date")
+                    +"Dato: ${getFormattedDate(LocalDate.now())}"
                 })
             }
 
@@ -251,20 +256,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 createElementsWithPossiblyChildren(map = it)
             } else {
                 listOf(createLeafElement(it))
-            }
-        }
-    }
-
-    private fun setCurrentDate() {
-        val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
-        val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
-
-        document.getElementById("logo_and_current_date").append {
-            div {
-                div {
-                    id = "current_date"
-                    +"Dato: $dateAsText"
-                }
             }
         }
     }
@@ -317,7 +308,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private fun processElement(map: Map<String, *>) {
         when (map["type"]) {
             "header" -> setHeaderText(map)
-            "current-date" -> setCurrentDate()
             "footer" -> setFooter(map)
             else -> addElementWithPossiblyChildren(map)
         }
