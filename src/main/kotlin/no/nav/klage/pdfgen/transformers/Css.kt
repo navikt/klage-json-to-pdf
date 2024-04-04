@@ -59,7 +59,7 @@ fun getCss(footer: String = "") = """
         width: 30%;
         float: right;
     }
-    .current_date {
+    .current-date {
         white-space: nowrap;
         text-align: right;
         margin-bottom: 24pt;

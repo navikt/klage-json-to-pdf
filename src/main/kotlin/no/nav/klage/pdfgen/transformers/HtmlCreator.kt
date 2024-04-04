@@ -9,12 +9,9 @@ import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
+import no.nav.klage.pdfgen.util.getCurrentDate
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.time.format.DateTimeFormatter
-import java.util.*
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
@@ -223,12 +220,9 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             }
 
             "current-date" -> {
-                val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
-                val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)   
-                
                 return listOf(document.create.div {
-                    classes = setOf("current_date")
-                    +"Dato: $dateAsText"
+                    classes = setOf("current-date")
+                    +getCurrentDate()
                 })
             }
 
