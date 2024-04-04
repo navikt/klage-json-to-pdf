@@ -13,18 +13,6 @@ import java.time.LocalDate
 
 @Service
 class SvarbrevService {
-    private fun String.toSpecialCase(): String {
-        val strings = this.split(" - ")
-        return if (strings.size == 2) {
-            strings[0].decapitalize() + " - " + strings[1].decapitalize()
-        } else this
-    }
-
-    private fun String.decapitalize(): String {
-        return if (!this.startsWith("NAV")) {
-            this.replaceFirstChar(Char::lowercase)
-        } else this
-    }
 
     fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
         val doc = getHTMLDocument(svarbrevRequest)
@@ -32,8 +20,6 @@ class SvarbrevService {
         createPDFA(doc, os)
         return os.toByteArray()
     }
-
-    private fun String.toFnrView() = this.substring(0, 6) + " " + this.substring(6)
 
     private fun getHTMLDocument(svarbrevRequest: SvarbrevRequest): Document {
         return createHTMLDocument()
@@ -50,7 +36,7 @@ class SvarbrevService {
                 }
                 body {
                     id = "body"
-                    div { 
+                    div {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                      }
@@ -60,12 +46,12 @@ class SvarbrevService {
                             +"Saken gjelder: "
                              +svarbrevRequest.sakenGjelder.name
                              }
-                        div { 
+                        div {
                             +"Fødselsnummer: "
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                          }
 
-                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr !== svarbrevRequest.sakenGjelder.fnr) {
+                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
                             div {
                                 +"Den ankende part: "
                                 +svarbrevRequest.klager.name
@@ -120,4 +106,19 @@ class SvarbrevService {
 
             }
     }
+
+    private fun String.toSpecialCase(): String {
+        val strings = this.split(" - ")
+        return if (strings.size == 2) {
+            strings[0].decapitalize() + " - " + strings[1].decapitalize()
+        } else this
+    }
+
+    private fun String.decapitalize(): String {
+        return if (!this.startsWith("NAV")) {
+            this.replaceFirstChar(Char::lowercase)
+        } else this
+    }
+
+    private fun String.toFnrView() = this.substring(0, 6) + " " + this.substring(6)
 }
