@@ -1,7 +1,6 @@
 package no.nav.klage.pdfgen.transformers
 
 import kotlinx.html.*
-import kotlinx.html.dom.append
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
@@ -9,9 +8,10 @@ import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
-import no.nav.klage.pdfgen.util.getCurrentDate
+import no.nav.klage.pdfgen.util.getFormattedDate
 import org.w3c.dom.Document
 import org.w3c.dom.Element
+import java.time.LocalDate
 
 @Suppress("UNCHECKED_CAST")
 class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
@@ -222,7 +222,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
             "current-date" -> {
                 return listOf(document.create.div {
                     classes = setOf("current-date")
-                    +getCurrentDate()
+                    +"Dato: ${getFormattedDate(LocalDate.now())}"
                 })
             }
 

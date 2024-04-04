@@ -5,19 +5,26 @@ import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.createPDFA
+import no.nav.klage.pdfgen.util.getFormattedDate
 import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
-import java.time.format.DateTimeFormatter
-import java.time.ZoneId
-import java.time.ZonedDateTime
-import java.util.*
-import no.nav.klage.pdfgen.util.getCurrentDate
+import java.time.LocalDate
 
 @Service
 class SvarbrevService {
+    private fun String.toSpecialCase(): String {
+        val strings = this.split(" - ")
+        return if (strings.size == 2) {
+            strings[0].decapitalize() + " - " + strings[1].decapitalize()
+        } else this
+    }
 
-    val dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy")
+    private fun String.decapitalize(): String {
+        return if (!this.startsWith("NAV")) {
+            this.replaceFirstChar(Char::lowercase)
+        } else this
+    }
 
     fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
         val doc = getHTMLDocument(svarbrevRequest)
@@ -45,9 +52,9 @@ class SvarbrevService {
                     id = "body"
                     div { 
                         classes = setOf("current-date")
-                        +getCurrentDate()
+                        +"Dato: ${getFormattedDate(LocalDate.now())}"
                      }
-                    h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn}" }
+                    h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
                     p {
                         div {
                             +"Saken gjelder: "
@@ -72,7 +79,7 @@ class SvarbrevService {
                     }
 
                     p {
-                        +"Vi viser til anken din, som vi mottok ${dateFormatter.format(svarbrevRequest.ankeReceivedDate)}."
+                        +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate)}."
                     }
 
                     h2 { +"Behandlingen av ankesaken" }
