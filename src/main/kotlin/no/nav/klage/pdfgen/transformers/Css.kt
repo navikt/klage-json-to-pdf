@@ -77,9 +77,7 @@ fun getCss(footer: String = "") = """
     }
     p {
         font-size: 12pt;
-    }
-    .svarbrev p {
-        margin-top: 0.8em;
+        margin-top: 1em;
     }
     .placeholder-text {
         background-color: #EFA89D;
