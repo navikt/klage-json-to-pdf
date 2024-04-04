@@ -47,26 +47,28 @@ fun getCss(footer: String = "") = """
         width: 60%;        
     }
     header {
-        margin-bottom: 24pt;
-        height: 80pt;
+        margin-bottom: 6pt;
     }
-    header span {
-        font-size: 10pt;
+    /* Clearfix */
+    header:after{
+        clear: both;
+        content: "";
+        display: block;
     }
-    #logo_and_current_date {
+    #logo {
         width: 30%;
         float: right;
     }
-    #current_date {
+    .current-date {
         white-space: nowrap;
-        float: right;
-        margin-top: 6pt;
+        text-align: right;
+        margin-bottom: 24pt;
     }
     #logo img {
         display: block;
         height: 60pt;
         float: right;
-    }    
+    }
     p {
         font-size: 12pt;
         margin-top: 1em;

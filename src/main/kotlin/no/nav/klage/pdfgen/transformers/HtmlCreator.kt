@@ -34,11 +34,8 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                         id = "header_text"
                     }
                     div {
-                        id = "logo_and_current_date"
-                        div {
-                            id = "logo"
-                            img { src = "nav_logo.png" }
-                        }
+                        id = "logo"
+                        img { src = "nav_logo.png" }
                     }
                 }
             }
@@ -225,6 +222,16 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 })
             }
 
+            "current-date" -> {
+                val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
+                val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)   
+                
+                return listOf(document.create.div {
+                    classes = setOf("current-date")
+                    +"Dato: $dateAsText"
+                })
+            }
+
             "empty-void" -> document.create.div()
 
             else -> {
@@ -255,20 +262,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 createElementsWithPossiblyChildren(map = it)
             } else {
                 listOf(createLeafElement(it))
-            }
-        }
-    }
-
-    private fun setCurrentDate() {
-        val formatter = DateTimeFormatter.ofPattern("d. MMMM yyyy", Locale.forLanguageTag("no"))
-        val dateAsText = ZonedDateTime.now(ZoneId.of("Europe/Oslo")).format(formatter)
-
-        document.getElementById("logo_and_current_date").append {
-            div {
-                div {
-                    id = "current_date"
-                    +"Dato: $dateAsText"
-                }
             }
         }
     }
@@ -321,7 +314,6 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     private fun processElement(map: Map<String, *>) {
         when (map["type"]) {
             "header" -> setHeaderText(map)
-            "current-date" -> setCurrentDate()
             "footer" -> setFooter(map)
             else -> addElementWithPossiblyChildren(map)
         }
