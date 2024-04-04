@@ -14,6 +14,15 @@ import java.time.LocalDate
 @Service
 class SvarbrevService {
 
+    val enhetHeaderAndFooterMap = mapOf(
+        "4291" to ("Returadresse,\nNAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4293" to ("Returadresse,\nNAV Klageinstans Øst, Postboks 2435, 3104 Tønsberg" to "Postadresse: NAV Klageinstans Øst // Postboks 2435 // 3104 Tønsberg\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4250" to ("Returadresse,\nNAV Klageinstans Sør, Postboks 644 Lundsiden, 4606 Kristiansand S" to "Postadresse: NAV Klageinstans Sør // Postboks 644 Lundsiden // 4606 Kristiansand S\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4294" to ("Returadresse,\nNAV Klageinstans Vest, Postboks 6245 Bedriftssenter, 5893 Bergen" to "Postadresse: NAV Klageinstans Vest // Postboks 6245 Bedriftssenter // 5893 Bergen\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4295" to ("Returadresse,\nNAV Klageinstans Nord, Postboks 2363, 9271 Tromsø" to "Postadresse: NAV Klageinstans Nord // Postboks 2363 // 9271 Tromsø\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4292" to ("Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" to "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 55 55 33 33\\Anav.no"),
+    )
+
     fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
         val doc = getHTMLDocument(svarbrevRequest)
         val os = ByteArrayOutputStream()
@@ -28,7 +37,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss("footer linje 1 \\A footer linje 2 \\A footer linje 3")
+                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
                             )
                         }
                     }
@@ -40,9 +49,7 @@ class SvarbrevService {
                     header {
                         div {
                             id = "header_text"
-                            +"Returadresse,"
-                            br { }
-                            +"Her må BE finne ut hva det skal stå"
+                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
                         }
                         div {
                             id = "logo"
@@ -138,9 +145,15 @@ class SvarbrevService {
 
     private fun String.toSpecialCase(): String {
         val strings = this.split(" - ")
-        return if (strings.size == 2) {
-            strings[0].decapitalize() + " - " + strings[1].decapitalize()
-        } else this
+        return when (strings.size) {
+            1 -> {
+                this.decapitalize()
+            }
+            2 -> {
+                strings[0].decapitalize() + " - " + strings[1].decapitalize()
+            }
+            else -> this
+        }
     }
 
     private fun String.decapitalize(): String {

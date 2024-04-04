@@ -41,6 +41,7 @@ data class SvarbrevRequest(
     val fullmektigFritekst: String?,
     val ankeReceivedDate: LocalDate,
     val behandlingstidInWeeks: Int,
+    val avsenderEnhetId: String,
 ) {
     data class Part(
         val name: String,
