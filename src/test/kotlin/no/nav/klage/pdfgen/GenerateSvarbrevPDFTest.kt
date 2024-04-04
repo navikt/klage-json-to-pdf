@@ -14,7 +14,8 @@ class GenerateSvarbrevPDFTest {
         val data = SvarbrevService().getSvarbrevAsByteArray(
             SvarbrevRequest(
                 title = "Svarbrev",
-                sakenGjelder = SvarbrevRequest.SakenGjelder(name = "First Last", fnr = "12345678910"),
+                sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
+                klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
                 enhetsnavn = "NAV Klageinstans Oslo",
                 ytelsenavn = "Foreldrepenger",
                 fullmektigFritekst = "Fullmektig Fritekst",

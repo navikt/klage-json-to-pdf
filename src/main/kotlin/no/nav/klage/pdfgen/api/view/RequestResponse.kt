@@ -1,5 +1,6 @@
 package no.nav.klage.pdfgen.api.view
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.LocalDate
 
 data class DocumentValidationResponse(
@@ -30,16 +31,18 @@ data class InnholdsfortegnelseRequest(
     }
 }
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 data class SvarbrevRequest(
     val title: String,
-    val sakenGjelder: SakenGjelder,
+    val sakenGjelder: Part,
+    val klager: Part,
     val enhetsnavn: String,
     val ytelsenavn: String,
     val fullmektigFritekst: String?,
     val ankeReceivedDate: LocalDate,
     val behandlingstidInWeeks: Int,
 ) {
-    data class SakenGjelder(
+    data class Part(
         val name: String,
         val fnr: String,
     )
