@@ -26,6 +26,8 @@ class SvarbrevService {
         return os.toByteArray()
     }
 
+    private fun String.toFnrView() = this.substring(0, 6) + " " + this.substring(6)
+
     private fun getHTMLDocument(svarbrevRequest: SvarbrevRequest): Document {
         return createHTMLDocument()
             .html {
@@ -47,10 +49,14 @@ class SvarbrevService {
                      }
                     h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn}" }
                     p {
-                        +"Gjelder: "
-                        span { +svarbrevRequest.sakenGjelder.name }
-                        +", "
-                        span { +svarbrevRequest.sakenGjelder.fnr }
+                        div {
+                            +"Saken gjelder: "
+                             +svarbrevRequest.sakenGjelder.name
+                             }
+                        div { 
+                            +"Fødselsnummer: "
+                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
+                         }
                         br { }
                         if (svarbrevRequest.fullmektigFritekst != null) {
                             +"Fullmektig: ${svarbrevRequest.fullmektigFritekst}"
