@@ -28,7 +28,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss()
+                                getCss("footer linje 1 \\A footer linje 2")
                             )
                         }
                     }
@@ -36,6 +36,18 @@ class SvarbrevService {
                 }
                 body {
                     id = "body"
+                    header {
+                        div {
+                            id = "header_text"
+                            +"Returadresse,"
+                            br { }
+                            +"Her må BE finne ut hva det skal stå"
+                        }
+                        div {
+                            id = "logo"
+                            img { src = "nav_logo.png" }
+                        }
+                    }
                     div {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
@@ -43,17 +55,27 @@ class SvarbrevService {
                     h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
                     p {
                         div {
-                            +"Saken gjelder: "
+                            span {
+                                classes = setOf("bold")
+                                +"Saken gjelder: "
+                            }
                              +svarbrevRequest.sakenGjelder.name
-                             }
+                            }
                         div {
-                            +"Fødselsnummer: "
+                            span {
+                                classes = setOf("bold")
+                                +"Fødselsnummer: "
+                            }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
-                         }
+                        }
+                        
 
                         if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
                             div {
-                                +"Den ankende part: "
+                                span {
+                                    classes = setOf("bold")
+                                    +"Den ankende part: "
+                                }
                                 +svarbrevRequest.klager.name
                             }
                         }
@@ -101,6 +123,15 @@ class SvarbrevService {
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
                     }
+
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"NAV Klageinstans"
+                    }
+
+                    
 
                 }
 

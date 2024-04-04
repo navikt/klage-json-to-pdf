@@ -146,6 +146,10 @@ fun getCss(footer: String = "") = """
     li > ul, li > ol {
       margin-top: 0;
     }
+
+    .signature {
+        margin-top: 36pt;
+    }
     
     @page {
         margin: 20mm;
