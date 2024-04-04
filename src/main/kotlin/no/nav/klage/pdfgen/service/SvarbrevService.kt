@@ -58,7 +58,7 @@ class SvarbrevService {
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                          }
 
-                        if (svarbrevRequest.klager != null) {
+                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr !== svarbrevRequest.sakenGjelder.fnr) {
                             div {
                                 +"Den ankende part: "
                                 +svarbrevRequest.klager.name
