@@ -28,7 +28,7 @@ class SvarbrevService {
                     style {
                         unsafe {
                             raw(
-                                getCss("footer linje 1 \\A footer linje 2")
+                                getCss("footer linje 1 \\A footer linje 2 \\A footer linje 3")
                             )
                         }
                     }
@@ -36,6 +36,7 @@ class SvarbrevService {
                 }
                 body {
                     id = "body"
+                    classes = setOf("svarbrev")
                     header {
                         div {
                             id = "header_text"
@@ -130,9 +131,6 @@ class SvarbrevService {
                         br { }
                         +"NAV Klageinstans"
                     }
-
-                    
-
                 }
 
             }

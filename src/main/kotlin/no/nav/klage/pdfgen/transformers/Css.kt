@@ -30,8 +30,14 @@ fun getCss(footer: String = "") = """
     h1 {
         font-size: 16pt;
     }
+    .svarbrev h1 {
+        font-size: 14pt;
+    }
     h2 {
         font-size: 14pt;
+    }
+    .svarbrev h2 {
+        font-size: 12pt;
     }
     h3 {
         font-size: 12pt;
@@ -71,7 +77,9 @@ fun getCss(footer: String = "") = """
     }
     p {
         font-size: 12pt;
-        margin-top: 1em;
+    }
+    .svarbrev p {
+        margin-top: 0.8em;
     }
     .placeholder-text {
         background-color: #EFA89D;
@@ -148,7 +156,7 @@ fun getCss(footer: String = "") = """
     }
 
     .signature {
-        margin-top: 36pt;
+        margin-top: 24pt;
     }
     
     @page {

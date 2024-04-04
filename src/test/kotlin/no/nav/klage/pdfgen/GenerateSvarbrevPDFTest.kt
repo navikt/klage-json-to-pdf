@@ -17,7 +17,7 @@ class GenerateSvarbrevPDFTest {
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
                 enhetsnavn = "NAV Klageinstans Oslo",
-                ytelsenavn = "Foreldrepenger",
+                ytelsenavn = "Supplerende stønad til personer over 67 år med kort botid i Norge",
                 fullmektigFritekst = "Fullmektig Fritekst",
                 ankeReceivedDate = LocalDate.now(),
                 behandlingstidInWeeks = 12
