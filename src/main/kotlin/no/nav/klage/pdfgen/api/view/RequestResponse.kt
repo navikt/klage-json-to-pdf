@@ -35,7 +35,7 @@ data class InnholdsfortegnelseRequest(
 data class SvarbrevRequest(
     val title: String,
     val sakenGjelder: Part,
-    val klager: Part,
+    val klager: Part?,
     val enhetsnavn: String,
     val ytelsenavn: String,
     val fullmektigFritekst: String?,

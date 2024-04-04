@@ -57,6 +57,13 @@ class SvarbrevService {
                             +"Fødselsnummer: "
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                          }
+
+                        if (svarbrevRequest.klager != null) {
+                            div {
+                                +"Den ankende part: "
+                                +svarbrevRequest.klager.name
+                            }
+                        }
                         br { }
                         if (svarbrevRequest.fullmektigFritekst != null) {
                             +"Fullmektig: ${svarbrevRequest.fullmektigFritekst}"
