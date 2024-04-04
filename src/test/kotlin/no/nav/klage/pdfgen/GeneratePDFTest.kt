@@ -110,4 +110,11 @@ class GeneratePDF {
         val jsonData = File(path + "minimal.json").readText()
         PDFGenService().validateDocumentContent(jsonData)
     }
+
+    @Test
+    fun `generate pdf with current date on later page`() {
+        val jsonData = File(path + "tilsvarsbrev-med-oversendelsesbrev.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        Files.write(Path.of("test.pdf"), data)
+    }
 }
