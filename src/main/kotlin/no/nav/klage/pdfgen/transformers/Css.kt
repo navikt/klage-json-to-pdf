@@ -3,7 +3,7 @@ package no.nav.klage.pdfgen.transformers
 import org.intellij.lang.annotations.Language
 
 @Language("css")
-fun getCss(footer: String) = """
+fun getCss(footer: String = "") = """
     html {
         font-family: "Source Sans Pro" !important;
         box-sizing: border-box;
@@ -30,8 +30,14 @@ fun getCss(footer: String) = """
     h1 {
         font-size: 16pt;
     }
+    .svarbrev h1 {
+        font-size: 14pt;
+    }
     h2 {
         font-size: 14pt;
+    }
+    .svarbrev h2 {
+        font-size: 12pt;
     }
     h3 {
         font-size: 12pt;
@@ -47,26 +53,28 @@ fun getCss(footer: String) = """
         width: 60%;        
     }
     header {
-        margin-bottom: 24pt;
-        height: 80pt;
+        margin-bottom: 6pt;
     }
-    header span {
-        font-size: 10pt;
+    /* Clearfix */
+    header:after{
+        clear: both;
+        content: "";
+        display: block;
     }
-    #logo_and_current_date {
+    #logo {
         width: 30%;
         float: right;
     }
-    #current_date {
+    .current-date {
         white-space: nowrap;
-        float: right;
-        margin-top: 6pt;
+        text-align: right;
+        margin-bottom: 24pt;
     }
     #logo img {
         display: block;
         height: 60pt;
         float: right;
-    }    
+    }
     p {
         font-size: 12pt;
         margin-top: 1em;
@@ -143,6 +151,10 @@ fun getCss(footer: String) = """
     
     li > ul, li > ol {
       margin-top: 0;
+    }
+
+    .signature {
+        margin-top: 24pt;
     }
     
     @page {
