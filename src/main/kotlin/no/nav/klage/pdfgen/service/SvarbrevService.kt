@@ -9,6 +9,10 @@ import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
 import java.time.format.DateTimeFormatter
+import java.time.ZoneId
+import java.time.ZonedDateTime
+import java.util.*
+import no.nav.klage.pdfgen.util.getCurrentDate
 
 @Service
 class SvarbrevService {
@@ -37,6 +41,10 @@ class SvarbrevService {
                 }
                 body {
                     id = "body"
+                    div { 
+                        classes = setOf("current-date")
+                        +getCurrentDate()
+                     }
                     h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn}" }
                     p {
                         +"Gjelder: "
