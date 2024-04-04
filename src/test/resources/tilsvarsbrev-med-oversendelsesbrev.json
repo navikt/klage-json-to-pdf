@@ -1,0 +1,1488 @@
+[
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "header",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Returadresse,\nNAV Klageinstans Nord, Postboks 2363, 9271 Tromsø"
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-mink",
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-mink",
+        "id": "95c2b077-a545-405e-a797-e2562d935bd5",
+        "children": [
+          {
+            "type": "h1",
+            "children": [
+              {
+                "text": "NAV Klageinstans har behandlet anken din"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "95c2b077-a545-405e-a797-e2562d935bd5"
+    ],
+    "id": "67777232-4f9d-46af-b134-4c8f804978fa"
+  },
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "klagerIfEqualToSakenGjelder.name",
+        "label": "Den ankende part",
+        "threadIds": [],
+        "result": "FALSK ONKEL\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "sakenGjelderIfDifferentFromKlager.name",
+        "label": "Saken gjelder",
+        "threadIds": []
+      },
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "sakenGjelder.fnr",
+        "label": "Fødselsnummer",
+        "threadIds": [],
+        "result": "178877 99784\n"
+      },
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "klagerIfDifferentFromSakenGjelder.name",
+        "label": "Den ankende part",
+        "threadIds": []
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "saksnummer",
+        "label": "Saksnummer",
+        "threadIds": [],
+        "result": "2290"
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-hund",
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-hund",
+        "id": "505e2185-5d8f-4c2f-abf8-2b6e0d8761ab",
+        "children": [
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Fullmektig: "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "fullmektig",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Etter at du anket, har vi vurdert vedtaket vårt på nytt. Vi har ikke endret vedtaket, og saken din går derfor videre til Trygderetten. "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Sammen med dette brevet har du fått en kopi av oversendelsesbrevet vi har skrevet til Trygderetten, der vi forklarer saken og begrunnelsen for vedtaket vårt.                                            "
+              }
+            ]
+          },
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Du har rett til å uttale deg                                                                       "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Du har mulighet til å uttale deg om det vi skriver i oversendelsesbrevet før vi sender saken til Trygderetten. Uttalelsen din vil følge saken til Trygderetten. "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Du må sende uttalelsen din til oss innen tre uker, regnet fra og med den datoen dette brevet kom frem til deg."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Hvis du ikke uttaler deg innen fristen, sender vi saken til Trygderetten slik den er nå."
+              }
+            ]
+          },
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Slik uttaler du deg"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "children": [
+              {
+                "text": "Du finner første side for innsending på www.nav.no/klage. Velg NAV Klageinstans "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "enhet/avdeling",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": "."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "505e2185-5d8f-4c2f-abf8-2b6e0d8761ab"
+    ],
+    "id": "f8e1148f-8fd2-409f-82c2-125782b0d71c"
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-sel",
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-sel",
+        "id": "cf6cf64b-d464-41fa-ac3a-3112a1625092",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Du har rett til innsyn"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Du har rett til å se dokumentene i saken din."
+              }
+            ],
+            "indent": 0
+          },
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Informasjon om fri rettshjelp"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Dette får du vite mer om hos Statsforvalteren eller advokat."
+              }
+            ],
+            "indent": 0
+          },
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Har du spørsmål?"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Du finner mer informasjon på nav.no."
+              }
+            ],
+            "indent": 0
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "På nav.no/kontakt kan du chatte eller skrive til oss."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Hvis du ikke finner svar på nav.no, kan du ringe oss på telefon 55 55 33 33, hverdager 09.00-15.00.\n\n\nMed hilsen\nNAV Klageinstans"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "cf6cf64b-d464-41fa-ac3a-3112a1625092"
+    ],
+    "id": "ad2b5f49-c8f6-44da-94df-2418db72c26e"
+  },
+  {
+    "type": "signature",
+    "useShortName": false,
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "saksbehandler": {
+      "name": "Daniel Eriksson",
+      "title": "Seniorrådgiver/saksbehandler"
+    }
+  },
+  {
+    "type": "page-break",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "current-date",
+    "children": [
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-esel",
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-esel",
+        "id": "0b583f10-3a9a-4d49-9707-562be8177895",
+        "children": [
+          {
+            "type": "h1",
+            "align": "left",
+            "children": [
+              {
+                "text": "Oversendelsesbrev til Trygderetten"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "0b583f10-3a9a-4d49-9707-562be8177895"
+    ],
+    "id": "f88bb5ce-8712-45a7-a4b2-99b7a89683d8"
+  },
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "sakenGjelder.name",
+        "label": "Den ankende part",
+        "threadIds": [],
+        "result": "FALSK ONKEL\n"
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "sakenGjelder.fnr",
+        "label": "Fødselsnummer",
+        "threadIds": [],
+        "result": "178877 99784\n"
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "p",
+    "align": "left",
+    "children": [
+      {
+        "text": ""
+      },
+      {
+        "type": "label-content",
+        "children": [
+          {
+            "text": ""
+          }
+        ],
+        "source": "saksnummer",
+        "label": "Saksnummer",
+        "threadIds": [],
+        "result": "2290"
+      },
+      {
+        "text": ""
+      }
+    ]
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-rev",
+    "children": [
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-rev",
+        "id": "5f15004f-9182-4d00-94f9-2661fa507b5f",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Fullmektig:",
+                "bold": true
+              },
+              {
+                "text": " "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "fullmektig",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Ankemotpart:",
+                "bold": true
+              },
+              {
+                "text": " NAV Klageinstans "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Ankesak: ",
+                "bold": true
+              },
+              {
+                "text": "Anke av "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": " over NAV Klageinstans sitt vedtak av "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": "."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-rev",
+        "id": "b192a888-e575-4247-aecc-a12ad9cddc08",
+        "children": [
+          {
+            "type": "h2",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Hva saken gjelder",
+                "bold": false
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Saken gjelder om "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "konkret problemstilling",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": "."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Den ankende part satte frem krav om "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "ytelse",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ". Kravet ble "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "utfall",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": " i vedtak av "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ". "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "NAV Klageinstans var enig i vedtaket."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-rev",
+        "id": "c768effb-5ed1-48a2-9ed5-33b402be9a68",
+        "children": [
+          {
+            "type": "h2",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Regelverket som gjelder for saken"
+              }
+            ]
+          },
+          {
+            "type": "ul",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "align": "left",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Lov",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": " § "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "hjemmel",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "align": "left",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": "NAV sitt rundskriv til bestemmelsen."
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "indent": 1
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Se vedlegg for lov- og rundskrivstekst."
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "5f15004f-9182-4d00-94f9-2661fa507b5f",
+      "b192a888-e575-4247-aecc-a12ad9cddc08",
+      "c768effb-5ed1-48a2-9ed5-33b402be9a68"
+    ],
+    "id": "18e36b85-8554-4958-b85b-d38e8329aea3"
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-ulv",
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-ulv",
+        "id": "ad764ca4-590c-4818-a6cc-7af61aeba135",
+        "children": [
+          {
+            "type": "h2",
+            "align": "left",
+            "children": [
+              {
+                "text": "Den ankende parts argumenter og påstand"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-ulv",
+        "id": "e10ed7a2-843a-48ab-8db1-bf61f01685f1",
+        "children": [
+          {
+            "type": "ul",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "align": "left",
+                    "children": [
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "indent": 1
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Den ankende part har lagt ned påstand om at klageinstansens vedtak blir omgjort, slik at   "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "lim inn ordrett dersom den ankende part har formulert påstanden sin. Hvis ikke, skriv kort hva den ankende part krever.",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "ad764ca4-590c-4818-a6cc-7af61aeba135",
+      "e10ed7a2-843a-48ab-8db1-bf61f01685f1"
+    ],
+    "id": "395add50-823c-4974-a40e-f35adfd09595"
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-sau",
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-sau",
+        "id": "ea314065-8e6a-43a0-8e6f-3c8950e005fe",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Ankemotpartens presentasjon av saksdokumentene"
+              }
+            ],
+            "indent": 0
+          },
+          {
+            "type": "p",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Datoene det henvises til er journalføringsdato hos NAV, og ikke når dokumentet er mottatt hos NAV.  NAV Klageinstans viser til sakens dokumentasjon i sin helhet, herunder blant annet følgende dokumenter:"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-sau",
+        "id": "2cb1ed80-23eb-4672-bcaf-b7dd5bb3b85e",
+        "children": [
+          {
+            "type": "p",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Tema",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "ul",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Dokumentnavn",
+                        "content": "",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "jouralføringsdato",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Dokumentnavn",
+                        "content": "",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "jouralføringsdato",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Dokumentnavn",
+                        "content": "",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "jouralføringsdato",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "indent": 1
+          },
+          {
+            "type": "p",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Tema",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "ul",
+            "children": [
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Dokumentnavn",
+                        "content": "",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "jouralføringsdato",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Dokumentnavn",
+                        "content": "",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "jouralføringsdato",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "type": "li",
+                "children": [
+                  {
+                    "type": "lic",
+                    "indent": 0,
+                    "children": [
+                      {
+                        "text": ""
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "Dokumentnavn",
+                        "content": "",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ", "
+                      },
+                      {
+                        "type": "placeholder",
+                        "placeholder": "jouralføringsdato",
+                        "children": [
+                          {
+                            "text": "​"
+                          }
+                        ]
+                      },
+                      {
+                        "text": ""
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "indent": 1
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "ea314065-8e6a-43a0-8e6f-3c8950e005fe",
+      "2cb1ed80-23eb-4672-bcaf-b7dd5bb3b85e"
+    ],
+    "id": "3f7c6559-3d1f-42db-8860-7903d1900673"
+  },
+  {
+    "type": "maltekstseksjon",
+    "section": "section-mus",
+    "children": [
+      {
+        "type": "maltekst",
+        "section": "section-mus",
+        "id": "d4913ec2-6bf8-44da-bf0c-d1d6f4da7c03",
+        "children": [
+          {
+            "type": "h2",
+            "children": [
+              {
+                "text": "Ankemotpartens vurdering"
+              }
+            ],
+            "indent": 0
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "42501115-7e00-431d-bc9b-61235e1ea89c",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": "Ankefristen er overholdt. "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Når ankefristen ikke er overholdt, begrunner du hvorfor det er/ ikke er særlige grunner for å se bort fra fristoversittelsen. Subsidiær vurdering av realiteten i ankesaken er bare nødvendig når KA vurderer at det er særlige grunner for å se bort fra at ankefristen er oversittet.",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ],
+            "indent": 0
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "1974c09d-001c-4998-bacc-22ec9b69c453",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "NAV Klageinstans har vurdert det påankede vedtaket på nytt. "
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "7bf43d5f-7ddc-4c65-b573-8363ddee274b",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Forklar hvordan rettsreglene som er brukt i saken er å forstå.",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "957e4368-4f79-425a-9589-e74d4ddfbd44",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "Skriv hvordan vi oppfatter de faktiske forholdene i saken (ikke vis til dokumenter her). I saker der den ankende part og ankemotparten er uenige om hva som er de faktiske forholdene i saken, skal ankemotparten både redegjøre for dette, og begrunne godt hvorfor vi har lagt mer vekt noen opplysninger enn på andre. Synliggjør bevisvurderingen ankemotparten har gjort for Trygderetten og den ankende part. Skriv hvordan KA vurderer at de aktuelle rettsreglene får anvendelse på faktum i saken (subsumsjon). Imøtegå den ankende parts argumenter. Det er ofte hensiktsmessig å ta utgangspunkt i argumentene i anken når du skriver den konkrete begrunnelsen. Unngå subjektive ord og begreper. Del gjerne opp med underoverskrifter og lag delkonklusjoner underveis.",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "9cda0970-beda-42fc-91a4-98792db30f10",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "NAV Klageinstans finner etter dette at det påankede vedtaket av "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato for klagevedtaket",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": " er i samsvar med gjeldende regelverk og praksis."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "NAV Klageinstans legger derfor ned slik påstand:"
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 6,
+            "children": [
+              {
+                "text": "Vedtak av "
+              },
+              {
+                "type": "placeholder",
+                "placeholder": "dato for klagevedtaket",
+                "content": "",
+                "children": [
+                  {
+                    "text": "​"
+                  }
+                ]
+              },
+              {
+                "text": " stadfestes."
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "redigerbar-maltekst",
+        "section": "section-mus",
+        "id": "e2b30529-105f-4347-8918-9918bacf2a47",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Sakens dokumenter følger vedlagt."
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "Vi har sendt kopi av dette brevet til den ankende part, med orientering om retten til å komme med merknader. "
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          },
+          {
+            "type": "p",
+            "align": "left",
+            "indent": 0,
+            "children": [
+              {
+                "text": "NAV Klageinstans "
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "textIdList": [
+      "d4913ec2-6bf8-44da-bf0c-d1d6f4da7c03",
+      "42501115-7e00-431d-bc9b-61235e1ea89c",
+      "1974c09d-001c-4998-bacc-22ec9b69c453",
+      "7bf43d5f-7ddc-4c65-b573-8363ddee274b",
+      "957e4368-4f79-425a-9589-e74d4ddfbd44",
+      "9cda0970-beda-42fc-91a4-98792db30f10",
+      "e2b30529-105f-4347-8918-9918bacf2a47"
+    ],
+    "id": "bb4b8954-5438-46da-81b1-ae22276a5cbd"
+  },
+  {
+    "type": "signature",
+    "useShortName": false,
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "saksbehandler": {
+      "name": "Daniel Eriksson",
+      "title": "Seniorrådgiver/saksbehandler"
+    }
+  },
+  {
+    "type": "footer",
+    "children": [
+      {
+        "text": ""
+      }
+    ],
+    "threadIds": [],
+    "content": "Postadresse: NAV Klageinstans Nord // Postboks 2363 // 9271 Tromsø\nTelefon: 55 55 33 33\nnav.no"
+  },
+  {
+    "type": "regelverk",
+    "section": "section-gnu",
+    "children": [
+      {
+        "type": "page-break",
+        "children": [
+          {
+            "text": ""
+          }
+        ]
+      },
+      {
+        "type": "maltekstseksjon",
+        "section": "section-gnu",
+        "children": [
+          {
+            "type": "maltekst",
+            "section": "section-gnu",
+            "id": "75ef2a36-63d3-439d-8dd5-9f28c3714afa",
+            "children": [
+              {
+                "type": "h2",
+                "children": [
+                  {
+                    "text": "Regelverket som gjelder i saken"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "textIdList": [
+          "75ef2a36-63d3-439d-8dd5-9f28c3714afa"
+        ],
+        "id": "5861c658-6b5e-4ae8-bffb-5457277e8875"
+      },
+      {
+        "type": "regelverk-container",
+        "children": [
+          {
+            "type": "p",
+            "align": "left",
+            "children": [
+              {
+                "text": ""
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
