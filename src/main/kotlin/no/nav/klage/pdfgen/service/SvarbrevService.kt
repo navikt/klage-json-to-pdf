@@ -89,7 +89,11 @@ class SvarbrevService {
                         }
                         br { }
                         if (svarbrevRequest.fullmektigFritekst != null) {
-                            +"Fullmektig: ${svarbrevRequest.fullmektigFritekst}"
+                            span {
+                                classes = setOf("bold")
+                                +"Fullmektig: "
+                            }
+                            +svarbrevRequest.fullmektigFritekst
                             br { }
                         }
                     }
