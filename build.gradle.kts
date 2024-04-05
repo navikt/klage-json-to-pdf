@@ -5,7 +5,7 @@ val logstashVersion = "7.4"
 val jsoupVersion = "1.17.2"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.11.0"
-val springDocVersion = "2.4.0"
+val springDocVersion = "2.5.0"
 
 repositories {
     mavenCentral()
