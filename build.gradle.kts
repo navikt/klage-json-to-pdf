@@ -5,7 +5,7 @@ val logstashVersion = "7.4"
 val jsoupVersion = "1.17.2"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.11.0"
-val springDocVersion = "2.4.0"
+val springDocVersion = "2.5.0"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ plugins {
     val kotlinVersion = "1.9.23"
     kotlin("jvm") version kotlinVersion
     kotlin("plugin.spring") version kotlinVersion
-    id("org.springframework.boot") version "3.2.4"
+    id("org.springframework.boot") version "3.2.5"
     idea
 }
 
