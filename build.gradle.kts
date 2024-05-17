@@ -1,6 +1,6 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
-val mockkVersion = "1.13.10"
+val mockkVersion = "1.13.11"
 val logstashVersion = "7.4"
 val jsoupVersion = "1.17.2"
 val openHtmlToPdfVersion = "1.0.10"
