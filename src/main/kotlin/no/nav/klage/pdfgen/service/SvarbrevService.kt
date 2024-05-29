@@ -59,7 +59,7 @@ class SvarbrevService {
                     div {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
-                     }
+                    }
                     h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
                     p {
                         div {
@@ -67,8 +67,8 @@ class SvarbrevService {
                                 classes = setOf("bold")
                                 +"Saken gjelder: "
                             }
-                             +svarbrevRequest.sakenGjelder.name
-                            }
+                            +svarbrevRequest.sakenGjelder.name
+                        }
                         div {
                             span {
                                 classes = setOf("bold")
@@ -76,7 +76,7 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                         }
-                        
+
 
                         if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
                             div {
@@ -123,9 +123,7 @@ class SvarbrevService {
                         +"Vi ber deg holde oss orientert om forhold som kan ha betydning for avgjørelsen av saken din. Det vil si endringer i for eksempel i medisinske forhold, arbeid, inntekt, sivilstand og lignende."
                     }
                     p {
-                        +"Du finner første side for innsending av dokumenter på www.nav.no/klage. Velg "
-                        span { +svarbrevRequest.enhetsnavn }
-                        +"."
+                        +"Du kan ettersende dokumentasjon på nav.no/klage ved å trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {
@@ -153,9 +151,11 @@ class SvarbrevService {
             1 -> {
                 this.decapitalize()
             }
+
             2 -> {
                 strings[0].decapitalize() + " - " + strings[1].decapitalize()
             }
+
             else -> this
         }
     }
