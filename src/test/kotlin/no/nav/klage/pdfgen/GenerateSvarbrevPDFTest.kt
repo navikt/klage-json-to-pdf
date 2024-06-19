@@ -19,8 +19,11 @@ class GenerateSvarbrevPDFTest {
                 ytelsenavn = "Supplerende stønad til personer over 67 år med kort botid i Norge",
                 fullmektigFritekst = "Fullmektig Fritekst",
                 ankeReceivedDate = LocalDate.now(),
+                receivedDate = LocalDate.now(),
                 behandlingstidInWeeks = 12,
-                avsenderEnhetId = "4291"
+                avsenderEnhetId = "4291",
+                type = null,
+                customText = null,
             )
         )
         Files.write(Path.of("svarbrev.pdf"), data)
