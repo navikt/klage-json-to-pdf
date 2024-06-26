@@ -24,7 +24,7 @@ class SvarbrevService {
     )
 
     fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
-        val doc = when(svarbrevRequest.type) {
+        val doc = when (svarbrevRequest.type) {
             SvarbrevRequest.Type.KLAGE -> getHTMLDocumentKlage(svarbrevRequest)
             SvarbrevRequest.Type.ANKE -> getHTMLDocumentAnke(svarbrevRequest)
             null -> getHTMLDocumentAnke(svarbrevRequest)
@@ -64,75 +64,36 @@ class SvarbrevService {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
-                    h1 { +"NAV orienterer om saksbehandlingen av klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
+                    h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
                     p {
-                        div {
-                            span {
-                                classes = setOf("bold")
-                                +"Saken gjelder: "
-                            }
-                            +svarbrevRequest.sakenGjelder.name
-                        }
-                        div {
-                            span {
-                                classes = setOf("bold")
-                                +"Fødselsnummer: "
-                            }
-                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
-                        }
-
-
-                        if (svarbrevRequest.klager != null && svarbrevRequest.klager.fnr != svarbrevRequest.sakenGjelder.fnr) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Den klagende part: "
-                                }
-                                +svarbrevRequest.klager.name
-                            }
-                        }
-                        if (svarbrevRequest.fullmektigFritekst != null) {
-                            div {
-                                span {
-                                    classes = setOf("bold")
-                                    +"Fullmektig: "
-                                }
-                                +svarbrevRequest.fullmektigFritekst
-                            }
-                        }
+                        +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${getFormattedDate(svarbrevRequest.receivedDate!!)}."
                     }
 
+                    h2 { +"Klageinstansens saksbehandlingstid" }
                     p {
-                        +"Vi viser til klagen din, som vi mottok ${getFormattedDate(svarbrevRequest.receivedDate!!)}."
-                    }
-
-                    h2 { +"Behandlingen av klagesaken" }
-                    p {
-                        +"Saksbehandlingstiden vår er nå "
+                        +"Saksbehandlingstiden vår er vanligvis "
                         span { +svarbrevRequest.behandlingstidInWeeks.toString() }
-                        +" uker. Du finner oversikt over saksbehandlingstidene våre på www.nav.no."
-                    }
-                    if (svarbrevRequest.customText != null) {
-                        p {
-                            +svarbrevRequest.customText
-                        }
+                        +" uker, men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText}"
                     }
                     p {
-                        +"Dersom vi ikke endrer vedtaket du har fått, sender vi saken din til Trygderetten."
+                        +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på  www.nav.no/saksbehandlingstid."
                     }
-                    h2 { +"Dersom saken går til Trygderetten" }
+                    h2 { +"Klageinstansens behandling av klagen" }
                     p {
-                        +"Hvis saken din går videre til Trygderetten, vil du få kopi av oversendelsesbrevet, der vi forklarer saken og begrunnelsen for vedtaket vårt."
+                        +"Vi vil vurdere alle dokumentene i saken din."
                     }
                     p {
-                        +"Du får da mulighet til å komme med merknader, som vil følge saken til Trygderetten."
+                        +"Mangler vi opplysninger, vil vi innhente disse. Får vi informasjon du ikke er kjent med, vil vi sende deg en kopi slik at du kan uttale deg. Dette gjelder også hvis vi får uttalelser fra rådgivende lege. Du får beskjed fra oss dersom dette påvirker saksbehandlingstiden."
+                    }
+                    p {
+                        +"Du får avgjørelsen tilsendt på den måten du ønsker, og som du har allerede har valgt. "
                     }
                     h2 { +"Du må melde fra om endringer" }
                     p {
-                        +"Vi ber deg holde oss orientert om forhold som kan ha betydning for avgjørelsen av saken din. Det vil si endringer i for eksempel i medisinske forhold, arbeid, inntekt, sivilstand og lignende."
+                        +"Skjer det endringer du mener er viktig for saken din, må du orientere oss.  Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
                     }
                     p {
-                        +"Du kan ettersende dokumentasjon på nav.no/klage ved å trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                        +"Du kan logge deg inn på nav.no/kontakt og sende skriftlig melding der. Hvis du ønsker å ettersende dokumentasjon, kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {
@@ -142,7 +103,6 @@ class SvarbrevService {
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
                     }
-
                     div {
                         classes = setOf("signature")
                         +"Med hilsen"
@@ -150,7 +110,6 @@ class SvarbrevService {
                         +"NAV Klageinstans"
                     }
                 }
-
             }
     }
 
