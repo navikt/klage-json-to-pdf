@@ -88,8 +88,8 @@ class SvarbrevService {
                     h2 { +"Klageinstansens saksbehandlingstid" }
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
-                        span { +svarbrevRequest.behandlingstidInWeeks.toString() }
-                        +" uker, men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText}"
+                        span { +getBehandlingstidText(svarbrevRequest) }
+                        +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText}"
                     }
                     p {
                         +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på  www.nav.no/saksbehandlingstid."
@@ -127,6 +127,27 @@ class SvarbrevService {
                     }
                 }
             }
+    }
+
+    private fun getBehandlingstidText(svarbrevRequest: SvarbrevRequest): String {
+        return svarbrevRequest.behandlingstidUnits.toString() + when (svarbrevRequest.behandlingstidUnitType) {
+            SvarbrevRequest.BehandlingstidUnitType.WEEKS -> {
+                if (svarbrevRequest.behandlingstidUnits == 1) {
+                    " uke"
+                }
+                else {
+                    " uker"
+                }
+            }
+            SvarbrevRequest.BehandlingstidUnitType.MONTHS -> {
+                if (svarbrevRequest.behandlingstidUnits == 1) {
+                    " måned"
+                }
+                else {
+                    " måneder"
+                }
+            }
+        }
     }
 
     private fun getHTMLDocumentAnke(svarbrevRequest: SvarbrevRequest): Document {
@@ -204,8 +225,8 @@ class SvarbrevService {
                     h2 { +"Behandlingen av ankesaken" }
                     p {
                         +"Saksbehandlingstiden vår er nå "
-                        span { +svarbrevRequest.behandlingstidInWeeks.toString() }
-                        +" uker. Du finner oversikt over saksbehandlingstidene våre på www.nav.no."
+                        span { +getBehandlingstidText(svarbrevRequest) }
+                        +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no."
                     }
                     if (svarbrevRequest.customText != null) {
                         p {
