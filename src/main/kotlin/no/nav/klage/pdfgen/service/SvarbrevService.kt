@@ -66,6 +66,22 @@ class SvarbrevService {
                     }
                     h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
                     p {
+                        div {
+                            span {
+                                classes = setOf("bold")
+                                +"Saken gjelder: "
+                            }
+                            +svarbrevRequest.sakenGjelder.name
+                        }
+                        div {
+                            span {
+                                classes = setOf("bold")
+                                +"Fødselsnummer: "
+                            }
+                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
+                        }
+                    }
+                    p {
                         +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${getFormattedDate(svarbrevRequest.receivedDate!!)}."
                     }
 
