@@ -34,7 +34,7 @@ class GenerateSvarbrevPDFTest {
     fun `generate pdf from full klage input`() {
         val data = SvarbrevService().getSvarbrevAsByteArray(
             SvarbrevRequest(
-                title = "Svarbrev",
+                title = "Svarbrev og hei og hei",
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = null,
                 ytelsenavn = "Sykdom i familien - Pleiepenger sykt barn",
@@ -45,7 +45,7 @@ class GenerateSvarbrevPDFTest {
                 behandlingstidUnitType = SvarbrevRequest.BehandlingstidUnitType.MONTHS,
                 avsenderEnhetId = "4291",
                 type = SvarbrevRequest.Type.KLAGE,
-                customText = "Dette er fritekst hentet fra innstillinger.",
+                customText = null,
             )
         )
         Files.write(Path.of("svarbrev.pdf"), data)

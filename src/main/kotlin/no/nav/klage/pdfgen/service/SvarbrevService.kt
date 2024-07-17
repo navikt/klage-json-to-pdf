@@ -89,10 +89,15 @@ class SvarbrevService {
                     p {
                         +"Saksbehandlingstiden vår er vanligvis "
                         span { +getBehandlingstidText(svarbrevRequest) }
-                        +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText}"
+                        +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
                     }
                     p {
-                        +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på  www.nav.no/saksbehandlingstid."
+                        div {
+                            +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på"
+                        }
+                        div {
+                            +"www.nav.no/saksbehandlingstid."
+                        }
                     }
                     h2 { +"Klageinstansens behandling av klagen" }
                     p {
@@ -118,12 +123,6 @@ class SvarbrevService {
                     h2 { +"Informasjon om fri rettshjelp" }
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
-                    }
-                    div {
-                        classes = setOf("signature")
-                        +"Med hilsen"
-                        br { }
-                        +"NAV Klageinstans"
                     }
                 }
             }
@@ -226,7 +225,7 @@ class SvarbrevService {
                     p {
                         +"Saksbehandlingstiden vår er nå "
                         span { +getBehandlingstidText(svarbrevRequest) }
-                        +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no."
+                        +". Du finner oversikt over saksbehandlingstidene våre på www.nav.no/saksbehandlingstid."
                     }
                     if (svarbrevRequest.customText != null) {
                         p {
@@ -258,15 +257,7 @@ class SvarbrevService {
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
                     }
-
-                    div {
-                        classes = setOf("signature")
-                        +"Med hilsen"
-                        br { }
-                        +"NAV Klageinstans"
-                    }
                 }
-
             }
     }
 
