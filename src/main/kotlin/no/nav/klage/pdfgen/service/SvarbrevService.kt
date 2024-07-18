@@ -80,6 +80,15 @@ class SvarbrevService {
                             }
                             +svarbrevRequest.sakenGjelder.fnr.toFnrView()
                         }
+                        if (svarbrevRequest.fullmektigFritekst != null) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"Fullmektig: "
+                                }
+                                +svarbrevRequest.fullmektigFritekst
+                            }
+                        }
                     }
                     p {
                         +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${getFormattedDate(svarbrevRequest.receivedDate!!)}."

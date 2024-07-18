@@ -38,7 +38,7 @@ class GenerateSvarbrevPDFTest {
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = null,
                 ytelsenavn = "Sykdom i familien - Pleiepenger sykt barn",
-                fullmektigFritekst = null,
+                fullmektigFritekst = "Fullmektig fritekst",
                 ankeReceivedDate = null,
                 receivedDate = LocalDate.now(),
                 behandlingstidUnits = 3,
