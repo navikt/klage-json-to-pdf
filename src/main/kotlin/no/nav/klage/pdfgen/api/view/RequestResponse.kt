@@ -38,12 +38,26 @@ data class SvarbrevRequest(
     val klager: Part?,
     val ytelsenavn: String,
     val fullmektigFritekst: String?,
-    val ankeReceivedDate: LocalDate,
-    val behandlingstidInWeeks: Int,
+    val ankeReceivedDate: LocalDate?,
+    val receivedDate: LocalDate?,
+    val behandlingstidUnits: Int,
+    val behandlingstidUnitType: BehandlingstidUnitType,
     val avsenderEnhetId: String,
+    val type: Type?,
+    val customText: String?,
 ) {
+    enum class BehandlingstidUnitType {
+        WEEKS,
+        MONTHS,
+    }
+
     data class Part(
         val name: String,
         val fnr: String,
     )
+
+    enum class Type {
+        KLAGE,
+        ANKE,
+    }
 }
