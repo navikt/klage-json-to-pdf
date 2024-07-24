@@ -2,7 +2,9 @@ package no.nav.klage.pdfgen.service
 
 import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
+import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
+import no.nav.klage.pdfgen.exception.ValidationException
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.createPDFA
 import no.nav.klage.pdfgen.util.getFormattedDate
@@ -10,6 +12,7 @@ import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
 import java.time.LocalDate
+import kotlin.math.E
 
 @Service
 class SvarbrevService {
@@ -138,8 +141,8 @@ class SvarbrevService {
     }
 
     private fun getBehandlingstidText(svarbrevRequest: SvarbrevRequest): String {
-        return svarbrevRequest.behandlingstidUnits.toString() + when (svarbrevRequest.behandlingstidUnitType) {
-            SvarbrevRequest.BehandlingstidUnitType.WEEKS -> {
+        return svarbrevRequest.behandlingstidUnits.toString() + when (TimeUnitType.of(svarbrevRequest.behandlingstidUnitTypeId)) {
+            TimeUnitType.WEEKS -> {
                 if (svarbrevRequest.behandlingstidUnits == 1) {
                     " uke"
                 }
@@ -147,7 +150,7 @@ class SvarbrevService {
                     " uker"
                 }
             }
-            SvarbrevRequest.BehandlingstidUnitType.MONTHS -> {
+            TimeUnitType.MONTHS -> {
                 if (svarbrevRequest.behandlingstidUnits == 1) {
                     " måned"
                 }
