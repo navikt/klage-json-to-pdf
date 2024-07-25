@@ -6,9 +6,11 @@ val jsoupVersion = "1.18.1"
 val openHtmlToPdfVersion = "1.0.10"
 val kotlinxHtmlVersion = "0.11.0"
 val springDocVersion = "2.6.0"
+val klageKodeverkVersion = "1.8.36"
 
 repositories {
     mavenCentral()
+    maven("https://github-package-registry-mirror.gc.nav.no/cached/maven-release")
 }
 
 plugins {
@@ -44,6 +46,8 @@ dependencies {
 
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:$kotlinxHtmlVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-html:$kotlinxHtmlVersion")
+
+    implementation("no.nav.klage:klage-kodeverk:$klageKodeverkVersion")
 
     testImplementation("io.mockk:mockk:$mockkVersion")
     testImplementation("org.springframework:spring-mock:2.0.8")

@@ -41,16 +41,11 @@ data class SvarbrevRequest(
     val ankeReceivedDate: LocalDate?,
     val receivedDate: LocalDate?,
     val behandlingstidUnits: Int,
-    val behandlingstidUnitType: BehandlingstidUnitType,
+    val behandlingstidUnitTypeId: String,
     val avsenderEnhetId: String,
     val type: Type?,
     val customText: String?,
 ) {
-    enum class BehandlingstidUnitType {
-        WEEKS,
-        MONTHS,
-    }
-
     data class Part(
         val name: String,
         val fnr: String,

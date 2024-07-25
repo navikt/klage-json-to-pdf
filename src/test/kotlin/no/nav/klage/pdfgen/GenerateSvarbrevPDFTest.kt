@@ -1,5 +1,6 @@
 package no.nav.klage.pdfgen
 
+import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.service.SvarbrevService
 import org.junit.jupiter.api.Test
@@ -21,7 +22,7 @@ class GenerateSvarbrevPDFTest {
                 ankeReceivedDate = LocalDate.now(),
                 receivedDate = LocalDate.now(),
                 behandlingstidUnits = 12,
-                behandlingstidUnitType = SvarbrevRequest.BehandlingstidUnitType.WEEKS,
+                behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
                 type = null,
                 customText = null,
@@ -42,7 +43,7 @@ class GenerateSvarbrevPDFTest {
                 ankeReceivedDate = null,
                 receivedDate = LocalDate.now(),
                 behandlingstidUnits = 3,
-                behandlingstidUnitType = SvarbrevRequest.BehandlingstidUnitType.MONTHS,
+                behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
                 type = SvarbrevRequest.Type.KLAGE,
                 customText = null,
