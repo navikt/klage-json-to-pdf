@@ -32,7 +32,7 @@ class GenerateSvarbrevPDFTest {
     }
 
     @Test
-    fun `generate pdf from full klage input`() {
+    fun `generate pdf from full anke input`() {
         val data = SvarbrevService().getSvarbrevAsByteArray(
             SvarbrevRequest(
                 title = "Svarbrev og hei og hei",
@@ -42,10 +42,10 @@ class GenerateSvarbrevPDFTest {
                 fullmektigFritekst = "Fullmektig fritekst",
                 ankeReceivedDate = null,
                 receivedDate = LocalDate.now(),
-                behandlingstidUnits = 3,
+                behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
-                type = SvarbrevRequest.Type.KLAGE,
+                type = SvarbrevRequest.Type.ANKE,
                 customText = null,
             )
         )

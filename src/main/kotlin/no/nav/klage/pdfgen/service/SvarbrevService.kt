@@ -68,6 +68,7 @@ class SvarbrevService {
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
                     h1 { +"Klageinstansen orienterer om saksbehandlingen av klagen din" }
+                    br {}
                     p {
                         div {
                             span {
@@ -93,8 +94,13 @@ class SvarbrevService {
                             }
                         }
                     }
+                    br {}
                     p {
-                        +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${getFormattedDate(svarbrevRequest.receivedDate!!)}."
+                        +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${
+                            getFormattedDate(
+                                svarbrevRequest.receivedDate!!
+                            )
+                        }."
                     }
 
                     h2 { +"Klageinstansens saksbehandlingstid" }
@@ -136,6 +142,12 @@ class SvarbrevService {
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
                     }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"NAV Klageinstans"
+                    }
                 }
             }
     }
@@ -145,16 +157,15 @@ class SvarbrevService {
             TimeUnitType.WEEKS -> {
                 if (svarbrevRequest.behandlingstidUnits == 1) {
                     " uke"
-                }
-                else {
+                } else {
                     " uker"
                 }
             }
+
             TimeUnitType.MONTHS -> {
                 if (svarbrevRequest.behandlingstidUnits == 1) {
                     " måned"
-                }
-                else {
+                } else {
                     " måneder"
                 }
             }
@@ -192,6 +203,7 @@ class SvarbrevService {
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
                     h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
+                    br { }
                     p {
                         div {
                             span {
@@ -228,6 +240,8 @@ class SvarbrevService {
                             }
                         }
                     }
+
+                    br { }
 
                     p {
                         +"Vi viser til anken din, som vi mottok ${getFormattedDate(svarbrevRequest.ankeReceivedDate ?: svarbrevRequest.receivedDate!!)}."
@@ -268,6 +282,12 @@ class SvarbrevService {
                     h2 { +"Informasjon om fri rettshjelp" }
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
+                    }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"NAV Klageinstans"
                     }
                 }
             }
