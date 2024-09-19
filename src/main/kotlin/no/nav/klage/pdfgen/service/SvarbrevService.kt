@@ -136,6 +136,12 @@ class SvarbrevService {
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
                     }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"NAV Klageinstans"
+                    }
                 }
             }
     }
@@ -268,6 +274,12 @@ class SvarbrevService {
                     h2 { +"Informasjon om fri rettshjelp" }
                     p {
                         +"Dette får du vite mer om hos Statsforvalteren eller advokat."
+                    }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"NAV Klageinstans"
                     }
                 }
             }
