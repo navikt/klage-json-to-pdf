@@ -301,7 +301,11 @@ class SvarbrevService {
             }
 
             2 -> {
-                strings[0].decapitalize() + " - " + strings[1].decapitalize()
+                if (strings[0].equals(other = strings[1], ignoreCase = true)) {
+                    strings[0].decapitalize()
+                } else {
+                    strings[0].decapitalize() + " - " + strings[1].decapitalize()
+                }
             }
 
             else -> this
