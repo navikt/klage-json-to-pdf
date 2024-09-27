@@ -1,11 +1,15 @@
 package no.nav.klage.pdfgen.transformers
 
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import kotlinx.html.*
 import kotlinx.html.dom.create
 import kotlinx.html.dom.createHTMLDocument
 import kotlinx.html.dom.serialize
+import no.nav.klage.pdfgen.api.view.DocumentToPdfRequest
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
+import no.nav.klage.pdfgen.exception.InvalidMaltekstseksjonException
+import no.nav.klage.pdfgen.exception.InvalidRegelverkException
 import no.nav.klage.pdfgen.util.getLogger
 import no.nav.klage.pdfgen.util.getSecureLogger
 import no.nav.klage.pdfgen.util.getFormattedDate
@@ -14,7 +18,7 @@ import org.w3c.dom.Element
 import java.time.LocalDate
 
 @Suppress("UNCHECKED_CAST")
-class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolean = false) {
+class HtmlCreator(val data: DocumentToPdfRequest, val validationMode: Boolean = false) {
 
     companion object {
         @Suppress("JAVA_CLASS_ON_COMPANION")
@@ -161,7 +165,83 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 }
             }
 
-            "maltekst", "redigerbar-maltekst", "regelverk", "maltekstseksjon" -> return loopOverChildren(children)
+            "maltekst", "redigerbar-maltekst" -> {
+                return loopOverChildren(children)
+            }
+
+            "regelverk" -> {
+                val query = map["query"]
+
+                if (query !is String || query.isEmpty()) {
+                    if (validationMode) {
+                        throw InvalidRegelverkException("Missing query in regelverk")
+                    }
+
+                    return listOf(document.create.div {
+                        classes = setOf("invalid")
+                        loopOverChildren(children)
+                    })
+                }
+
+                val queryMap = jacksonObjectMapper().readValue(query, Map::class.java)
+
+                if (isEqualToBehandling(queryMap)) {
+                    return loopOverChildren(children)
+                }
+
+                if (validationMode) {
+                    throw InvalidRegelverkException("Mismatched query in regelverk")
+                }
+
+                return listOf(document.create.div {
+                    classes = setOf("invalid")
+                    loopOverChildren(children)
+                })
+
+            }
+
+            "maltekstseksjon" -> {
+                val language = map["language"]?.toString()
+
+                if (language != data.language) {
+                    if (validationMode) {
+                        throw InvalidMaltekstseksjonException("Mismatched language in maltekstseksjon")
+                    } else {
+                        return listOf(document.create.div {
+                            classes = setOf("invalid")
+                            loopOverChildren(children)
+                        })
+                    }
+                }
+
+                val query = map["query"]
+
+                if (query !is String || query.isEmpty()) {
+                    if (validationMode) {
+                        throw InvalidMaltekstseksjonException("Missing query in maltekstseksjon")
+                    }
+
+                    return listOf(document.create.div {
+                        classes = setOf("invalid")
+                        loopOverChildren(children)
+                    })
+                }
+
+                val queryMap = jacksonObjectMapper().readValue(query, Map::class.java)
+
+                if (isEqualToBehandling(queryMap)) {
+                    return loopOverChildren(children)
+                }
+
+                if (validationMode) {
+                    throw InvalidMaltekstseksjonException("Mismatched query in maltekstseksjon")
+                }
+
+                return listOf(document.create.div {
+                    classes = setOf("maltekstseksjon", "invalid")
+                    loopOverChildren(children)
+                })
+            }
 
             "regelverk-container" -> {
                 if (validationMode) {
@@ -248,6 +328,40 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
         return listOf(element)
     }
 
+    private fun isEqualToBehandling(map: Map<*, *>): Boolean {
+        if (map.isEmpty()) {
+            return false
+        }
+
+        map.forEach { (key, value) ->
+            if (key == "utfallIdList") {
+                if (value != data.utfallIdList) {
+                    return false
+                }
+            }
+
+            if (key == "ytelseHjemmelIdList") {
+                if (value !is List<*> || data.ytelseHjemmelIdList.size == value.size || data.ytelseHjemmelIdList.containsAll(value)) {
+                    return false
+                }
+            }
+
+            if (key == "templateSectionIdList") {
+                if (value !is List<*> || data.templateSectionIdList.size != value.size || !data.templateSectionIdList.containsAll(value)) {
+                    return false
+                }
+            }
+
+            if (key == "language") {
+                if (value != data.language) {
+                    return false
+                }
+            }
+        }
+
+        return true
+    }
+
     private fun loopOverChildren(
         children: List<Map<String, *>>,
     ): List<Element> {
@@ -284,7 +398,7 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     fun getDoc(): Document {
-        dataList.forEach {
+        (jacksonObjectMapper().readValue(data.json, List::class.java) as List<Map<String, *>>).forEach {
             processElement(it)
         }
 

@@ -3,6 +3,14 @@ package no.nav.klage.pdfgen.api.view
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties
 import java.time.LocalDate
 
+data class DocumentToPdfRequest(
+    val json: String,
+    val ytelseHjemmelIdList: List<String> = emptyList(),
+    val templateSectionIdList: List<String> = emptyList(),
+    val utfallIdList: String = "",
+    val language: String = "untranslated",
+)
+
 data class DocumentValidationResponse(
     val errors: List<DocumentValidationError> = emptyList()
 ) {

@@ -2,11 +2,14 @@ package no.nav.klage.pdfgen.api
 
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.tags.Tag
+import no.nav.klage.pdfgen.api.view.DocumentToPdfRequest
 import no.nav.klage.pdfgen.api.view.DocumentValidationResponse
 import no.nav.klage.pdfgen.api.view.InnholdsfortegnelseRequest
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
 import no.nav.klage.pdfgen.exception.EmptyPlaceholderException
 import no.nav.klage.pdfgen.exception.EmptyRegelverkException
+import no.nav.klage.pdfgen.exception.InvalidMaltekstseksjonException
+import no.nav.klage.pdfgen.exception.InvalidRegelverkException
 import no.nav.klage.pdfgen.service.InnholdsfortegnelseService
 import no.nav.klage.pdfgen.service.PDFGenService
 import no.nav.klage.pdfgen.service.SvarbrevService
@@ -42,12 +45,12 @@ class PDFGenController(
     @ResponseBody
     @PostMapping("/topdf")
     fun toPDF(
-        @RequestBody json: String
+        @RequestBody body: DocumentToPdfRequest
     ): ResponseEntity<ByteArray> {
         logger.debug("toPDF() called. See body in secure logs")
-        secureLogger.debug("toPDF() called. Received json: {}", json)
+        secureLogger.debug("toPDF() called. Received json: {}", body.json)
 
-        val data = pdfGenService.getPDFAsByteArray(json)
+        val data = pdfGenService.getPDFAsByteArray(body)
 
         val responseHeaders = HttpHeaders()
         responseHeaders.contentType = MediaType.APPLICATION_PDF
@@ -113,13 +116,13 @@ class PDFGenController(
     )
     @PostMapping("/validate")
     fun validate(
-        @RequestBody json: String
+        @RequestBody body: DocumentToPdfRequest
     ): DocumentValidationResponse {
         logger.debug("${::validate.name} called. See body in secure logs")
-        secureLogger.debug("validate() called. Received json: {}", json)
+        secureLogger.debug("validate() called. Received json: {}", body.json)
 
         return try {
-            pdfGenService.validateDocumentContent(json)
+            pdfGenService.validateDocumentContent(body)
             DocumentValidationResponse()
         } catch (epe: EmptyPlaceholderException) {
             DocumentValidationResponse(
@@ -134,6 +137,22 @@ class PDFGenController(
                 errors = listOf(
                     DocumentValidationResponse.DocumentValidationError(
                         type = "EMPTY_REGELVERK"
+                    )
+                )
+            )
+        } catch (eme: InvalidMaltekstseksjonException) {
+            DocumentValidationResponse(
+                errors = listOf(
+                    DocumentValidationResponse.DocumentValidationError(
+                        type = "INVALID_MALTEKSTSEKSJON"
+                    )
+                )
+            )
+        } catch (ere: InvalidRegelverkException) {
+            DocumentValidationResponse(
+                errors = listOf(
+                    DocumentValidationResponse.DocumentValidationError(
+                        type = "INVALID_REGELVERK"
                     )
                 )
             )

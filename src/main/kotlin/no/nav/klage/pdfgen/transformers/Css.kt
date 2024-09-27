@@ -79,7 +79,7 @@ fun getCss(footer: String = "") = """
         font-size: 12pt;
         margin-top: 1em;
     }
-    .placeholder-text {
+    .placeholder-text, .invalid {
         background-color: #EFA89D;
         border-radius: 3pt;
     }
