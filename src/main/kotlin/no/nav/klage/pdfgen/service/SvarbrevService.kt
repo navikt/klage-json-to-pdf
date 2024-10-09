@@ -96,7 +96,7 @@ class SvarbrevService {
                     }
                     br {}
                     p {
-                        +"Vi skal behandle klagen din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${
+                        +"Vi skal behandle klagen din som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi har fått oversendt ${
                             getFormattedDate(
                                 svarbrevRequest.receivedDate!!
                             )
@@ -202,7 +202,7 @@ class SvarbrevService {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
-                    h1 { +"NAV orienterer om saksbehandlingen av anken din om ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
+                    h1 { +"NAV orienterer om saksbehandlingen av anken din som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
                     br { }
                     p {
                         div {
