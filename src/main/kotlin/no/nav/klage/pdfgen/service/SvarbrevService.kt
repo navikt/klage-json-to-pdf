@@ -4,7 +4,6 @@ import kotlinx.html.*
 import kotlinx.html.dom.createHTMLDocument
 import no.nav.klage.kodeverk.TimeUnitType
 import no.nav.klage.pdfgen.api.view.SvarbrevRequest
-import no.nav.klage.pdfgen.exception.ValidationException
 import no.nav.klage.pdfgen.transformers.getCss
 import no.nav.klage.pdfgen.util.createPDFA
 import no.nav.klage.pdfgen.util.getFormattedDate
@@ -12,18 +11,17 @@ import org.springframework.stereotype.Service
 import org.w3c.dom.Document
 import java.io.ByteArrayOutputStream
 import java.time.LocalDate
-import kotlin.math.E
 
 @Service
 class SvarbrevService {
 
     val enhetHeaderAndFooterMap = mapOf(
-        "4291" to ("Returadresse,\nNAV Klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: NAV Klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4293" to ("Returadresse,\nNAV Klageinstans Øst, Postboks 2435, 3104 Tønsberg" to "Postadresse: NAV Klageinstans Øst // Postboks 2435 // 3104 Tønsberg\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4250" to ("Returadresse,\nNAV Klageinstans Sør, Postboks 644 Lundsiden, 4606 Kristiansand S" to "Postadresse: NAV Klageinstans Sør // Postboks 644 Lundsiden // 4606 Kristiansand S\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4294" to ("Returadresse,\nNAV Klageinstans Vest, Postboks 6245 Bedriftssenter, 5893 Bergen" to "Postadresse: NAV Klageinstans Vest // Postboks 6245 Bedriftssenter // 5893 Bergen\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4295" to ("Returadresse,\nNAV Klageinstans Nord, Postboks 2363, 9271 Tromsø" to "Postadresse: NAV Klageinstans Nord // Postboks 2363 // 9271 Tromsø\\ATelefon: 55 55 33 33\\Anav.no"),
-        "4292" to ("Returadresse,\nNAV Klageinstans Midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" to "Postadresse: NAV Klageinstans Midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4291" to ("Returadresse,\nNav klageinstans Oslo og Akershus, Postboks 7028 St. Olavs plass, 0130 Oslo" to "Postadresse: Nav klageinstans Oslo og Akershus // Postboks 7028 St. Olavs plass // 0130 Oslo\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4293" to ("Returadresse,\nNav klageinstans øst, Postboks 2435, 3104 Tønsberg" to "Postadresse: Nav klageinstans øst // Postboks 2435 // 3104 Tønsberg\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4250" to ("Returadresse,\nNav klageinstans sør, Postboks 644 Lundsiden, 4606 Kristiansand S" to "Postadresse: Nav klageinstans sør // Postboks 644 Lundsiden // 4606 Kristiansand S\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4294" to ("Returadresse,\nNav klageinstans vest, Postboks 6245 Bedriftssenter, 5893 Bergen" to "Postadresse: Nav klageinstans vest // Postboks 6245 Bedriftssenter // 5893 Bergen\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4295" to ("Returadresse,\nNav klageinstans nord, Postboks 2363, 9271 Tromsø" to "Postadresse: Nav klageinstans nord // Postboks 2363 // 9271 Tromsø\\ATelefon: 55 55 33 33\\Anav.no"),
+        "4292" to ("Returadresse,\nNav klageinstans midt-Norge, Postboks 2914 Torgarden, 7438 Trondheim" to "Postadresse: Nav klageinstans midt-Norge // Postboks 2914 Torgarden // 7438 Trondheim\\ATelefon: 55 55 33 33\\Anav.no"),
     )
 
     fun getSvarbrevAsByteArray(svarbrevRequest: SvarbrevRequest): ByteArray {
@@ -146,7 +144,7 @@ class SvarbrevService {
                         classes = setOf("signature")
                         +"Med hilsen"
                         br { }
-                        +"NAV Klageinstans"
+                        +"Nav klageinstans"
                     }
                 }
             }
@@ -202,7 +200,7 @@ class SvarbrevService {
                         classes = setOf("current-date")
                         +"Dato: ${getFormattedDate(LocalDate.now())}"
                     }
-                    h1 { +"NAV orienterer om saksbehandlingen av anken din som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
+                    h1 { +"Nav orienterer om saksbehandlingen av anken din som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}" }
                     br { }
                     p {
                         div {
@@ -287,7 +285,7 @@ class SvarbrevService {
                         classes = setOf("signature")
                         +"Med hilsen"
                         br { }
-                        +"NAV Klageinstans"
+                        +"Nav klageinstans"
                     }
                 }
             }
