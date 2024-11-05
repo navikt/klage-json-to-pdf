@@ -28,6 +28,7 @@ class SvarbrevService {
         val doc = when (svarbrevRequest.type) {
             SvarbrevRequest.Type.KLAGE -> getHTMLDocumentKlage(svarbrevRequest)
             SvarbrevRequest.Type.ANKE -> getHTMLDocumentAnke(svarbrevRequest)
+            SvarbrevRequest.Type.OMGJOERINGSKRAV -> getHTMLDocumentOmgjoeringskrav(svarbrevRequest)
             null -> getHTMLDocumentAnke(svarbrevRequest)
         }
         val os = ByteArrayOutputStream()
@@ -127,7 +128,7 @@ class SvarbrevService {
                     }
                     h2 { +"Du må melde fra om endringer" }
                     p {
-                        +"Skjer det endringer du mener er viktig for saken din, må du orientere oss.  Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
+                        +"Skjer det endringer du mener er viktig for saken din, må du orientere oss. Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
                     }
                     p {
                         +"Du kan logge deg inn på nav.no/kontakt og sende skriftlig melding der. Hvis du ønsker å ettersende dokumentasjon, kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
@@ -272,6 +273,111 @@ class SvarbrevService {
                     }
                     p {
                         +"Du kan ettersende dokumentasjon på nav.no/klage ved å trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
+                    }
+                    h2 { +"Du har rett til innsyn" }
+                    p {
+                        +"Du har rett til å se dokumentene i saken din."
+                    }
+                    h2 { +"Informasjon om fri rettshjelp" }
+                    p {
+                        +"Dette får du vite mer om hos Statsforvalteren eller advokat."
+                    }
+                    div {
+                        classes = setOf("signature")
+                        +"Med hilsen"
+                        br { }
+                        +"Nav klageinstans"
+                    }
+                }
+            }
+    }
+
+    private fun getHTMLDocumentOmgjoeringskrav(svarbrevRequest: SvarbrevRequest): Document {
+        return createHTMLDocument()
+            .html {
+                head {
+                    style {
+                        unsafe {
+                            raw(
+                                getCss(footer = enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.second)
+                            )
+                        }
+                    }
+                    title(svarbrevRequest.title)
+                }
+                body {
+                    id = "body"
+                    classes = setOf("svarbrev")
+                    header {
+                        div {
+                            id = "header_text"
+                            +enhetHeaderAndFooterMap[svarbrevRequest.avsenderEnhetId]!!.first
+                        }
+                        div {
+                            id = "logo"
+                            img { src = "nav_logo.png" }
+                        }
+                    }
+                    div {
+                        classes = setOf("current-date")
+                        +"Dato: ${getFormattedDate(LocalDate.now())}"
+                    }
+                    h1 { +"Nav klageinstans har mottatt kravet ditt om omgjøring" }
+                    br {}
+                    p {
+                        div {
+                            span {
+                                classes = setOf("bold")
+                                +"Saken gjelder: "
+                            }
+                            +svarbrevRequest.sakenGjelder.name
+                        }
+                        div {
+                            span {
+                                classes = setOf("bold")
+                                +"Fødselsnummer: "
+                            }
+                            +svarbrevRequest.sakenGjelder.fnr.toFnrView()
+                        }
+                        if (svarbrevRequest.fullmektigFritekst != null) {
+                            div {
+                                span {
+                                    classes = setOf("bold")
+                                    +"Fullmektig: "
+                                }
+                                +svarbrevRequest.fullmektigFritekst
+                            }
+                        }
+                    }
+                    br {}
+                    p {
+                        +"Vi viser til kravet ditt om omgjøring av vedtak som gjelder ${svarbrevRequest.ytelsenavn.toSpecialCase()}, som vi mottok ${
+                            getFormattedDate(
+                                svarbrevRequest.receivedDate!!
+                            )
+                        }."
+                    }
+
+                    h2 { +"Behandling av kravet om omgjøring" }
+                    p {
+                        +"Saksbehandlingstiden vår er vanligvis "
+                        span { +getBehandlingstidText(svarbrevRequest) }
+                        +", men dette kan variere avhengig av hvor mange klagesaker vi har til behandling. ${svarbrevRequest.customText ?: ""}"
+                    }
+                    p {
+                        div {
+                            +"Du finner en oppdatert oversikt over saksbehandlingstiden vår på"
+                        }
+                        div {
+                            +"www.nav.no/saksbehandlingstid."
+                        }
+                    }
+                    h2 { +"Du må melde fra om endringer" }
+                    p {
+                        +"Skjer det endringer du mener er viktig for saken din, må du orientere oss. Dette kan for eksempel være medisinske forhold, arbeid, inntekt og sivilstand. "
+                    }
+                    p {
+                        +"Du kan logge deg inn på nav.no/kontakt og sende skriftlig melding der. Hvis du ønsker å ettersende dokumentasjon, kan du gå til nav.no/klage og trykke på \"Ettersend dokumentasjon\" for det saken gjelder."
                     }
                     h2 { +"Du har rett til innsyn" }
                     p {

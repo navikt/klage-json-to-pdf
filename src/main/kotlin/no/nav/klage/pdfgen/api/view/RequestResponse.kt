@@ -54,5 +54,6 @@ data class SvarbrevRequest(
     enum class Type {
         KLAGE,
         ANKE,
+        OMGJOERINGSKRAV,
     }
 }
