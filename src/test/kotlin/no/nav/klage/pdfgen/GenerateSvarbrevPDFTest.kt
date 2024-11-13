@@ -17,15 +17,15 @@ class GenerateSvarbrevPDFTest {
                 title = "Svarbrev",
                 sakenGjelder = SvarbrevRequest.Part(name = "First Last", fnr = "12345678910"),
                 klager = SvarbrevRequest.Part(name = "Second Last", fnr = "23456789120"),
-                ytelsenavn = "Grunn- og hjelpestønad - Grunnstønad",
+                ytelsenavn = "Sykdom i familien - Pleiepenger sykt barn",
                 fullmektigFritekst = "Fullmektig Fritekst",
                 ankeReceivedDate = LocalDate.now(),
                 receivedDate = LocalDate.now(),
                 behandlingstidUnits = 12,
                 behandlingstidUnitTypeId = TimeUnitType.WEEKS.id,
                 avsenderEnhetId = "4291",
-                type = null,
-                customText = null,
+                type = SvarbrevRequest.Type.OMGJOERINGSKRAV,
+                customText = "Litt ekstra fritekst.",
             )
         )
         Files.write(Path.of("svarbrev.pdf"), data)
