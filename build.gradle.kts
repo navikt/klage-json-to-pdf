@@ -40,6 +40,7 @@ dependencies {
     implementation("io.github.openhtmltopdf:openhtmltopdf-svg-support:$openHtmlToPdfVersion")
 
     implementation("ch.qos.logback:logback-classic")
+    implementation("org.codehaus.janino:janino")
     implementation("net.logstash.logback:logstash-logback-encoder:$logstashVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 
