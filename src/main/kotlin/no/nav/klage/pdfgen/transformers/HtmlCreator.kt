@@ -261,7 +261,10 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
     }
 
     private fun createLeafElement(map: Map<String, *>, inputClasses: MutableSet<String> = mutableSetOf()): Element {
-        var text = map["text"] ?: throw RuntimeException("no content here")
+        var text = map["text"]
+        if (text == null) {
+            throw RuntimeException("no content here")
+        }
         text as String
         if (text.isEmpty()) {
             text = "\uFEFF"
