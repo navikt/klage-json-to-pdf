@@ -219,6 +219,27 @@ class HtmlCreator(val dataList: List<Map<String, *>>, val validationMode: Boolea
                 })
             }
 
+            "fullmektig" -> {
+                val show = map["show"] as Boolean
+                if (!show) {
+                    return emptyList()
+                }
+
+                val key = children[0]["children"] as List<Map<String, *>>
+                val value = children[1]["children"] as List<Map<String, *>>
+
+                val elements = mutableListOf<Element>()
+                elements += createLeafElement(map = key[0])
+                elements += document.create.span {
+                    classes = setOf("bold")
+                    +": "
+                }
+                elements += createLeafElement(map = value[0])
+                elements += document.create.br {}
+
+                return elements
+            }
+
             "current-date" -> {
                 return listOf(document.create.div {
                     classes = setOf("current-date")
