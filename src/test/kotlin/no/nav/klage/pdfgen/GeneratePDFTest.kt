@@ -22,6 +22,13 @@ class GeneratePDF {
     }
 
     @Test
+    fun `generate pdf from fullmektig input`() {
+        val jsonData = File(path + "fullmektig.json").readText()
+        val data = PDFGenService().getPDFAsByteArray(jsonData)
+        Files.write(Path.of("test.pdf"), data)
+    }
+
+    @Test
     fun `generate pdf from table input`() {
         val jsonData = File(path + "tables.json").readText()
         val data = PDFGenService().getPDFAsByteArray(jsonData)
